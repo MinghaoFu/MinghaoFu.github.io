@@ -17,37 +17,37 @@ Education
 
 
   **Mohamed bin Zayed University of Artificial Intelligence**  
-  M.S. in Machine Learning <div style="text-align: right;">Aug 2023 - Present</div>
+  *M.S. in Machine Learning*, Aug 2023 - Present
 
 
   **University of Electronic Science and Technology of China**  
-  B.S. in Software Engineering <div style="text-align: right;">Sep 2019 - June 2023</div>
+  *B.S. in Software Engineering*, Sep 2019 - June 2023
 
 
 Previous Appointments
 ------
 
   **Mohamed bin Zayed University of Artificial Intelligence**, Abu Dhabi, UAE  
-  *Research Assistant, Department of Machine Learning* <div style="text-align: right;">May 2023 - Aug 2023</div>
+  *Research Assistant, Department of Machine Learning*, May 2023 - Aug 2023
 
-  **Shanghai AI Lab,**, Shanghai, China  
-  *Research Intern, Ark NLP Group* <div style="text-align: right;">Nov 2022 - Mar 2023</div>
+  **Shanghai AI Lab**, Shanghai, China  
+  *Research Intern, Ark NLP Group*, Nov 2022 - Mar 2023
 
   **University of Electronic Science and Technology of China**, Chengdu, China  
-  *Undergraduate Research Assistant, Center For Future Media Lab* <div style="text-align: right">Apr 2022 - Aug 2022</div>
+  *Undergraduate Research Assistant, Center For Future Media Lab*, Apr 2022 - Aug 2022
 
   **SAP**, Chengdu, China  
-  *Cloud Developer Intern*<div style="text-align: right"> Jan 2022 - Mar 2022 </div>
+  *Cloud Developer Intern*, Jan 2022 - Mar 2022
 
 
 Publications & Preprints
 ------
-**Minghao Fu**, Dongyang Zhang, Min Lei, Kun He, Changyu Li, Jie Shao. ”Wide Fea-
-ture Projection with Fast and Memory-Economic Attention for Efficient Image Super-
-Resolution”. In *Birtish Machine Vision Conference* (BMVC), 2022
+  **Minghao Fu**, Dongyang Zhang, Min Lei, Kun He, Changyu Li, Jie Shao. "[Wide Fea-
+  ture Projection with Fast and Memory-Economic Attention for Efficient Image Super-
+  Resolution](https://bmvc2022.mpi-inf.mpg.de/615/)". In *Birtish Machine Vision Conference* (BMVC), 2022
 
-**Minghao Fu**, Xin Man, Yihan Xu, Jie Shao. ”ESTISR: Adapting Efficient Scene
-Text Image Super-resolution for Real-Scenes”. In CoRR, abs/2306.02443, 2023
+  **Minghao Fu**, Xin Man, Yihan Xu, Jie Shao. ”[ESTISR: Adapting Efficient Scene
+  Text Image Super-resolution for Real-Scenes](https://arxiv.org/abs/2306.02443)”. In CoRR, abs/2306.02443, 2023
 
 Miscellaneous
 ------
