@@ -7,13 +7,10 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Your Name / Site Title"
+title                    : "Minghao Fu@MBZUAI"
 title_separator          : "-"
 name                     : &name "Minghao Fu"
-description              : &description "My name is Minghao Fu, a first-year master student at Department of Machine Learning, Johns Hopkins University, advised by Prof. Daniel Khashabi, 
-and Prof. Philipp Koehn. Before that, I received my B.S. degree (Mathematics) from China Agricultural University. My current research interests include: Causal Discovery, 
-Causal Represenational Learning, Structural Learning, and Trustworthy AI. 
-Email: isminghaofu[at]gmail.com"
+description              : &description "Homepage of Minghao Fu"
 url                      : https://MinghaoFu.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "MinghaoFu/MinghaoFu.github.io"
@@ -88,8 +85,8 @@ author:
   bio              : "Bayesians"
   location         : "Abu Dhabi, UAE"
   employer         :
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    : "http://yourfullgooglescholarurl.com"
+  pubmed           : 
+  googlescholar    : 
   email            :
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
