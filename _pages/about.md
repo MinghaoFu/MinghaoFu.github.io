@@ -61,5 +61,19 @@ Miscellaneous
 🎮 #45 in the Hearthstone final leaderboard  
 🎧 AHHHH wait my spotify playlists  
 📺 Animation  
-
+  
+    
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Markdown with Script Tag</title>
+  </head>
+  <body>
+    <div>
+      <!-- Your markdown content goes here -->
+    </div>
+    <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=1IPf0Fo3ktm5IO3crx8N7GXZRlsf8B-tprE0j0O560Y&cl=ffffff&w=a"></script>
+  </body>
+</html>
 
