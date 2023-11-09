@@ -12,7 +12,7 @@ My name is Minghao Fu, a first-year master student at Department of Machine Lear
 
 My current research interests include: Causal Discovery, Causal Represenational Learning, Structural Learning, and Trustworthy AI. 
 
-See my [CV](Academic_CV.pdf) for more details.
+See my [CV](../files/Academic_CV.pdf) for more details.
 
 Education
 ======
