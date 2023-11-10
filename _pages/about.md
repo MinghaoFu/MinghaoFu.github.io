@@ -30,7 +30,7 @@ Previous Appointments
 ------
 
   **Mohamed bin Zayed University of Artificial Intelligence**, Abu Dhabi, UAE  
-  *Research Assistant, Department of Machine Learning*, May 2023 - Aug 2023
+  *Visiting Student & Research Assistant, Department of Machine Learning*, May 2023 - Aug 2023
 
   **Shanghai AI Lab**, Shanghai, China  
   *Research Intern, Ark NLP Group*, Nov 2022 - Mar 2023
@@ -60,7 +60,7 @@ Miscellaneous
 🏃‍♂️ 6mins/km for a 10km distance  
 🎮 #45 in the Hearthstone final leaderboard  
 🎧 AHHHH wait my spotify playlists  
-📺 Animation  
+📺 Animation!  
   
     
 

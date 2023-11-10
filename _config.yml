@@ -7,10 +7,10 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Minghao Fu@MBZUAI"
+title                    : "minghao-pursuing"
 title_separator          : "-"
-name                     : &name "Minghao Fu"
-description              : &description "Homepage of Minghao Fu"
+name                     : &name "Minghao (Spike) Fu"
+description              : &description "Homepage of Minghao"
 url                      : https://MinghaoFu.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "MinghaoFu/MinghaoFu.github.io"
