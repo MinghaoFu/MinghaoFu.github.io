@@ -46,9 +46,7 @@ Previous Appointments
 ------
 **2022**  
 
-  **Minghao Fu**, Dongyang Zhang, Min Lei, Kun He, Changyu Li, Jie Shao. "[Wide Fea-
-  ture Projection with Fast and Memory-Economic Attention for Efficient Image Super-
-  Resolution](https://bmvc2022.mpi-inf.mpg.de/615/)". In *Birtish Machine Vision Conference* (BMVC), 2022
+  **Minghao Fu**, Dongyang Zhang, Min Lei, Kun He, Changyu Li, Jie Shao. "[Wide Feature Projection with Fast and Memory-Economic Attention for Efficient Image Super-Resolution](https://bmvc2022.mpi-inf.mpg.de/615/)". In *Birtish Machine Vision Conference* (BMVC), 2022
 
   <!-- **Minghao Fu**, Xin Man, Yihan Xu, Jie Shao. ”[ESTISR: Adapting Efficient Scene
   Text Image Super-resolution for Real-Scenes](https://arxiv.org/abs/2306.02443)”. In CoRR, abs/2306.02443, 2023 -->
