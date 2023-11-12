@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-My name is Minghao Fu, a first-year master student at Department of Machine Learning, Mohamed bin Zayed University of Artificial Intelligence (MBZUAI), advised by Prof. [Kun Zhang](https://www.andrew.cmu.edu/user/kunz1/index.html). Also, I work closely with Prof. [Biwei Huang](https://biweihuang.com/).
+I am a first-year master student at Department of Machine Learning, Mohamed bin Zayed University of Artificial Intelligence (MBZUAI), advised by Prof. [Kun Zhang](https://www.andrew.cmu.edu/user/kunz1/index.html). Also, I work closely with Prof. [Biwei Huang](https://biweihuang.com/).
 
 My current research interests include: Causal Discovery, Causal Represenational Learning, Structural Learning, and Trustworthy AI. 
 
@@ -42,25 +42,27 @@ Previous Appointments
   *Cloud Developer Intern*, Jan 2022 - Mar 2022
 
 
-<!-- Publications & Preprints
+
 ------
+**2022**  
+
   **Minghao Fu**, Dongyang Zhang, Min Lei, Kun He, Changyu Li, Jie Shao. "[Wide Fea-
   ture Projection with Fast and Memory-Economic Attention for Efficient Image Super-
   Resolution](https://bmvc2022.mpi-inf.mpg.de/615/)". In *Birtish Machine Vision Conference* (BMVC), 2022
 
-  **Minghao Fu**, Xin Man, Yihan Xu, Jie Shao. ”[ESTISR: Adapting Efficient Scene
+  <!-- **Minghao Fu**, Xin Man, Yihan Xu, Jie Shao. ”[ESTISR: Adapting Efficient Scene
   Text Image Super-resolution for Real-Scenes](https://arxiv.org/abs/2306.02443)”. In CoRR, abs/2306.02443, 2023 -->
 
 Miscellaneous
 ------
 🎾 Once Champion  
-🏀 With my friends  
-🏓 My strong suits  
+🏀 With My Friends  
+🏓 Good Player  
 🏸 Enthusiast  
 🏃‍♂️ 6mins/km for a 10km distance  
 🎮 #45 in the Hearthstone final leaderboard  
-🎧 AHHHH wait my spotify playlists  
-📺 Animation!  
+🎧 Jazz/Blues/J-Pop  
+📺 Anime \(Let's Battle!    
   
     
 
