@@ -26,17 +26,19 @@ Education
   *B.S. in Software Engineering*, Sep 2019 - June 2023
 
 
-Previous Appointments
+Experiences
 ------
+  **University of California, San Diego**, California, USA  
+  *Visiting Student, Halicioğlu Data Science Institute (HDSI)*, Nov 2023 - Present
 
   **Mohamed bin Zayed University of Artificial Intelligence**, Abu Dhabi, UAE  
-  *Visiting Student & Research Assistant, Department of Machine Learning*, May 2023 - Aug 2023
+  *Visiting Student & Research Assistant, Center for Integrative Artificial Intelligence*, May 2023 - Aug 2023
 
   **Shanghai AI Lab**, Shanghai, China  
   *Research Intern, Ark NLP Group*, Nov 2022 - Mar 2023
 
   **University of Electronic Science and Technology of China**, Chengdu, China  
-  *Undergraduate Research Assistant, Center For Future Media Lab*, Apr 2022 - Aug 2022
+  *Research Assistant, Center For Future Media Lab*, Apr 2022 - Aug 2022
 
   **SAP**, Chengdu, China  
   *Cloud Developer Intern*, Jan 2022 - Mar 2022
