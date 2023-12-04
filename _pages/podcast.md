@@ -1,10 +1,3 @@
----
-layout: archive
-title: "PODCAST"
-permalink: /podcast/
-author_profile: true
----
-
 📖
 =====
 
