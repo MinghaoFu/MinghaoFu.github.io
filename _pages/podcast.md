@@ -1,3 +1,12 @@
+---
+layout: archive
+title: "PODCAST"
+permalink: /podcast/
+author_profile: true
+redirect_from:
+  - /podcast
+---
+
 📖
 
 [https://www.youtube.com/watch?v=7W_rJKm8m6w](https://www.youtube.com/watch?v=7W_rJKm8m6w)
