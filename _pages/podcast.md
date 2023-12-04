@@ -1,3 +1,10 @@
+---
+layout: archive
+title: "PODCAST"
+permalink: /podcast/
+author_profile: true
+---
+
 ### 📖
 
 https://www.youtube.com/watch?v=7W_rJKm8m6w

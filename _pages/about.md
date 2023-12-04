@@ -10,7 +10,7 @@ redirect_from:
 
 I am a first-year master student at Mohamed bin Zayed University of Artificial Intelligence (MBZUAI), advised by [Kun Zhang](https://www.andrew.cmu.edu/user/kunz1/index.html). I work closely with [Biwei Huang](https://biweihuang.com/).
 
-My current research interests include: Causal Discovery, Causal Represenational Learning, and ML for science/healthcare. 
+My current research interests include: Causal Discovery, Causal Represenational Learning, and ML for Science/Healthcare. 
 
 Email: isminghaofu\[AT\]gmail\[DOT\]com
 
