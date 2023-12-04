@@ -1,6 +1,9 @@
 # main links links
 main:
     
-  # - title: "CV"
-  #   url: /Academic_CV.pdf
+  - title: "CV"
+    url: /files/Academic_CV.pdf
+
+  - title: "Recommendation"
+    url: /_pages/PODCAST.md
     

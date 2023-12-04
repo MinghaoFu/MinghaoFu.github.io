@@ -14,6 +14,8 @@ My current research interests include: Causal Discovery, Causal Represenational 
 
 See my [CV](../files/Academic_CV.pdf) for more details.
 
+Email: isminghaofu\[AT\]gmail\[DOT\]com
+
 Education
 ======
 
