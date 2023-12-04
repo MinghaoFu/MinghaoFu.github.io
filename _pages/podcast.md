@@ -5,12 +5,15 @@ permalink: /podcast/
 author_profile: true
 ---
 
-### 📖
+📖
+=====
 
 https://www.youtube.com/watch?v=7W_rJKm8m6w
 https://www.youtube.com/@onlinecausalinferencesemin2364
 
-### 🎵
+🎵
+=====
+
 https://www.youtube.com/watch?v=4fndeDfaWCg
 https://www.youtube.com/watch?v=5-ZiKXrnvog
 https://www.youtube.com/watch?v=IHENIg8Se7M&list=PLevNdVJ_oyLYKVyCQSuxHPzcE0HA8mWYX&index=1
