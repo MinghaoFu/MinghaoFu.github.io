@@ -4,6 +4,6 @@ main:
   - title: "CV"
     url: /files/Academic_CV.pdf
 
-  - title: "Recommendation"
-    url: /_pages/PODCAST.md
+  - title: "PODCAST"
+    url: /_pages/podcast.md
     

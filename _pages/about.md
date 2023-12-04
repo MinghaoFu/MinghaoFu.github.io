@@ -12,8 +12,6 @@ I am a first-year master student at Mohamed bin Zayed University of Artificial I
 
 My current research interests include: Causal Discovery, Causal Represenational Learning, and ML for science/healthcare. 
 
-See my [CV](../files/Academic_CV.pdf) for more details.
-
 Email: isminghaofu\[AT\]gmail\[DOT\]com
 
 Education
