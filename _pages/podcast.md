@@ -7,14 +7,16 @@ redirect_from:
   - /podcast
 ---
 
-📖
+### I watch...
 
-[https://www.youtube.com/watch?v=7W_rJKm8m6w](https://www.youtube.com/watch?v=7W_rJKm8m6w)  
-[https://www.youtube.com/watch?v=CCyR4pR83PY&list=PLevNdVJ_oyLaahOpzK9PdlOtQV0QCNXZt&index=1](https://www.youtube.com/watch?v=CCyR4pR83PY&list=PLevNdVJ_oyLaahOpzK9PdlOtQV0QCNXZt&index=1)  
+[Aapo Hyvärinen on intelligence and suffering](https://www.youtube.com/watch?v=7W_rJKm8m6w)  
+[Rank deficiency](https://www.youtube.com/watch?v=CCyR4pR83PY&list=PLevNdVJ_oyLaahOpzK9PdlOtQV0QCNXZt&index=1)  
+[TAMU causal lecture](https://www.youtube.com/watch?v=tIVxRlz9t80&list=PLmT7xj3n_0C58CKjYZtrlVenYvk5iOy9_)  
+[Natasha Jaques PhD Thesis Defense](https://www.youtube.com/watch?v=a-oWa2CS8jg)  
 
-🎵
+### I listen...
 
-[https://www.youtube.com/watch?v=4fndeDfaWCg](https://www.youtube.com/watch?v=4fndeDfaWCg)  
-[https://www.youtube.com/watch?v=5-ZiKXrnvog](https://www.youtube.com/watch?v=5-ZiKXrnvog)  
-[https://www.youtube.com/watch?v=IHENIg8Se7M&list=PLevNdVJ_oyLYKVyCQSuxHPzcE0HA8mWYX&index=1](https://www.youtube.com/watch?v=IHENIg8Se7M&list=PLevNdVJ_oyLYKVyCQSuxHPzcE0HA8mWYX&index=1)  
-[https://www.youtube.com/watch?v=kxs9Su_mbpU&list=PLevNdVJ_oyLYKVyCQSuxHPzcE0HA8mWYX&index=3](https://www.youtube.com/watch?v=kxs9Su_mbpU&list=PLevNdVJ_oyLYKVyCQSuxHPzcE0HA8mWYX&index=3)  
+[I want it that way (Backstreet Boys!)](https://www.youtube.com/watch?v=4fndeDfaWCg)  
+[Dynasty](https://www.youtube.com/watch?v=5-ZiKXrnvog)  
+[❤️Hokkaido](https://www.youtube.com/watch?v=IHENIg8Se7M&list=PLevNdVJ_oyLYKVyCQSuxHPzcE0HA8mWYX&index=1)  
+[Aimer - カタオモイ (Kataomoi)](https://www.youtube.com/watch?v=kxs9Su_mbpU&list=PLevNdVJ_oyLYKVyCQSuxHPzcE0HA8mWYX&index=3)  
