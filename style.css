@@ -1,0 +1,97 @@
+
+:root{ --text:#1a1a1a; --muted:#5b5b5b; --line:#e6e6eb; --link:#0a58cc; --bg:#fff; --pill:#f4f7ff; }
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg);line-height:1.6;letter-spacing:.01em}
+.container{max-width:1380px;margin:0 auto;padding:40px 22px}
+a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+.header{display:flex;align-items:center;gap:28px;margin-bottom:16px}
+.header img{width:240px;height:240px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+h1{font-size:42px;line-height:1.1;margin:0 0 4px 0;letter-spacing:-.02em}
+.subtitle{margin:2px 0 10px 0;color:var(--muted);font-weight:500}
+.small{font-size:20px;color:var(--muted)}
+.links a{margin-right:14px}
+.btnbar{margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:9px 14px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:#fff}
+.btn:hover{background:#f0f4ff}
+.section{margin-top:34px}
+.section h2{font-size:22px;margin:0 0 12px 0;padding-bottom:8px;border-bottom:1px solid var(--line);letter-spacing:.01em}
+
+/* Publications */
+.pub {
+    display: flex;
+    align-items: stretch;
+    gap: 18px;
+    margin: 22px 0;
+  }
+.pub.paper .thumb-wrap {
+    flex: 0 0 240px;   /* 宽度 */
+    height: 160px;     /* 高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.pub.paper .thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* 保比例不裁切 */
+    object-position: center;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+  }
+.pub.edu {
+    margin-left: -80px;     /* 根据需要微调：-10px ~ -30px 都可 */
+  }
+.pub.edu .thumb-wrap {
+    flex: 0 0 160px;   /* 更窄一些 */
+    height: 160px;     /* 正方形 logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.pub.edu .thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* 保比例不裁切 */
+    object-position: center;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+  }
+.pub .body{flex:1 1 auto;min-width:0}
+.pub h3{margin:0;font-size:19px;line-height:1.35;font-weight:650}
+.pub .authors{color:#383838;font-size:18px;margin-top:6px;font-weight: 500}
+.pub .venue{margin-top:8px}
+.pub .venue .abbr{font-variant:normal;font-weight:650;letter-spacing:.02em;background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:2px 10px;display:inline-block}
+.pub .desc{margin-top:8px;color:#444}
+.pub .links{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
+.pub .linkbtn{display:inline-block;padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;background:#fff;white-space:nowrap}
+
+/* Education timeline */
+.edu{position:relative;margin-top:12px;padding-left:120px}
+.edu::before{content:"";position:absolute;left:88px;top:5px;bottom:0;width:2px;background:var(--line)}
+.eduitem{position:relative;margin:0 0 22px 0}
+.eduitem .year{position:absolute;left:0;width:70px;text-align:right;color:var(--muted);font-weight:600;line-height:1.2}
+.eduitem .dot{position:absolute;left:84px;top:0.6em;width:10px;height:10px;background:#fff;border:2px solid var(--link);border-radius:50%}
+.eduitem .body{margin-left:16px;line-height:1.55}
+.eduitem .school{font-weight:650}
+.eduitem .detail{color:var(--muted)}
+.footer{margin-top:34px;color:#666;font-size:14px}
+
+/* Service / Reviewing */
+.service-block { margin-top: 10px; }
+.service-title { font-weight: 650; margin-bottom: 8px; }
+
+/* Reusable pill (matches venue chips style but usable anywhere) */
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0a58cc;
+  background: #eef5ff;
+  border: 1px solid #d0e0ff;
+  border-radius: 999px;
+  vertical-align: middle;
+}
