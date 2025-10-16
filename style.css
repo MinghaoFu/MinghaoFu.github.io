@@ -2,13 +2,14 @@
 :root{ --text:#1a1a1a; --muted:#5b5b5b; --line:#e6e6eb; --link:#1a8f3b; --bg:#fff; --pill:#e6f6eb; }
 *{box-sizing:border-box} html,body{margin:0;padding:0}
 body{font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg);line-height:1.6;letter-spacing:.01em}
-.container{max-width:960px;margin:0 auto;padding:40px 22px;position:relative;background-image:url("images/branch.png");background-repeat:no-repeat;background-size:260px auto;background-position:calc(100% - 18px) calc(100% - 18px)}
+.container{max-width:900px;margin:0 auto;padding:40px 22px;position:relative;background-image:url("images/branch.png");background-repeat:no-repeat;background-size:260px auto;background-position:calc(100% - 18px) calc(100% - 18px)}
 a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
 .header{display:flex;align-items:center;gap:28px;margin-bottom:16px}
-.header img{width:200px;height:200px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-h1{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:36px;line-height:1.1;margin:0 0 4px 0;letter-spacing:-.02em;font-weight:300}
+.header .profile{width:200px;height:200px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+h1{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:40px;line-height:1.1;margin:0 0 4px 0;letter-spacing:-.02em;font-weight:600}
+.header h1 .cname{margin-left:-16px;height:52px;width:auto;vertical-align:middle;display:inline-block;position:relative;top:-10px}
 .subtitle{margin:2px 0 10px 0;color:var(--muted);font-weight:400}
-.small{font-size:13px;color:var(--muted)}
+.small{font-size:14px;color:var(--muted)}
 .small b{color:var(--link);font-weight:600}
 .links a{margin-right:0}
 .section{margin-top:34px}
@@ -106,3 +107,7 @@ h1{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:36
     color:#2d2d2d;
     font-weight:360;
 }
+
+.service-line{margin:4px 0;font-size:14px;color:#383838}
+.service-line .label{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:16px;font-weight:600;color:#0f6d2a;margin-right:6px}
+.service-line .value{font-size:14px;font-weight:400}
