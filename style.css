@@ -111,16 +111,3 @@ h1{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:40
 .service-line{margin:4px 0;font-size:14px;color:#383838}
 .service-line .label{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:16px;font-weight:600;color:#0f6d2a;margin-right:6px}
 .service-line .value{font-size:14px;font-weight:400}
-
-:root {
-  --scale: clamp(0.50, 1vw + 0.3, 1);  /* 小屏时大约缩到 75%，宽屏时为100% */
-}
-/* 所有元素的基础缩放 */
-html {
-  font-size: calc(16px * var(--scale));  /* 字体比例随屏宽变 */
-}
-/* 图片跟随缩放 */
-img, .thumb, .logo {
-  width: calc(100% * var(--scale));
-  height: auto;
-}
