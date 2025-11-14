@@ -111,3 +111,57 @@ h1{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:40
 .service-line{margin:4px 0;font-size:14px;color:#383838}
 .service-line .label{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:16px;font-weight:600;color:#0f6d2a;margin-right:6px}
 .service-line .value{font-size:14px;font-weight:400}
+
+/* --- Mobile fix: publications/education 在手机上单列、自适应图片 --- */
+@media (max-width: 768px) {
+  /* 容器占满宽度，留一点边距 */
+  .container {
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* 每条 publication / education 卡片：从并排改为上下排 */
+  .pub, .edu {
+    display: grid !important;
+    grid-template-columns: 1fr !important;   /* 单列 */
+    grid-auto-rows: auto !important;
+    align-items: start !important;
+    gap: 10px !important;
+  }
+
+  /* 左侧缩略图容器占满行宽，放在上面 */
+  .pub .thumb-wrap, .edu .thumb-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    /* 移除任何固定高度 */
+    height: auto !important;
+  }
+
+  /* 图片按比例缩放，不裁切、不拉伸 */
+  .pub .thumb, .edu .thumb, .pub img, .edu img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    /* 如果之前有圆角/边框可保留，你已经有就不重复了 */
+  }
+
+  /* 右侧正文区域（现在在图片下）正常流式换行，避免过窄 */
+  .pub .body, .edu .body {
+    width: 100% !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.6;
+  }
+
+  /* 徽章行（会议缩写 / Under Review / PDF 按钮）自动换行 */
+  .badges, .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+
+}
