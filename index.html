@@ -5,11 +5,10 @@
   <meta name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2, user-scalable=yes">
   <title>Minghao Fu - Ph.D. student at UCSD</title>
-  <!-- Google site verification -->
   <meta name="google-site-verification" content="jWKehdsRIcDHo2w5dZ_IRKSA-aeocPoq1xqDmPBEDpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="stylesheet" href="style.css">
   <link rel="canonical" href="https://minghaofu.github.io/">
@@ -19,296 +18,214 @@
   <meta property="og:image" content="https://minghaofu.github.io/images/profile.png">
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <img class="profile" src="images/profile.png" alt="Minghao Fu">
-    <div>
+<div class="page">
+  <header class="hero">
+    <div class="hero-media">
+      <img class="profile" src="images/profile.png" alt="Minghao Fu">
+    </div>
+    <div class="hero-text">
       <h1>Minghao Fu <img src="images/cn-name.png" alt="Minghao Fu Chinese name" class="cname"></h1>
-      <p></p>
-      <div class="small">
-        I am a first-year Ph.D. student at the Halıcıoğlu Data Science Institute, 
-        <a href="https://www.ucsd.edu/">UC San Diego</a>, advised by 
-        <a href="https://biweihuang.com/">Biwei Huang</a>.
+      <p class="subtitle">Ph.D. student, Halıcıoğlu Data Science Institute, UC San Diego</p>
+      <div class="intro">
         <p>
-          Before UCSD, I completed my M.S. in Machine Learning at <a href="https://mbzuai.ac.ae/">MBZUAI</a> under 
-          <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>. 
-          During that time, I was also a visiting student at <a href="https://www.cmu.edu/">CMU</a>, 
-          working with <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>. 
-          I worked on causal learning and identification problems, with using them to improve downstream generative models and scientific discovery. 
-          My master’s thesis can be found <a href="https://irep.mbzuai.ac.ae/items/a425bc77-b9c4-483d-9bdd-bc79d5ad778f">here</a>.
+          I am a Ph.D. student at the Halıcıoğlu Data Science Institute,
+          <a href="https://www.ucsd.edu/">UC San Diego</a>, advised by
+          <a href="https://biweihuang.com/">Biwei Huang</a>.
         </p>
         <p>
-          Prior to MBZUAI, I obtained my Bachelor from <a href="https://en.uestc.edu.cn/">UESTC</a>, advised by 
-          <a href="https://cfm.uestc.edu.cn/~shaojie/">Jie Shao</a>, 
-          and also interned in the NLP group at Shanghai AI Lab, 
+          Before UCSD, I completed my M.S. in Machine Learning at <a href="https://mbzuai.ac.ae/">MBZUAI</a> under
+          <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>, and was a visiting student at
+          <a href="https://www.cmu.edu/">CMU</a> working with
+          <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>,
+          focusing on theoretical aspects of generative models.
+        </p>
+        <p>
+          Prior to MBZUAI, I obtained my Bachelor from <a href="https://en.uestc.edu.cn/">UESTC</a>, advised by
+          <a href="https://cfm.uestc.edu.cn/~shaojie/">Jie Shao</a>,
+          and also interned in the NLP group at Shanghai AI Lab,
           led by <a href="https://ikekonglp.github.io/">Lingpeng Kong</a>.
         </p>
       </div>
 
-      <div class="links small" style="margin-top:10px">
-        <a href="mailto:isminghaofu@gmail.com">Email</a>&nbsp;/&nbsp;
-        <a href="https://github.com/MinghaoFu">GitHub</a>&nbsp;/&nbsp;
-        <a href="https://scholar.google.com/citations?user=e-ShHX0AAAAJ&hl=en">Google Scholar</a>&nbsp;/&nbsp;
-        <a href="https://www.linkedin.com/in/minghao-fu-80254a270/">LinkedIn</a>&nbsp;/&nbsp;
-        <a href="https://twitter.com/Minghao__Fu">Twitter</a>&nbsp;/&nbsp;
-        <a href="cv.pdf" target="_blank">Curriculum Vitae</a>
+      <div class="link-row">
+        <a class="link-btn" href="mailto:isminghaofu@gmail.com">Email</a>
+        <a class="link-btn" href="https://github.com/MinghaoFu">GitHub</a>
+        <a class="link-btn" href="https://scholar.google.com/citations?user=e-ShHX0AAAAJ&hl=en">Google Scholar</a>
+        <a class="link-btn" href="https://www.linkedin.com/in/minghao-fu-80254a270/">LinkedIn</a>
+        <a class="link-btn" href="https://twitter.com/Minghao__Fu">Twitter</a>
+        <a class="link-btn" href="cv.pdf" target="_blank">Curriculum Vitae</a>
       </div>
+
     </div>
-  </div>
+  </header>
 
-  <div class="section">
-    <h2>Research: Truth is good</h2>
-    <div class="pub">
-      <div class="small">
-        <p>My research centers on <b>inverting observation-generation to unveil the hidden world</b>. 
-          
-          I explore:  
-          (1) how to identify a hidden world based on the assumed generative mechanism, and  
-          (2) how such a hidden world instructs the observed world evolving in response to the environment?
-          
-          <p> Hence, my works cover world models (multi‑modal learning, VLMs, temporal state‑space models), decision‑making (VLAs, reinforcement learning), and theoretical aspects of generative models. </p>
+  <main>
+    <section class="section">
+      <h2>Research</h2>
+      <div class="card">
+        <p>
+          My research centers on <strong>inverting observation-generation to unveil the hidden world</strong>.
+          I explore: (1) how to identify a hidden world based on the assumed generative mechanism, and
+          (2) how such a hidden world instructs the observed world evolving in response to the environment.
+        </p>
+        <p>
+          Hence, my works cover world models (multi-modal learning, VLMs, temporal state-space models),
+          decision-making (VLAs, reinforcement learning), and theoretical aspects of generative models.
+        </p>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="section">
-    <h2>News</h2>
-    <div class="pub">
-      <div class="small">
-        <p><b>Jan 2026.</b> Two papers on <b>Reinforcement Learning</b> and <b>Multi-modality</b> were accepted to ICLR 2026.</p>
-        <p><b>Dec 2025.</b> Attended <b></b>NeurIPS 2025</b> in Seattle, WA, USA.</p>
-        <p><b>Nov 2025.</b> Presented our work on <b>The 5th Measurement Errors and Latent Variables Workshop</b> at JHU. Thanks to <a href="https://econ.jhu.edu/directory/yingyao-hu/">Dean. Hu</a> for invitation!</p>
-        <p><b>Sep 2025.</b> Two papers on <b>Temporal State-Space Models</b> were accepted to NeurIPS 2025.</p>
-      </div>
-    </div>
-  </div>
+    <section class="section">
+      <h2>News</h2>
+      <ul class="news">
+        <li><span class="date">Jan 2026</span> Two papers on <strong>Reinforcement Learning</strong> and <strong>Multi-modality</strong> were accepted to ICLR 2026.</li>
+        <li><span class="date">Dec 2025</span> Attended <strong>NeurIPS 2025</strong> in San Diego, CA, USA.</li>
+        <li><span class="date">Nov 2025</span> Presented our work at <strong>The 5th Measurement Errors and Latent Variables Workshop</strong> at JHU. Thanks to <a href="https://econ.jhu.edu/directory/yingyao-hu/">Dean. Hu</a> for invitation.</li>
+        <li><span class="date">Sep 2025</span> Two papers on <strong>Temporal State-Space Models</strong> were accepted to NeurIPS 2025.</li>
+      </ul>
+    </section>
 
-  <div class="section">
-    <h2>Selected Publications</h2>
+    <section class="section">
+      <h2>Selected Publications</h2>
 
-    <!-- 1 -->
-    <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/child.png" alt=""></div>
-      <div class="body">
-        <h3>Towards Identifiability of Hierarchical Temporal Causal Representation Learning</h3>
-        <div class="authors">Zijian Li*, <span class="me">Minghao Fu*</span>, Junxian Huang, Yifan Shen, Ruichu Cai, Yuewen Sun, Guangyi Chen, Kun Zhang</div>
-        <div class="venue"><span class="abbr">NeurIPS 2025</span></div>
-        <div class="links">
-          <a href="https://arxiv.org/pdf/2510.18310" target="_blank">arXiv</a> | 
-          <a href="https://github.com/MinghaoFu/CHiLD" target="_blank">Code</a>
+      <div class="paper-card">
+        <div class="thumb-wrap"><img class="thumb" src="images/papers/adadiff.png" alt=""></div>
+        <div class="body">
+          <h3>Ada-Diffuser: Latent-Aware Adaptive Diffusion for Decision-Making</h3>
+          <div class="authors">Fan Feng, Selena Ge, <span class="me">Minghao Fu</span>, Zijian Li, Yujia Zheng, Zeyu Tang, Yingyao Hu, Biwei Huang, Kun Zhang</div>
+          <div class="venue"><span class="abbr">ICLR 2026</span></div>
+          <div class="links">
+            <a href="https://openreview.net/pdf?id=lZ2iSl8ihf" target="_blank">arXiv</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/online.png" alt=""></div>
-      <div class="body">
-        <h3>Online Time Series Forecasting with Theoretical Guarantees</h3>
-        <div class="authors">Zijian Li, Changze Zhou, <span class="me">Minghao Fu</span>, Sanjay Manjunath, Fan Feng, Guangyi Chen, Yingyao Hu, Ruichu Cai, Kun Zhang</div>
-        <div class="venue"><span class="abbr">NeurIPS 2025</span></div>
-        <div class="links">
-          <a href="https://www.arxiv.org/abs/2510.18281" target="_blank">arXiv</a> 
+      <div class="paper-card">
+        <div class="thumb-wrap"><img class="thumb" src="images/papers/personaX.png" alt=""></div>
+        <div class="body">
+          <h3>PersonaX: Multimodal Datasets with LLM-Inferred Behavior Traits</h3>
+          <div class="authors">Loka Li*, Wong Yu Kang*, <span class="me">Minghao Fu</span>, Guangyi Chen, Zhenhao Chen, Gongxu Luo, Yuewen Sun, Salman Khan, Peter Spirtes, Kun Zhang</div>
+          <div class="venue"><span class="abbr">ICLR 2026</span></div>
+          <div class="links">
+            <a href="https://arxiv.org/pdf/2509.11362" target="_blank">arXiv</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 2 -->
-    <!-- <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/mist.png" alt=""></div>
-      <div class="body">
-        <h3>Learning Task-Sufficient World Models via Intervention-Curriculum Co-Design</h3>
-        <div class="authors">Fan Feng, Yujia Zheng, <span class="me">Minghao Fu</span>, Yongqiang Chen, Guangyi Chen, Kevin P. Murphy, Biwei Huang, Kun Zhang</div>
-        <div class="venue"><span class="abbr">Under Review at ICLR 2026</span></div>
+      <div class="paper-card">
+        <div class="thumb-wrap"><img class="thumb" src="images/papers/child.png" alt=""></div>
+        <div class="body">
+          <h3>Towards Identifiability of Hierarchical Temporal Causal Representation Learning</h3>
+          <div class="authors">Zijian Li*, <span class="me">Minghao Fu*</span>, Junxian Huang, Yifan Shen, Ruichu Cai, Yuewen Sun, Guangyi Chen, Kun Zhang</div>
+          <div class="venue"><span class="abbr">NeurIPS 2025</span></div>
+          <div class="links">
+            <a href="https://arxiv.org/pdf/2510.18310" target="_blank">arXiv</a>
+            <span class="sep">•</span>
+            <a href="https://github.com/MinghaoFu/CHiLD" target="_blank">Code</a>
+          </div>
+        </div>
       </div>
-    </div> -->
 
-    <!-- 3 -->
-    <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/climate.png" alt=""></div>
-      <div class="body">
-        <h3>Learning General Causal Structures with Hidden Dynamic Process for Climate Analysis</h3>
-        <div class="authors"><span class="me">Minghao Fu</span>, Biwei Huang, Zijian Li, Yujia Zheng, Ignavier Ng, Guangyi Chen, Yingyao Hu†, Kun Zhang†</div>
-        <div class="links">
-          <a href="https://arxiv.org/pdf/2501.12500v2" target="_blank">arXiv</a>
+      <div class="paper-card">
+        <div class="thumb-wrap"><img class="thumb" src="images/papers/online.png" alt=""></div>
+        <div class="body">
+          <h3>Online Time Series Forecasting with Theoretical Guarantees</h3>
+          <div class="authors">Zijian Li, Changze Zhou, <span class="me">Minghao Fu</span>, Sanjay Manjunath, Fan Feng, Guangyi Chen, Yingyao Hu, Ruichu Cai, Kun Zhang</div>
+          <div class="venue"><span class="abbr">NeurIPS 2025</span></div>
+          <div class="links">
+            <a href="https://www.arxiv.org/abs/2510.18281" target="_blank">arXiv</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 4 -->
-    <!-- <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/c3.png" alt=""></div>
-      <div class="body">
-        <h3>From Comparison to Composition: Understanding Machine Cognition of Unseen Categories</h3>
-        <div class="authors"><span class="me">Minghao Fu</span>, Sheng Zhang, Guangyi Chen, Zijian Li, Yifan Shen, Fan Feng, Shaoan Xie, Kun Zhang</div>
-        <div class="venue"><span class="abbr">NeurIPS 2025 CogInterp Workshop</span></div>
+      <div class="paper-card">
+        <div class="thumb-wrap"><img class="thumb" src="images/papers/climate.png" alt=""></div>
+        <div class="body">
+          <h3>Learning General Causal Structures with Hidden Dynamic Process for Climate Analysis</h3>
+          <div class="authors"><span class="me">Minghao Fu</span>, Biwei Huang, Zijian Li, Yujia Zheng, Ignavier Ng, Guangyi Chen, Yingyao Hu†, Kun Zhang†</div>
+          <div class="links">
+            <a href="https://arxiv.org/pdf/2501.12500v2" target="_blank">arXiv</a>
+          </div>
+        </div>
       </div>
-    </div> -->
+    </section>
 
-    <!-- 6 -->
-    <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/adadiff.png" alt=""></div>
-      <div class="body">
-        <h3>Ada-Diffuser: Latent-Aware Adaptive Diffusion for Decision-Making</h3>
-        <div class="authors">Fan Feng, Selena Ge, <span class="me">Minghao Fu</span>, Zijian Li, Yujia Zheng, Zeyu Tang, Yingyao Hu, Biwei Huang, Kun Zhang</div>
-        <!-- <div class="venue"><span class="abbr">NeurIPS 2025 EWMDM Workshop</span></div> -->
-        <div class="links">
-          <a href="https://openreview.net/pdf?id=lZ2iSl8ihf" target="_blank">arXiv</a>
-        </div>
-      </div>
-    </div>
+    <section class="section">
+      <h2>Education</h2>
 
-    <!-- 7 -->
-    <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/personaX.png" alt=""></div>
-      <div class="body">
-        <h3>PersonaX: Multimodal Datasets with LLM-Inferred Behavior Traits</h3>
-        <div class="authors">Loka Li*, Wong Yu Kang*, <span class="me">Minghao Fu</span>, Guangyi Chen, Zhenhao Chen, Gongxu Luo, Yuewen Sun, Salman Khan, Peter Spirtes, Kun Zhang</div>
-        <div class="links">
-          <a href="https://arxiv.org/pdf/2509.11362" target="_blank">arXiv</a>
+      <div class="edu-card">
+        <div class="thumb-wrap">
+          <img class="thumb logo" src="images/schools/ucsd.png" alt="UC San Diego">
+        </div>
+        <div class="body">
+          <div class="edu-header">
+            <span class="school">University of California, San Diego</span>
+            <span class="period">Aug 2025 – Present</span>
+          </div>
+          <div class="edu-title">Ph.D., Halıcıoğlu Data Science Institute</div>
+          <div class="desc">Advisor: <a href="https://biweihuang.com/">Biwei Huang</a></div>
         </div>
       </div>
-    </div>
 
-    <!-- <div class="pub paper">
-      <div class="thumb-wracausp"><img class="thumb" src="images/papers/rebuttal.png" alt=""></div>
-      <div class="body">
-        <h3>How Effective is Your Rebuttal? Identifying Causal Models from the OpenReview System</h3>
-        <div class="authors">Loka Li, Ibrahim Aldarmaki, <span class="me">Minghao Fu</span>, Wong Yu Kang, Yunlong Deng, Qiang Huang, Jing Yang, Jin Tian, Guangyi Chen, Kun Zhang</div>
-        <div class="venue"><span class="abbr">NeurIPS 2025 CauScien Workshop</span></div>
+      <div class="edu-card">
+        <div class="thumb-wrap">
+          <img class="thumb logo" src="images/schools/cmu.png" alt="Carnegie Mellon University">
+        </div>
+        <div class="body">
+          <div class="edu-header">
+            <span class="school">Carnegie Mellon University</span>
+            <span class="period">Jun 2024 – Nov 2024</span>
+          </div>
+          <div class="edu-title">Visiting Student, CLeaR</div>
+          <div class="desc">
+            Advisors: <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>,
+            <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>
+          </div>
+        </div>
       </div>
-    </div> -->
 
-    <!-- 8 -->
-    <!-- <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/infant.png" alt=""></div>
-      <div class="body">
-        <h3>Infant Cry Detection Using Causal Temporal Representation</h3>
-        <div class="authors"><span class="me">Minghao Fu*</span>, Danning Li*, Aryan Gadhiya, Benjamin Lambright, Mohab Bahnassy, Mohamed Alowais, Saad El Dine ELEtter, Hawau Olamide Toyin, Haiyan Jiang, Kun Zhang†, Hanan Aldarmaki†</div>
-        <div class="venue">
-          <span class="abbr">ICASSP 2025</span>;
-          <a class="abbr deploy" href="https://cradle-ai.com/#/project/letbabytalk" target="_blank">Deployed in LetBabyTalk, Cradle AI</a>
+      <div class="edu-card">
+        <div class="thumb-wrap">
+          <img class="thumb logo" src="images/schools/mbzuai.png" alt="MBZUAI">
         </div>
-        <div class="links">
-          <a href="https://arxiv.org/pdf/2503.06247" target="_blank">PDF</a> |
-          <a href="https://github.com/danninglee/Infant-Cry-Detection-by-CRSTC" target="_blank">Code</a> |
-          <a href="https://cradle-ai.com/#/project/letbabytalk" target="_blank">Project</a>
+        <div class="body">
+          <div class="edu-header">
+            <span class="school">Mohamed bin Zayed University of Artificial Intelligence</span>
+            <span class="period">Aug 2023 – Jun 2025</span>
+          </div>
+          <div class="edu-title">M.S., Machine Learning</div>
+          <div class="desc">Advisor: <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a></div>
         </div>
       </div>
-    </div> -->
 
-    <!-- 9 -->
-    <!-- <div class="pub paper">
-      <div class="thumb-wrap"><img class="thumb" src="images/papers/wfpn.png" alt=""></div>
-      <div class="body">
-        <h3>Wide Feature Projection with Fast and Memory-Economic Attention for Efficient Image Super-Resolution</h3>
-        <div class="authors"><span class="me">Minghao Fu</span>, Dongyang Zhang, Min Lei, Kun He, Changyu Li, Jie Shao</div>
-        <div class="venue">
-          <span class="abbr">BMVC 2022</span>
+      <div class="edu-card">
+        <div class="thumb-wrap">
+          <img class="thumb logo" src="images/schools/uestc.png" alt="UESTC">
         </div>
-        <div class="links">
-          <a href="https://bmvc2022.mpi-inf.mpg.de/0615.pdf" target="_blank">PDF</a> |
-          <a href="https://github.com/MinghaoFu/WFPN" target="_blank">Code</a>
+        <div class="body">
+          <div class="edu-header">
+            <span class="school">University of Electronic Science and Technology of China</span>
+            <span class="period">Sep 2019 – Jun 2023</span>
+          </div>
+          <div class="edu-title">B.S., Software Engineering</div>
+          <div class="desc">Advisor: <a href="https://cfm.uestc.edu.cn/~shaojie/">Jie Shao</a></div>
         </div>
       </div>
-    </div> -->
+    </section>
 
-  </div>
-
-  <div class="section">
-    <h2>Education</h2>
-  
-    <!-- UCSD -->
-    <div class="pub edu">
-      <div class="thumb-wrap">
-        <img class="thumb logo" src="images/schools/ucsd.png" alt="UC San Diego">
-      </div>
-      <div class="body">
-        <div class="edu-header">
-          <span class="school">University of California, San Diego</span>
-          <span class="period">Aug 2025 – Present</span>
-        </div>
-        <div class="edu-title">Ph.D., Halıcıoğlu Data Science Institute</div>
-        <div class="desc">Advisor: <a href="https://biweihuang.com/">Biwei Huang</a></div>
-      </div>
-    </div>
-  
-    <!-- CMU -->
-    <div class="pub edu">
-      <div class="thumb-wrap">
-        <img class="thumb logo" src="images/schools/cmu.png" alt="Carnegie Mellon University">
-      </div>
-      <div class="body">
-        <div class="edu-header">
-          <span class="school">Carnegie Mellon University</span>
-          <span class="period">Jun 2024 – Nov 2024</span>
-        </div>
-        <div class="edu-title">Visiting Student, CLeaR</div>
-        <div class="desc">
-          Advisors: <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>,
-          <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>
-        </div>
-      </div>
-    </div>
-  
-    <!-- MBZUAI -->
-    <div class="pub edu">
-      <div class="thumb-wrap">
-        <img class="thumb logo" src="images/schools/mbzuai.png" alt="MBZUAI">
-      </div>
-      <div class="body">
-        <div class="edu-header">
-          <span class="school">Mohamed bin Zayed University of Artificial Intelligence</span>
-          <span class="period">Aug 2023 – Jun 2025</span>
-        </div>
-        <div class="edu-title">M.S., Machine Learning</div>
-        <div class="desc">Advisor: <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a></div>
-      </div>
-    </div>
-  
-    <!-- UESTC -->
-    <div class="pub edu">
-      <div class="thumb-wrap">
-        <img class="thumb logo" src="images/schools/uestc.png" alt="UESTC">
-      </div>
-      <div class="body">
-        <div class="edu-header">
-          <span class="school">University of Electronic Science and Technology of China</span>
-          <span class="period">Sep 2019 – Jun 2023</span>
-        </div>
-        <div class="edu-title">B.S., Software Engineering</div>
-        <div class="desc">Advisor: <a href="https://cfm.uestc.edu.cn/~shaojie/">Jie Shao</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="service">
-    <h2>Service</h2>
-    <div class="pub">
-      <div class="body">
-        <p class="service-line"><span class="label">Conference Reviewer:</span> <span class="value">CVPR 2026; WMW 2026; ICLR 2026; NeurIPS 2025; BMVC 2023.</span></p>
+    <section class="section" id="service">
+      <h2>Service</h2>
+      <div class="card">
+        <p class="service-line"><span class="label">Conference Reviewer:</span> <span class="value">ICML 2026; CVPR 2026; WMW 2026; ICLR 2026; NeurIPS 2025; BMVC 2023.</span></p>
         <p class="service-line"><span class="label">Journal Reviewer:</span> <span class="value">IEEE Transactions on Image Processing (TIP) 2024</span></p>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <div class="footer">© <span id="year"></span> Minghao Fu.</div>
+  <footer class="footer">© <span id="year"></span> Minghao Fu.</footer>
 </div>
 
-
-
 <script>
-// 严格等高：左图 = 右侧文字块高度
-function equalizeThumbHeights(){
-  document.querySelectorAll('.pub').forEach(p=>{
-    const body = p.querySelector('.body');
-    const img  = p.querySelector('.thumb');
-    if(body && img){
-      img.style.height = body.getBoundingClientRect().height + 'px';
-    }
-  });
-}
-window.addEventListener('load', equalizeThumbHeights);
-window.addEventListener('resize', equalizeThumbHeights);
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>

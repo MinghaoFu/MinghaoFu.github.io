@@ -1,167 +1,250 @@
+:root{
+  --ink:#1e1f24;
+  --muted:#4b5563;
+  --accent:#0f6d5f;
+  --accent-2:#183a6b;
+  --bg:#f6f2ec;
+  --card:#ffffff;
+  --line:#e4dfd7;
+  --pill:#e7f3ef;
+  --shadow:0 10px 30px rgba(15, 23, 42, 0.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(15,109,95,0.08), transparent 45%),
+    radial-gradient(circle at 100% 10%, rgba(24,58,107,0.08), transparent 40%),
+    linear-gradient(180deg, #f7f3ee 0%, #f3efe8 100%);
+  line-height:1.65;
+  letter-spacing:.01em;
+}
+.page{
+  max-width:980px;
+  margin:0 auto;
+  padding:48px 24px 64px;
+}
+a{color:var(--accent-2);text-decoration:none}
+a:hover{text-decoration:underline}
 
-:root{ --text:#1a1a1a; --muted:#5b5b5b; --line:#e6e6eb; --link:#1a8f3b; --bg:#fff; --pill:#e6f6eb; }
-*{box-sizing:border-box} html,body{margin:0;padding:0}
-body{font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg);line-height:1.6;letter-spacing:.01em}
-.container{max-width:900px;margin:0 auto;padding:40px 22px;position:relative;background-image:url("images/branch.png");background-repeat:no-repeat;background-size:260px auto;background-position:calc(100% - 18px) calc(100% - 18px)}
-a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-.header{display:flex;align-items:center;gap:28px;margin-bottom:16px}
-.header .profile{width:200px;height:200px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-h1{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:40px;line-height:1.1;margin:0 0 4px 0;letter-spacing:-.02em;font-weight:600}
-.header h1 .cname{margin-left:-16px;height:52px;width:auto;vertical-align:middle;display:inline-block;position:relative;top:-10px}
-.subtitle{margin:2px 0 10px 0;color:var(--muted);font-weight:400}
-.small{font-size:14px;color:var(--muted)}
-.small b{color:var(--link);font-weight:600}
-.links a{margin-right:0}
-.section{margin-top:34px}
-.section h2{font-size:24px;margin:0 0 12px 0;padding-bottom:8px;border-bottom:1px solid var(--line);letter-spacing:.01em;font-weight:260}
+.hero{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:32px;
+  align-items:start;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+.hero-media{display:flex;justify-content:center}
+.profile{
+  width:200px;
+  height:200px;
+  border-radius:18px;
+  object-fit:cover;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+h1{
+  font-family:"Libre Baskerville","Times New Roman",serif;
+  font-size:40px;
+  line-height:1.1;
+  margin:0 0 8px 0;
+  letter-spacing:-.02em;
+}
+.cname{
+  margin-left:-10px;
+  height:52px;
+  width:auto;
+  vertical-align:middle;
+  display:inline-block;
+  position:relative;
+  top:-8px;
+}
+.subtitle{
+  margin:0 0 12px 0;
+  color:var(--muted);
+  font-weight:500;
+}
+.intro p{margin:0 0 10px 0;color:var(--muted)}
 
-/* Publications */
-.pub {
-    display: flex;
-    align-items: stretch;
-    gap: 18px;
-    margin: 22px 0;
-  }
-.pub.paper .thumb-wrap {
-    flex: 0 0 240px;   /* 宽度 */
-    height: 120px;     /* 高度 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-.pub.paper .thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;   /* 保比例不裁切 */
-    object-position: center;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-  }
-.pub .body{flex:1 1 auto;min-width:0}
-.pub h3{margin:0;font-size:15px;line-height:1.35;font-weight:420;color:#0f6d2a}
-.pub .authors{color:#383838;font-size:14px;margin-top:6px;font-weight:360}
-.pub .authors .me{color:var(--link);font-weight:480}
-.pub .venue{margin-top:4px;line-height:1.4}
-.pub .venue .abbr{font-variant:normal;font-weight:260;font-size:14px;letter-spacing:.01em;color:var(--muted);background:none;border:none;padding:0;display:inline}
-.pub .desc{margin-top:8px;color:#444}
-.pub .links{margin-top:8px;font-size:13px;line-height:1.4}
+.link-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:14px 0 12px;
+}
+.link-btn{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 12px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#faf8f5;
+  font-size:13px;
+  font-weight:600;
+  color:var(--accent-2);
+}
+.link-btn:hover{background:#f0ebe3;text-decoration:none}
 
-.pub.edu {
-    align-items:flex-start;
-  }
-.pub.edu .thumb-wrap {
-    flex: 0 0 88px;
-    height: 88px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border:1px solid #e0e0e0;
-    border-radius:12px;
-    overflow:hidden;
-    background:#fff;
-  }
-.pub.edu .thumb {
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    object-position:center;
-    display:block;
-  }
-.pub.edu .desc{font-size:13px;color:#555;margin-top:6px}
-.footer{margin-top:34px;color:#666;font-size:14px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px}
+.pill{
+  display:inline-block;
+  padding:4px 10px;
+  font-size:12px;
+  font-weight:600;
+  color:var(--accent);
+  background:var(--pill);
+  border-radius:999px;
+}
 
-/* Service / Reviewing */
-.service-block { margin-top: 10px; }
-.service-title { font-weight: 650; margin-bottom: 8px; }
+.section{margin-top:32px}
+.section h2{
+  font-family:"Libre Baskerville","Times New Roman",serif;
+  font-size:24px;
+  margin:0 0 12px 0;
+  color:var(--ink);
+}
 
-/* Reusable pill (matches venue chips style but usable anywhere) */
-.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.pill {
-  display: inline-block;
-  padding: 2px 10px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #0a58cc;
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+}
+
+.news{
+  list-style:none;
+  margin:0;
+  padding:0;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+.news li{
+  padding:12px 18px;
+  border-top:1px solid var(--line);
+}
+.news li:first-child{border-top:none}
+.news .date{
+  display:inline-block;
+  min-width:78px;
+  color:var(--accent);
+  font-weight:700;
+  font-size:13px;
+}
+
+.paper-card,
+.edu-card{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:18px;
+  align-items:center;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:var(--shadow);
+}
+.thumb-wrap{
+  width:100%;
+  height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:#fbfaf8;
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+.thumb{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+}
+
+.paper-card h3{
+  margin:0;
+  font-size:16px;
+  line-height:1.35;
+  font-weight:700;
+  color:var(--accent-2);
+}
+.authors{color:#2d2f35;font-size:14px;margin-top:6px}
+.authors .me{color:var(--accent);font-weight:700}
+.venue{margin-top:4px}
+.venue .abbr{font-weight:600;font-size:13px;color:var(--muted)}
+.links{margin-top:8px;font-size:13px}
+.sep{margin:0 6px;color:var(--muted)}
+
+.edu-card{
+  grid-template-columns:140px 1fr;
+}
+.edu-card .thumb-wrap{
+  width:120px;
+  height:120px;
+  background:#ffffff;
+  aspect-ratio:1 / 1;
 }
 .edu-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:12px;
-    font-weight:400;
-    font-size:15px;
-    color:var(--text);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  font-weight:600;
+  font-size:15px;
 }
-.edu-header .period{
-    color:var(--muted);
-    font-weight:360;
-    font-size:14px;
-    white-space:nowrap;
-    min-width:120px;
-    text-align:right;
-}
-.edu-title{
-    margin-top:4px;
-    font-size:14px;
-    color:#2d2d2d;
-    font-weight:360;
+.edu-header .period{color:var(--muted);font-weight:500;white-space:nowrap}
+.edu-title{margin-top:4px;font-size:14px;color:#2d2d2d;font-weight:500}
+.desc{font-size:13px;color:#4b5563;margin-top:6px}
+
+.service-line{margin:6px 0;font-size:14px;color:#2f3340}
+.service-line .label{
+  font-family:"Libre Baskerville","Times New Roman",serif;
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent-2);
+  margin-right:6px;
 }
 
-.service-line{margin:4px 0;font-size:14px;color:#383838}
-.service-line .label{font-family:"Playfair Display","Times New Roman","Georgia",serif;font-size:16px;font-weight:600;color:#0f6d2a;margin-right:6px}
-.service-line .value{font-size:14px;font-weight:400}
+.footer{
+  margin-top:36px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
 
-/* --- Mobile fix: publications/education 在手机上单列、自适应图片 --- */
-@media (max-width: 768px) {
-  /* 容器占满宽度，留一点边距 */
-  .container {
-    max-width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr;}
+  .hero-media{justify-content:flex-start}
+  .profile{width:180px;height:180px}
+}
 
-  /* 每条 publication / education 卡片：从并排改为上下排 */
-  .pub, .edu {
-    display: grid !important;
-    grid-template-columns: 1fr !important;   /* 单列 */
-    grid-auto-rows: auto !important;
-    align-items: start !important;
-    gap: 10px !important;
-  }
+@media (max-width: 768px){
+  .page{padding:28px 16px 48px}
+  h1{font-size:34px}
+  .paper-card,.edu-card{grid-template-columns:1fr}
+  .thumb-wrap{height:160px}
+  .edu-card .thumb-wrap{height:120px}
+  .news .date{min-width:auto;margin-right:6px}
+}
 
-  /* 左侧缩略图容器占满行宽，放在上面 */
-  .pub .thumb-wrap, .edu .thumb-wrap {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    /* 移除任何固定高度 */
-    height: auto !important;
-  }
-
-  /* 图片按比例缩放，不裁切、不拉伸 */
-  .pub .thumb, .edu .thumb, .pub img, .edu img {
-    width: 100% !important;
-    height: auto !important;
-    object-fit: contain !important;
-    object-position: center !important;
-    display: block !important;
-    /* 如果之前有圆角/边框可保留，你已经有就不重复了 */
-  }
-
-  /* 右侧正文区域（现在在图片下）正常流式换行，避免过窄 */
-  .pub .body, .edu .body {
-    width: 100% !important;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    line-height: 1.6;
-  }
-
-  /* 徽章行（会议缩写 / Under Review / PDF 按钮）自动换行 */
-  .badges, .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 8px;
-  }
-
+@media (prefers-reduced-motion: no-preference){
+  .section, .hero{animation:fadeUp .6s ease both}
+  .section:nth-of-type(2){animation-delay:.05s}
+  .section:nth-of-type(3){animation-delay:.1s}
+  .section:nth-of-type(4){animation-delay:.15s}
+  .section:nth-of-type(5){animation-delay:.2s}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
 }
