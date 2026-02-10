@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PersonaX: Multimodal datasets with LLM-inferred behavior traits for causal, cross-modal analysis.">
+  <meta name="keywords" content="PersonaX, Multimodal, Behavior Traits, LLM, Dataset, ICLR 2026">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaX: Multimodal Datasets with LLM-Inferred Behavior Traits</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <span class="icon"><i class="fas fa-home"></i></span>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#contributions">Contributions</a>
+      <a class="navbar-item" href="#datasets">Datasets</a>
+      <a class="navbar-item" href="#method">Method</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#usage">Usage</a>
+      <a class="navbar-item" href="#bibtex">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <p class="conference-tag">ICLR 2026</p>
+          <h1 class="title is-1 publication-title">PersonaX: Multimodal Datasets with LLM-Inferred Behavior Traits</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://lokali.github.io/">Loka Li</a>*<sup>1</sup>,</span>
+            <span class="author-block"><a href="https://openreview.net/profile?id=~Wong_Yu_Kang1">Wong Yu Kang</a>*<sup>1</sup>,</span>
+            <span class="author-block"><a href="https://minghaofu.github.io/">Minghao Fu</a><sup>1,3</sup>,</span>
+            <span class="author-block"><a href="https://chengy12.github.io/">Guangyi Chen</a><sup>1,2</sup>,</span>
+            <span class="author-block"><a href="https://zhenhaochenofficial.github.io/">Zhenhao Chen</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://openreview.net/profile?id=~Gongxu_Luo1">Gongxu Luo</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://yuewen-sun.github.io/">Yuewen Sun</a><sup>1,2</sup>,</span>
+            <span class="author-block"><a href="https://salman-h-khan.github.io/">Salman Khan</a><sup>1,4</sup>,</span>
+            <span class="author-block"><a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a><sup>2</sup>,</span>
+            <span class="author-block"><a href="https://www.andrew.cmu.edu/user/kunz1/">Kun Zhang</a><sup>1,2</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>MBZUAI</span>
+            <span class="author-block"><sup>2</sup>Carnegie Mellon University</span>
+            <span class="author-block"><sup>3</sup>UC San Diego</span>
+            <span class="author-block"><sup>4</sup>Australian National University</span>
+          </div>
+          <div class="is-size-6 publication-authors">* Equal contribution</div>
+
+          <div class="columns is-centered is-vcentered affiliation-logos">
+            <div class="column is-narrow"><img class="affil-logo" src="./static/images/affiliations/mbzuai.png" alt="MBZUAI"></div>
+            <div class="column is-narrow"><img class="affil-logo" src="./static/images/affiliations/cmu.svg" alt="CMU"></div>
+            <div class="column is-narrow"><img class="affil-logo" src="./static/images/affiliations/ucsd.svg" alt="UC San Diego"></div>
+            <div class="column is-narrow"><img class="affil-logo" src="./static/images/affiliations/anu.svg" alt="ANU"></div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2509.11362"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/lokali/PersonaX"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/Persona-X/datasets"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="far fa-images"></i></span>
+                  <span>Datasets (HF)</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="overview">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Overview</h2>
+    <div class="content">
+      <p>
+        PersonaX is built to answer a simple question: can we study human behavior traits at scale without
+        relying on self-reports or invasive measurements? We link LLM-inferred behavior traits to visual and
+        biographical signals, enabling cross-modal analysis, causal discovery, and reproducible empirical study.
+      </p>
+      <p>
+        The result is a two-dataset suite that is large enough for population-level insights, but structured
+        enough to support principled causal analysis.
+      </p>
+    </div>
+    <img class="figure-img figure-main" src="./static/figures/png/personax.png" alt="PersonaX pipeline diagram">
+    <p class="figure-caption">End-to-end pipeline for constructing PersonaX.</p>
+  </div>
+</section>
+
+<section class="section" id="contributions">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Core Contributions</h2>
+    <div class="content">
+      <ul>
+        <li>Two multimodal datasets: CelebPersona (9,444 public figures) and AthlePersona (4,181 professional athletes across seven major leagues).</li>
+        <li>LLM-inferred Big Five trait descriptions and scores, paired with facial embeddings and structured biographical metadata.</li>
+        <li>Two-level analysis: structured independence testing and causal representation learning with identifiability guarantees.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="datasets">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Datasets & Access</h2>
+    <div class="content">
+      <p>
+        PersonaX is released on Hugging Face as two datasets with unified schema and documentation.
+      </p>
+    </div>
+    <table class="table is-striped is-fullwidth dataset-table">
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>Rows</th>
+          <th>Modalities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://huggingface.co/datasets/Persona-X/celebpersona">CelebPersona</a></td>
+          <td>9,444</td>
+          <td>Face embeddings, curated facial attributes, biographical metadata, LLM-inferred traits</td>
+        </tr>
+        <tr>
+          <td><a href="https://huggingface.co/datasets/Persona-X/athlepersona">AthlePersona</a></td>
+          <td>4,181</td>
+          <td>Face embeddings, league metadata, biographical attributes, LLM-inferred traits</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="content">
+      <p>
+        Browse the full dataset collection: <a href="https://huggingface.co/Persona-X/datasets">huggingface.co/Persona-X/datasets</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Method: From Data to Causal Structure</h2>
+    <div class="content">
+      <p>
+        We define a consistent data processing pipeline that connects public sources to LLM-inferred trait
+        summaries while preserving privacy. The structured pipeline enables classical statistical testing, and
+        the unstructured pipeline supports multimodal causal representation learning.
+      </p>
+      <ul>
+        <li>Trait inference with calibrated prompts and multiple LLMs.</li>
+        <li>Aggregation into Big Five scores and embeddings.</li>
+        <li>Privacy-first release: no raw images or raw trait text.</li>
+      </ul>
+    </div>
+    <img class="figure-img" src="./static/figures/png/processing_pipeline.png" alt="Processing pipeline for multimodal trait inference">
+    <p class="figure-caption">Processing pipeline for multimodal trait inference.</p>
+
+    <div class="content" style="margin-top: 2rem;">
+      <p>
+        AthlePersona is curated from official league data across NBA, NFL, NHL, ATP, PGA, EPL, and Bundesliga,
+        linking biographical metadata, physical attributes, and LLM-inferred traits.
+      </p>
+      <p>
+        CelebPersona is built on CelebA identities linked to Wikidata, enabling rich biographical context and
+        stable facial attributes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Results Highlights</h2>
+    <div class="content">
+      <p>
+        We benchmark prompt designs across models and datasets to quantify stability of inferred traits.
+        Consistent prompting yields reliable trait scores that are suitable for downstream analysis.
+      </p>
+    </div>
+    <img class="figure-img" src="./static/figures/png/fig2.png" alt="LLM consistency analysis for prompt design" />
+    <p class="figure-caption">Evaluation on LLM consistency for prompt design: prompt format affects trait-score stability.</p>
+
+    <div class="columns is-vcentered">
+      <div class="column is-6">
+        <img class="figure-img" src="./static/figures/png/celeb_causalgraph.png" alt="Estimated causal graph for CelebPersona">
+        <p class="figure-caption">Estimated causal graph for CelebPersona.</p>
+      </div>
+      <div class="column is-6">
+        <img class="figure-img" src="./static/figures/png/athle_causalgraph.png" alt="Estimated causal graph for AthlePersona">
+        <p class="figure-caption">Estimated causal graph for AthlePersona.</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>
+        The learned graphs reveal interpretable cross-modal pathways between visual, biographical, and LLM-inferred
+        trait variables, supporting structured reasoning about behavior signals across populations.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="usage">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Ethics & Usage</h2>
+    <div class="content">
+      <p>
+        PersonaX uses publicly available sources with non-commercial academic usage constraints. No raw images or
+        raw trait text are released; only embeddings and structured attributes are provided. Use is restricted to
+        non-commercial research and excludes high-stakes applications such as employment, insurance, or lending.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@inproceedings{personax2026,
+  title     = {PersonaX: Multimodal Datasets with LLM-Inferred Behavior Traits},
+  author    = {Li, Loka and Yu Kang, Wong and Fu, Minghao and Chen, Guangyi and Chen, Zhenhao and Luo, Gongxu and Sun, Yuewen and Khan, Salman and Spirtes, Peter and Zhang, Kun},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Template adapted from <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">nerfies</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
