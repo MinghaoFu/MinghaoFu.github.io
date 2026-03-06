@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2, user-scalable=yes">
+  <title>Blogs - Minghao Fu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">Minghao Fu</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="blog.html" class="nav-link active">Blogs</a>
+    </div>
+  </div>
+</nav>
+<div class="page">
+  <main>
+    <section class="section" style="margin-top:0">
+      <h2>Blogs</h2>
+
+      <!-- Add new blog entries here (newest first). Each links to blogs/<slug>/index.html -->
+      <a href="blogs/cg-ica/index.html" class="blog-entry">
+        <span class="blog-date">Oct 2024</span>
+        <span class="blog-title">Stable Causal Graph &hArr; Complete Nonlinear ICA:<br>Even in Your Cyclic Graph / Dense Generation!</span>
+        <span class="blog-desc">Computation drafts showing the equivalence between stable causal graphs and complete nonlinear ICA via LUP decomposition.</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> Minghao Fu.</footer>
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

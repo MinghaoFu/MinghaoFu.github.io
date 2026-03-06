@@ -1,0 +1,145 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.publication-title,
+.publication-authors,
+.tagline,
+.conference-tag {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.nav-center {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.conference-tag {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: #4a4a4a;
+}
+
+.tagline {
+  margin: 0.5rem auto 1.2rem auto;
+  max-width: 900px;
+  color: #363636;
+}
+
+.abstract-block {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.abstract-text {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: left;
+  line-height: 1.65;
+}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.is-disabled-link {
+  opacity: 0.78;
+}
+
+.figure-img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  display: block;
+}
+
+.figure-main {
+  max-height: 860px;
+  object-fit: contain;
+}
+
+.figure-caption {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.92rem;
+  color: #4a4a4a;
+}
+
+.demo-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.65rem;
+  height: 100%;
+}
+
+.dataset-gif {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+  background: #f8f8f8;
+}
+
+.demo-caption {
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  text-align: center;
+}
+
+.dataset-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dataset-cell {
+  width: 100%;
+  max-width: 220px;
+}
+
+pre {
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .tagline {
+    font-size: 0.95rem;
+  }
+
+  .publication-links .button {
+    width: 100%;
+  }
+
+  .dataset-row {
+    flex-wrap: wrap;
+  }
+
+  .dataset-cell {
+    max-width: 100%;
+  }
+}

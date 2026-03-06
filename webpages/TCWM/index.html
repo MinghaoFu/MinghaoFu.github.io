@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="TC-WM: Learning Task-Centric World Models from Visual Foundations.">
+  <meta name="keywords" content="TC-WM, World Models, Visual Foundation Models, Planning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Task-Centric World Models from Visual Foundations</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/" aria-label="Back to Home">
+      <span class="icon"><i class="fas fa-home"></i></span>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="tcwm-navbar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+    <div id="tcwm-navbar" class="navbar-menu">
+    <div class="navbar-start nav-center">
+      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#contributions">Contributions</a>
+      <a class="navbar-item" href="#datasets">Datasets</a>
+      <a class="navbar-item" href="#method">Method</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#resources">Resources</a>
+      <a class="navbar-item" href="#bibtex">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Learning Task-Centric World Models from Visual Foundations</h1>
+          <p class="tagline">A task-centric latent world model that distills high-dimensional visual foundation embeddings into compact, planning-relevant dynamics.</p>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://minghaofu.github.io/" target="_blank">Minghao Fu</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?hl=en&user=rYKQ3i8AAAAJ" target="_blank">Fan Feng</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://www.nicklashansen.com/" target="_blank">Nicklas Hanse</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://biweihuang.com/" target="_blank">Biwei Huang</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of California, San Diego</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="#" onclick="return false;" aria-disabled="true" class="external-link button is-normal is-rounded is-dark is-disabled-link">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv (Coming Soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/MinghaoFu/TCWM" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" onclick="return false;" aria-disabled="true" class="external-link button is-normal is-rounded is-dark is-disabled-link">
+                  <span class="icon"><i class="far fa-images"></i></span>
+                  <span>Dataset (Coming Soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="abstract-block">
+      <h2 class="title is-3 has-text-centered">Abstract</h2>
+      <p class="abstract-text">
+        World models enable agents to predict the evolution of dynamics under control signals. However, semantic representations
+        in world models are often overly rich or misaligned with task objectives, which can introduce unnecessary complexity,
+        degrade physical fidelity, and reduce planning efficiency. We propose a task-centric world modeling framework that
+        transforms high-dimensional visual foundation embeddings into a compact latent space that preserves task-relevant
+        information while discarding redundant factors. The resulting representation is partially aligned with critical physical
+        properties and remains semantically faithful for accurate prediction and planning. Empirically, our method enables
+        zero-shot planning across diverse environments (for example, Robomimic and D4RL), achieving stronger world-model quality
+        and more precise control compared with prior approaches.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="overview">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Overview / Motivation</h2>
+    <div class="content">
+      <p>
+        Modern world models increasingly reuse frozen visual foundation embeddings as latent states. While this improves transfer,
+        the embeddings are optimized for broad semantics, not necessarily for control-relevant dynamics. As a result, latent spaces can
+        retain texture and appearance details that are unnecessary for decision-making, reducing planning efficiency and interpretability.
+      </p>
+      <p>
+        TC-WM addresses this gap by learning a compact task-centric latent space on top of foundation embeddings. The model preserves
+        predictive information needed for future task dynamics while discarding redundant semantics, enabling more stable and precise
+        zero-shot planning across diverse offline benchmarks.
+      </p>
+    </div>
+    <img class="figure-img figure-main" src="./static/figures/png/network.png" alt="TC-WM architecture showing task-centric latent extraction from visual foundation embeddings">
+    <p class="figure-caption">TC-WM architecture: frozen visual embeddings are distilled into a compact latent world model with partial task alignment and dynamics prediction.</p>
+  </div>
+</section>
+
+<section class="section" id="contributions">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Contributions</h2>
+    <div class="content">
+      <ul>
+        <li>A task-centric world modeling framework that extracts compact planning-relevant latents from high-dimensional visual foundation features.</li>
+        <li>Partial alignment between latent subspace and task-critical physical variables (for example proprioception), balancing semantic fidelity and controllability.</li>
+        <li>Joint latent dynamics and task dynamics objectives that improve predictive sufficiency for downstream goal-conditioned planning.</li>
+        <li>Consistent gains in world-model quality and planning performance across 9 environments spanning Robomimic, D4RL, and DMControl offline settings.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Method</h2>
+    <div class="content">
+      <p>
+        TC-WM builds a world model in three stages: encode observations with a frozen visual backbone, project embeddings to a compact latent space,
+        and learn temporal dynamics for both latent transitions and task-centric variables. Instead of predicting directly in the original visual embedding space,
+        TC-WM reshapes representation structure for physical consistency and planning.
+      </p>
+      <p>
+        The key design is partial alignment: only a designated latent subspace is aligned with observed task-relevant signals, while the remaining latent factors
+        preserve complementary semantics. This decomposition improves controllability without collapsing representation capacity.
+      </p>
+    </div>
+
+    <div id="datasets">
+      <p class="figure-caption">Dataset previews used for qualitative inspection across navigation and control tasks.</p>
+      <div class="dataset-row">
+        <div class="dataset-cell">
+          <div class="demo-card">
+            <img class="dataset-gif" src="./static/datasets/gifs/wall_single_episode_003.gif" alt="Dataset preview gif for wall single episode 003">
+          </div>
+        </div>
+        <div class="dataset-cell">
+          <div class="demo-card">
+            <img class="dataset-gif" src="./static/datasets/gifs/point_maze_episode_009.gif" alt="Dataset preview gif for point maze episode 009">
+          </div>
+        </div>
+        <div class="dataset-cell">
+          <div class="demo-card">
+            <img class="dataset-gif" src="./static/datasets/gifs/episode_006.gif" alt="Dataset preview gif for episode 006">
+          </div>
+        </div>
+        <div class="dataset-cell">
+          <div class="demo-card">
+            <img class="dataset-gif" src="./static/datasets/gifs/episode_00009.gif" alt="Dataset preview gif for episode 00009">
+          </div>
+        </div>
+      </div>
+      <div class="dataset-row">
+        <div class="dataset-cell">
+          <div class="demo-card">
+            <img class="dataset-gif" src="./static/datasets/gifs/episode_00006.gif" alt="Dataset preview gif for episode 00006">
+          </div>
+        </div>
+        <div class="dataset-cell">
+          <div class="demo-card">
+            <img class="dataset-gif" src="./static/datasets/gifs/episode_00004.gif" alt="Dataset preview gif for episode 00004">
+          </div>
+        </div>
+        <div class="dataset-cell">
+          <div class="demo-card">
+            <img class="dataset-gif" src="./static/datasets/gifs/episode_00002.gif" alt="Dataset preview gif for episode 00002">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Results</h2>
+
+    <div class="content">
+      <p>
+        Quantitatively, TC-WM achieves stronger latent prediction accuracy and competitive image-space rollout quality versus prior world-model baselines.
+        The performance advantage is especially clear in long-horizon planning with high-dimensional action spaces.
+      </p>
+    </div>
+
+    <img class="figure-img" src="./static/figures/png/plan_compare_cem_ldp.png" alt="Planning success comparison using CEM and latent diffusion planners">
+    <p class="figure-caption">Planning performance: TC-WM improves success rates in both CEM (navigation/low-dimensional action) and LDP (manipulation/high-dimensional action) settings.</p>
+
+    <img class="figure-img" src="./static/figures/png/pred_loss.png" alt="Prediction reconstruction and latent prediction losses across multiple environments">
+    <p class="figure-caption">World-model prediction metrics over training: TC-WM maintains lower latent prediction error across most evaluated tasks.</p>
+
+    <div class="columns is-multiline">
+      <div class="column is-12-mobile is-4-desktop">
+        <img class="figure-img" src="./static/figures/png/lift.png" alt="Open-loop rollout visualization for Robomimic Lift task">
+        <p class="figure-caption">Lift rollout: more stable long-horizon manipulation and grasping behavior.</p>
+      </div>
+      <div class="column is-12-mobile is-4-desktop">
+        <img class="figure-img" src="./static/figures/png/can.png" alt="Open-loop rollout visualization for Robomimic Can task">
+        <p class="figure-caption">Can rollout: improved object placement consistency near goal states.</p>
+      </div>
+      <div class="column is-12-mobile is-4-desktop">
+        <img class="figure-img" src="./static/figures/png/square.png" alt="Open-loop rollout visualization for Robomimic Square task">
+        <p class="figure-caption">Square rollout: stronger temporal stability in contact-rich assembly dynamics.</p>
+      </div>
+    </div>
+
+    <img class="figure-img" src="./static/figures/png/linear_probing_scatter.png" alt="Linear probing results indicating stronger task-centric separability in learned latent representations">
+    <p class="figure-caption">Representation analysis: linear probing indicates stronger encoding of task-relevant factors in TC-WM latents.</p>
+  </div>
+</section>
+
+<section class="section" id="resources">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Resources</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Paper:</strong> TODO (Coming Soon)</li>
+        <li><strong>arXiv:</strong> TODO (Coming Soon)</li>
+        <li><strong>Code:</strong> <a href="https://github.com/MinghaoFu/TCWM" target="_blank">https://github.com/MinghaoFu/TCWM</a></li>
+        <li><strong>Dataset:</strong> TODO (Coming Soon)</li>
+        <li><strong>Dataset Previews:</strong> Available in the <a href="#datasets">Datasets</a> section on this page (GIF format).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@misc{tcwm2026,
+  title     = {Learning Task-Centric World Models from Visual Foundations},
+  author    = {Fu, Minghao and Feng, Fan and Hanse, Nicklas and Huang, Biwei},
+  year      = {2026},
+  note      = {TODO: update with official publication/arXiv link}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>Template adapted from <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">nerfies</a>.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

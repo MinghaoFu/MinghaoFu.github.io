@@ -11,6 +11,42 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+
+.nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(246,242,236,0.85);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:980px;
+  margin:0 auto;
+  padding:12px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.nav-brand{
+  font-family:"Libre Baskerville","Times New Roman",serif;
+  font-size:18px;
+  font-weight:700;
+  color:var(--ink);
+}
+.nav-brand:hover{text-decoration:none;color:var(--accent)}
+.nav-links{display:flex;gap:24px}
+.nav-link{
+  font-size:14px;
+  font-weight:600;
+  color:var(--muted);
+  padding:4px 0;
+  border-bottom:2px solid transparent;
+  transition:color .2s, border-color .2s;
+}
+.nav-link:hover{color:var(--accent);text-decoration:none}
+.nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
 body{
   font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
   color:var(--ink);
@@ -139,8 +175,7 @@ h1{
   font-size:13px;
 }
 
-.paper-card,
-.edu-card{
+.paper-card{
   display:grid;
   grid-template-columns:240px 1fr;
   gap:18px;
@@ -185,24 +220,68 @@ h1{
 .links{margin-top:8px;font-size:13px}
 .sep{margin:0 6px;color:var(--muted)}
 
-.edu-card{
-  grid-template-columns:140px 1fr;
+/* Timeline */
+.timeline-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
 }
-.edu-card .thumb-wrap{
-  width:120px;
-  height:120px;
-  background:#ffffff;
-  aspect-ratio:1 / 1;
+.timeline-label{
+  font-family:"Libre Baskerville","Times New Roman",serif;
+  font-size:17px;
+  color:var(--accent-2);
+  margin:0 0 16px 30px;
 }
-.edu-header{
+.timeline-track{
+  position:relative;
+  padding-left:30px;
+}
+.timeline-track::before{
+  content:'';
+  position:absolute;
+  left:5px;
+  top:6px;
+  bottom:6px;
+  width:2px;
+  background:var(--line);
+}
+.timeline-item{
+  position:relative;
+  margin-bottom:16px;
+}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-dot{
+  position:absolute;
+  left:-30px;
+  top:18px;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--accent);
+  border:2px solid var(--bg);
+  transform:translateX(0.5px);
+}
+.timeline-card{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+}
+.timeline-logo{
+  width:44px;
+  height:44px;
+  border-radius:8px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+.timeline-head{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:12px;
-  font-weight:600;
-  font-size:15px;
+  align-items:baseline;
+  gap:8px;
 }
-.edu-header .period{color:var(--muted);font-weight:500;white-space:nowrap}
+.timeline-head .school{font-weight:600;font-size:15px}
+.timeline-head .period{color:var(--muted);font-weight:500;font-size:13px;white-space:nowrap}
 .edu-title{margin-top:4px;font-size:14px;color:#2d2d2d;font-weight:500}
 .desc{font-size:13px;color:#4b5563;margin-top:6px}
 
@@ -213,6 +292,143 @@ h1{
   font-weight:700;
   color:var(--accent-2);
   margin-right:6px;
+}
+
+/* Blog listing */
+.blog-entry{
+  display:block;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px 20px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow);
+  transition:border-color .2s, box-shadow .2s;
+}
+.blog-entry:hover{
+  border-color:var(--accent);
+  box-shadow:0 10px 30px rgba(15,109,95,0.1);
+  text-decoration:none;
+}
+.blog-date{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:4px;
+}
+.blog-title{
+  display:block;
+  font-family:"Libre Baskerville","Times New Roman",serif;
+  font-size:18px;
+  font-weight:700;
+  color:var(--accent-2);
+  line-height:1.35;
+}
+.blog-desc{
+  display:block;
+  font-size:14px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* Blog post page */
+.blog-back{
+  display:inline-block;
+  margin-bottom:16px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--accent);
+}
+.blog-back:hover{text-decoration:none;color:var(--accent-2)}
+.blog-hero{
+  padding:28px;
+}
+.blog-h1{
+  font-size:28px;
+  line-height:1.3;
+  margin:0 0 8px 0;
+}
+.blog-meta{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:14px;
+}
+.blog-meta a{color:var(--accent);font-weight:600}
+.blog-abstract{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.blog-card{
+  padding:22px 24px;
+  line-height:1.8;
+  font-size:15px;
+}
+.blog-card p{margin:0 0 14px}
+.blog-card p:last-child{margin-bottom:0}
+.blog-subhead{
+  font-family:"Libre Baskerville","Times New Roman",serif;
+  font-size:17px;
+  font-weight:700;
+  color:var(--accent-2);
+  margin:0 0 12px;
+}
+.blog-list{
+  margin:0 0 14px;
+  padding-left:20px;
+  color:var(--ink);
+}
+.blog-list li{margin-bottom:6px}
+.blog-note{
+  border-left:3px solid var(--accent);
+  padding:8px 16px;
+  margin:14px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  background:var(--pill);
+  border-radius:0 10px 10px 0;
+}
+.math-block{
+  margin:16px 0;
+  padding:12px 16px;
+  background:#fbfaf8;
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow-x:auto;
+  text-align:center;
+}
+.blog-card img{
+  max-width:100%;
+  border-radius:12px;
+  margin:14px 0;
+}
+.blog-card code{
+  background:#f0ebe3;
+  padding:2px 6px;
+  border-radius:4px;
+  font-size:13px;
+}
+.blog-card pre{
+  background:#1e1f24;
+  color:#e4dfd7;
+  padding:16px 20px;
+  border-radius:12px;
+  overflow-x:auto;
+  margin:14px 0;
+}
+.blog-card pre code{
+  background:none;
+  padding:0;
+  color:inherit;
+  font-size:13px;
+}
+
+@media (max-width: 768px){
+  .blog-hero{padding:20px 16px}
+  .blog-h1{font-size:22px}
+  .blog-card{padding:16px}
+  .math-block{padding:8px 10px}
 }
 
 .footer{
@@ -231,9 +447,9 @@ h1{
 @media (max-width: 768px){
   .page{padding:28px 16px 48px}
   h1{font-size:34px}
-  .paper-card,.edu-card{grid-template-columns:1fr}
+  .paper-card{grid-template-columns:1fr}
   .thumb-wrap{height:160px}
-  .edu-card .thumb-wrap{height:120px}
+  .timeline-grid{grid-template-columns:1fr}
   .news .date{min-width:auto;margin-right:6px}
 }
 

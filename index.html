@@ -18,6 +18,15 @@
   <meta property="og:image" content="https://minghaofu.github.io/images/profile.png">
 </head>
 <body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">Minghao Fu</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link active">Home</a>
+      <a href="blog.html" class="nav-link">Blogs</a>
+    </div>
+  </div>
+</nav>
 <div class="page">
   <header class="hero">
     <div class="hero-media">
@@ -81,6 +90,21 @@
 
     <section class="section">
       <h2>Selected Publications</h2>
+
+      <div class="paper-card">
+        <div class="thumb-wrap"><img class="thumb" src="webpages/TCWM/static/figures/png/network.png" alt="TC-WM method overview"></div>
+        <div class="body">
+          <h3>Learning Task-Centric World Models from Visual Foundations</h3>
+          <div class="authors"><span class="me">Minghao Fu</span>, Fan Feng, Nicklas Hanse, Biwei Huang</div>
+          <div class="links">
+            <a href="webpages/TCWM/index.html" target="_blank">Project Page</a>
+            <span class="sep">•</span>
+            <a href="#" onclick="return false;">arXiv (TODO)</a>
+            <span class="sep">•</span>
+            <a href="https://github.com/MinghaoFu/TCWM" target="_blank">Code</a>
+          </div>
+        </div>
+      </div>
 
       <div class="paper-card">
         <div class="thumb-wrap"><img class="thumb" src="images/papers/adadiff.png" alt=""></div>
@@ -151,64 +175,111 @@
     </section>
 
     <section class="section">
-      <h2>Education</h2>
-
-      <div class="edu-card">
-        <div class="thumb-wrap">
-          <img class="thumb logo" src="images/schools/ucsd.png" alt="UC San Diego">
-        </div>
-        <div class="body">
-          <div class="edu-header">
-            <span class="school">University of California, San Diego</span>
-            <span class="period">Aug 2025 – Present</span>
+      <h2>Education & Experience</h2>
+      <div class="timeline-grid">
+        <!-- Education column -->
+        <div class="timeline-chain">
+          <h3 class="timeline-label">Education</h3>
+          <div class="timeline-track">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card card">
+                <img class="timeline-logo" src="images/schools/ucsd.png" alt="UCSD">
+                <div>
+                  <div class="timeline-head">
+                    <span class="school">UC San Diego</span>
+                    <span class="period">Aug 2025 – Present</span>
+                  </div>
+                  <div class="edu-title">Ph.D., Halıcıoğlu Data Science Institute</div>
+                  <div class="desc">Advisor: <a href="https://biweihuang.com/">Biwei Huang</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card card">
+                <img class="timeline-logo" src="images/schools/cmu.png" alt="CMU">
+                <div>
+                  <div class="timeline-head">
+                    <span class="school">Carnegie Mellon University</span>
+                    <span class="period">Jun 2024 – Nov 2024</span>
+                  </div>
+                  <div class="edu-title">Visiting Student, CLeaR</div>
+                  <div class="desc">Advisors: <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>, <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card card">
+                <img class="timeline-logo" src="images/schools/mbzuai.png" alt="MBZUAI">
+                <div>
+                  <div class="timeline-head">
+                    <span class="school">MBZUAI</span>
+                    <span class="period">Aug 2023 – Jun 2025</span>
+                  </div>
+                  <div class="edu-title">M.S., Machine Learning</div>
+                  <div class="desc">Advisor: <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card card">
+                <img class="timeline-logo" src="images/schools/uestc.png" alt="UESTC">
+                <div>
+                  <div class="timeline-head">
+                    <span class="school">UESTC</span>
+                    <span class="period">Sep 2019 – Jun 2023</span>
+                  </div>
+                  <div class="edu-title">B.S., Software Engineering</div>
+                  <div class="desc">Advisor: <a href="https://cfm.uestc.edu.cn/~shaojie/">Jie Shao</a></div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="edu-title">Ph.D., Halıcıoğlu Data Science Institute</div>
-          <div class="desc">Advisor: <a href="https://biweihuang.com/">Biwei Huang</a></div>
         </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="thumb-wrap">
-          <img class="thumb logo" src="images/schools/cmu.png" alt="Carnegie Mellon University">
-        </div>
-        <div class="body">
-          <div class="edu-header">
-            <span class="school">Carnegie Mellon University</span>
-            <span class="period">Jun 2024 – Nov 2024</span>
+        <!-- Experience column -->
+        <div class="timeline-chain">
+          <h3 class="timeline-label">Experience</h3>
+          <div class="timeline-track">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card card">
+                <div>
+                  <div class="timeline-head">
+                    <span class="school">Cradle AI</span>
+                    <span class="period">Jun 2024 – Jun 2025</span>
+                  </div>
+                  <div class="edu-title">Cofounder & CTO</div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card card">
+                <div>
+                  <div class="timeline-head">
+                    <span class="school">Shanghai AI Lab</span>
+                    <span class="period">Nov 2022 – Mar 2023</span>
+                  </div>
+                  <div class="edu-title">Research Intern, Ark NLP Group</div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card card">
+                <div>
+                  <div class="timeline-head">
+                    <span class="school">SAP</span>
+                    <span class="period">Jan 2022 – Mar 2022</span>
+                  </div>
+                  <div class="edu-title">Cloud Developer, Internship</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="edu-title">Visiting Student, CLeaR</div>
-          <div class="desc">
-            Advisors: <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>,
-            <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="thumb-wrap">
-          <img class="thumb logo" src="images/schools/mbzuai.png" alt="MBZUAI">
-        </div>
-        <div class="body">
-          <div class="edu-header">
-            <span class="school">Mohamed bin Zayed University of Artificial Intelligence</span>
-            <span class="period">Aug 2023 – Jun 2025</span>
-          </div>
-          <div class="edu-title">M.S., Machine Learning</div>
-          <div class="desc">Advisor: <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a></div>
-        </div>
-      </div>
-
-      <div class="edu-card">
-        <div class="thumb-wrap">
-          <img class="thumb logo" src="images/schools/uestc.png" alt="UESTC">
-        </div>
-        <div class="body">
-          <div class="edu-header">
-            <span class="school">University of Electronic Science and Technology of China</span>
-            <span class="period">Sep 2019 – Jun 2023</span>
-          </div>
-          <div class="edu-title">B.S., Software Engineering</div>
-          <div class="desc">Advisor: <a href="https://cfm.uestc.edu.cn/~shaojie/">Jie Shao</a></div>
         </div>
       </div>
     </section>

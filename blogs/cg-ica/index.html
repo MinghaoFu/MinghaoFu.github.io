@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2, user-scalable=yes">
+  <title>Stable Causal Graph &hArr; Complete Nonlinear ICA: Even in Your Cyclic Graph / Dense Generation! - Minghao Fu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.png">
+  <link rel="stylesheet" href="../../style.css">
+  <script>
+  MathJax = {
+    tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../../index.html">Minghao Fu</a>
+    <div class="nav-links">
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../blog.html" class="nav-link active">Blogs</a>
+    </div>
+  </div>
+</nav>
+<div class="page">
+  <main>
+    <a href="../../blog.html" class="blog-back">&larr; Back to Blogs</a>
+
+    <header class="blog-hero card">
+      <h1 class="blog-h1">Stable Causal Graph &hArr; Complete Nonlinear ICA:<br>Even in Your Cyclic Graph / Dense Generation!</h1>
+      <div class="blog-meta">October 2024 &middot; Computation Draft</div>
+      <p class="blog-abstract">
+        These are some of my computation drafts exploring the equivalence between <strong>stable causal graphs</strong> and <strong>complete nonlinear ICA</strong> (beyond acyclic/lower-triangle case in <em>Fu et al., 2025</em>). The key insight is that these two concepts are equivalent &mdash; connected through LUP decomposition of the Jacobian. 
+      </p>
+      <div class="link-row" style="margin-top:14px;margin-bottom:0">
+        <a class="link-btn" href="cg-ica.pdf" target="_blank">Original Handwritten Draft (PDF)</a>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>Setup</h2>
+      <div class="card blog-card">
+        <p>
+          Consider a structural causal model with exogenous variables $e = (e_1, e_2, e_3)$, latent sources $s = (s_1, s_2, s_3)$, and observed variables $x = (x_1, x_2, x_3)$, where each layer is generated through an invertible mechanism:
+        </p>
+        <div class="math-block">$$e \;\xrightarrow{s = f_s(e)}\; s \;\xrightarrow{x = f_x(s)}\; x$$</div>
+        <p>By the chain rule on the Jacobians:</p>
+        <div class="math-block">$$J_x(e) = J_x(s) \cdot J_s(e) = \frac{\partial x}{\partial s} \cdot \frac{\partial s}{\partial e}$$</div>
+        <p>
+          Since all mappings are invertible, the Jacobian $J_x(e)$ is invertible. If the causal graphs over $s$ and $x$ are DAGs with adjacency matrices $B_1$ and $B_2$, we can write:
+        </p>
+        <div class="math-block">$$J_x(e) = (I - B_1)^{-1} \cdot (I - B_2)^{-1}$$</div>
+        <p>This gives us the <strong>functional equivalence</strong> between the mixing function's Jacobian and the causal structure.</p>
+        <div class="blog-note">
+          Note: self-loops can be handled following <em>Lacerda et al., 2012</em>. If the system is not stable (e.g., $e_3 \to x_1$ explodes), identifiability breaks down.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Main Result: The Equivalence</h2>
+
+      <div class="card blog-card">
+        <h3 class="blog-subhead">Direction 1: Complete Nonlinear ICA $\Rightarrow$ Stable Causal Graph</h3>
+        <p>
+          Suppose we have a complete nonlinear ICA model $x = g(e)$ where $J_g(e)$ is invertible and square. Since $J_g(e)$ is an invertible matrix, it always admits a <strong>LUP decomposition</strong>:
+        </p>
+        <div class="math-block">$$J_g(e) = L \cdot U \cdot P$$</div>
+        <p>where:</p>
+        <ul class="blog-list">
+          <li>$L$ &mdash; lower triangular matrix (non-zero diagonal)</li>
+          <li>$U$ &mdash; upper triangular matrix (non-zero diagonal)</li>
+          <li>$P$ &mdash; permutation matrix</li>
+        </ul>
+        <p>
+          If we fix the scaling and the permutation $P$, the LUP decomposition is <strong>unique</strong>.
+          Both $L$ and $U$ have non-zero diagonals, so we can express them as:
+        </p>
+        <div class="math-block">
+          $$J_s(e) = (I - U')^{-1} \quad \text{(up to a permutation } P' \text{)}$$
+          $$J_x(s) = (I - L')^{-1}$$
+        </div>
+        <p>
+          where $U'$ is strictly upper triangular and $L'$ is strictly lower triangular (both are DAG adjacency matrices). Since $J_s(e)$ and $J_x(s)$ are bounded, the resulting causal system is <strong>stable</strong>. Self-loops can be freely introduced following <em>Lacerda et al., 2012</em>.
+        </p>
+      </div>
+
+      <div class="card blog-card">
+        <h3 class="blog-subhead">Direction 2: Stable Causal Graph $\Rightarrow$ Complete Nonlinear ICA</h3>
+        <p>
+          Conversely, if we have a stable causal graph, the Jacobian of the full mapping $x = g(e)$ takes the form $(I - B_1)^{-1}(I - B_2)^{-1}$, which is invertible. This is precisely the structure of a complete nonlinear ICA model.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>TL;DR</h2>
+      <div class="card blog-card" style="text-align:center">
+        <p>Two days of "multiplying matrices" led to:</p>
+        <div class="math-block">$$\boxed{\text{Stable Causal Graph} \iff \text{Complete Nonlinear ICA}}$$</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Example: A Chain Graph</h2>
+      <div class="card blog-card">
+        <p>Consider a simple chain $x_1 \to x_2 \to x_3$ with adjacency matrix:</p>
+        <div class="math-block">$$B = \begin{bmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
+        <p>Its Markov equivalence class contains DAGs with the same set of conditional independencies. The corresponding "super matrix" (union of all edges in the equivalence class) is:</p>
+        <div class="math-block">$$\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
+        <p>
+          This illustrates that while the causal direction within a Markov equivalence class is ambiguous from observational data alone, the stable causal graph structure still guarantees complete nonlinear ICA identifiability.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">&copy; <span id="year"></span> Minghao Fu.</footer>
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
