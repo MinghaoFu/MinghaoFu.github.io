@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TC-WM logo">
+  <!-- outer rounded square: the foundation embedding scaffold -->
+  <rect x="6" y="6" width="52" height="52" rx="11" ry="11" fill="#28679E"/>
+  <!-- inner rounded square: the compact latent z -->
+  <rect x="19" y="19" width="26" height="26" rx="6" ry="6" fill="#fdfdfd"/>
+  <!-- task-centric block z^s: a small filled square at the centre -->
+  <rect x="27" y="27" width="10" height="10" rx="2.5" ry="2.5" fill="#28679E"/>
+</svg>

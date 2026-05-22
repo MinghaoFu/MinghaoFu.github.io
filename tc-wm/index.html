@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="TC-WM: Learning Task-Centric World Models from Visual Foundations.">
+  <meta name="keywords" content="TC-WM, World Models, Visual Foundation Models, Planning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TC-WM: Task-Centric World Models</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260518f">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/" aria-label="Back to Home">
+      <span class="icon"><i class="fas fa-home"></i></span>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="tcwm-navbar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="tcwm-navbar" class="navbar-menu">
+    <div class="navbar-start nav-center">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#datasets">Environments</a>
+      <a class="navbar-item" href="#method">Method</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#rollouts">Open-Loop Rollout</a>
+      <a class="navbar-item" href="#analysis">Analysis</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <p class="kicker">Project Page</p>
+          <h1 class="title is-1 publication-title">Learning <span class="accent">Task-Centric</span> World Models from Visual Foundations</h1>
+          <p class="tagline">Turning frozen foundation embeddings into compact, task-centric latent dynamics for downstream reward-free offline planning and control.</p>
+          <p class="publication-authors">
+            <a href="https://minghaofu.github.io/" target="_blank" rel="noopener">Minghao Fu</a><sup>1</sup>
+            &nbsp; <a href="https://scholar.google.com/citations?hl=en&user=rYKQ3i8AAAAJ" target="_blank" rel="noopener">Fan Feng</a><sup>1</sup>
+            &nbsp; <a href="https://www.nicklashansen.com/" target="_blank" rel="noopener">Nicklas Hansen</a><sup>1</sup>
+            &nbsp; <a href="https://biweihuang.com/" target="_blank" rel="noopener">Biwei Huang</a><sup>1</sup>
+          </p>
+          <p class="publication-affiliation"><sup>1</sup>University of California, San Diego</p>
+          <div class="publication-links">
+            <a href="https://arxiv.org/abs/XXXX.XXXXX" class="btn is-accent" target="_blank" rel="noopener" aria-label="arXiv preprint">
+              <span class="icon"><i class="fas fa-book"></i></span><span>arXiv</span>
+            </a>
+            <a href="./static/tc-wm.pdf" class="btn" aria-label="Paper PDF">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+            </a>
+            <a href="https://github.com/MinghaoFu/TC-WM" class="btn" target="_blank" rel="noopener" aria-label="Code repository">
+              <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="abstract-block">
+      <h2 class="title is-3 has-text-centered">Abstract</h2>
+      <p class="abstract-text">
+        World models enable agents to predict future dynamics conditioned on actions, making the choice of latent representation central to planning and control. Such representations are often either learned directly from pixels with limited semantic structure or inherited from frozen visual foundation models with excessive task-irrelevant detail, yielding state spaces that are poorly matched to downstream planning and control. This is especially challenging in reward-free offline settings, where the model must learn from fixed trajectories without reward supervision or online interaction.
+      </p>
+      <p class="abstract-text">
+        To address this, we propose <strong>TC-WM</strong>, a framework for turning foundation-model embeddings into compact, task-sufficient world representations. The key design is to treat the pretrained embedding space as a semantic scaffold rather than as the final state space: TC-WM linearly projects high-dimensional visual embeddings into a compact latent as the dynamic space, aligns a subspace with the agent's physical state via contrastive learning, and reconstructs embeddings to preserve useful visual structure. This combines the generality of foundation features with the controllability of task-centric dynamics. Theoretically, we show that TC-WM suffices to identify the task-centric latent factors up to a simple transformation. Empirically, TC-WM enables test-time planning across diverse environments (<em>e.g.</em>, <code>Robomimic</code> and <code>D4RL</code>), achieving better world-modeling quality and more precise control than state-of-the-art approaches.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section figure-teaser">
+  <div class="container is-max-desktop">
+    <img class="figure-img" src="./static/figures/png/world_model_variants.png" alt="Comparison of world-model paradigms (a)-(c) and TC-WM (d)-(e)">
+    <p class="figure-caption"><strong>Figure 1: Comparison of world-model paradigms.</strong> <em>(a)</em> Generative WM (MDN-RNN, IRIS) — predict pixels directly. <em>(b)</em> Latent WM (TD-MPC, MuZero) — predict in a learned latent. <em>(c)</em> Embedding WM (DINO-WM, V-JEPA) — predict in a frozen foundation embedding. <em>(d)</em> <strong>TC-WM dynamics</strong> — predict in a compact latent <em>inside</em> the embedding. <em>(e)</em> <strong>Task-centric structure</strong> — align <span style="font-style:italic">z<sup>s</sup></span> with proprioception, anchor <span style="font-style:italic">z<sup>c</sup></span> via embedding reconstruction.</p>
+  </div>
+</section>
+
+<section class="section figure-teaser">
+  <div class="container is-max-desktop">
+    <img class="figure-img" src="./static/figures/png/teaser_five_panel.png" alt="Robomimic highlight: success rate, latent-rollout MSE, linear probing on Lift and Can, and anti-collapse">
+    <p class="figure-caption"><strong>Figure 2: Robomimic highlight.</strong> (1) Success rate. (2) Latent-rollout MSE. (3&ndash;4) Linear probes on <code>Lift</code> and <code>Can</code>. (5) TC-WM avoids the latent collapse seen when rolling out directly on foundation embeddings.</p>
+  </div>
+</section>
+
+<section class="section" id="datasets">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Environments</h2>
+    <p class="section-lede">Nine offline visual-control tasks: navigation, locomotion, and manipulation &mdash; trained on images + actions + proprioception, no reward.</p>
+    <div class="env-grid">
+      <div class="env-card">
+        <img src="./static/datasets/gifs/point_maze_episode_009.gif" alt="Maze trajectory" loading="lazy">
+        <span class="env-tag">Maze</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/wall_single_episode_003.gif" alt="Wall trajectory" loading="lazy">
+        <span class="env-tag">Wall</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/episode_006.gif" alt="Push-T trajectory" loading="lazy">
+        <span class="env-tag">Push-T</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/episode_00006.gif" alt="Robomimic Lift trajectory" loading="lazy">
+        <span class="env-tag">Lift</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/episode_00009.gif" alt="Robomimic Can trajectory" loading="lazy">
+        <span class="env-tag">Can</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/square_episode.gif" alt="Robomimic Square trajectory" loading="lazy">
+        <span class="env-tag">Square</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/dmc_reacher_mmbench.gif" alt="DMC Reacher trajectory" loading="lazy">
+        <span class="env-tag">Reacher</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/dmc_cheetah_mmbench.gif" alt="DMC Cheetah trajectory" loading="lazy">
+        <span class="env-tag">Cheetah</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/dmc_hopper_mmbench.gif" alt="DMC Hopper trajectory" loading="lazy">
+        <span class="env-tag">Hopper</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Method</h2>
+    <img class="figure-img figure-main" src="./static/figures/png/network.png" alt="TC-WM architecture: linear projection of joint visual and proprioception embeddings into a compact latent, with task-centric alignment, dynamics, and embedding reconstruction">
+    <p class="figure-caption"><strong>Architecture.</strong> A frozen visual backbone is linearly projected into a compact latent; a designated subspace is aligned with proprioception via InfoNCE; a ViT predicts latent dynamics; a linear decoder reconstructs the embedding to prevent collapse. Under partial alignment, the task-centric block is identifiable up to an affine map.</p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Results</h2>
+
+    <img class="figure-img" src="./static/figures/png/pred_loss.png" alt="World model prediction accuracy across nine environments">
+    <p class="figure-caption"><strong>World-model prediction.</strong> Lowest latent-prediction error on nearly all tasks; competitive image reconstruction. Lower is better.</p>
+
+    <img class="figure-img" src="./static/figures/png/plan_compare_cem_ldp.png" alt="Planning performance under CEM and LDP">
+    <p class="figure-caption"><strong>Planning.</strong> CEM on <code>Maze</code> / <code>Wall</code> / <code>Push-T</code> / <code>Cheetah</code> / <code>Hopper</code>; LDP on <code>Lift</code> / <code>Can</code> / <code>Square</code>. Only method that surpasses DINO-WM on every LDP task.</p>
+
+    <div class="rollout-card" style="margin-top:1.6rem;">
+      <div class="rollout-row is-4">
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_clean_orig_4fps.gif"   alt="Clean observation"          loading="lazy"><span class="rollout-label">clean input</span></div>
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_clean_pred_4fps.gif"   alt="TC-WM rollout from clean"   loading="lazy"><span class="rollout-label">TC-WM pred (clean)</span></div>
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_noisy_input_4fps.gif"  alt="Perturbed observation"      loading="lazy"><span class="rollout-label">noisy input</span></div>
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_noisy_pred_4fps.gif"   alt="TC-WM rollout from perturbed" loading="lazy"><span class="rollout-label">TC-WM pred (noisy)</span></div>
+      </div>
+      <p class="rollout-task"><code>Lift</code> &nbsp;&middot;&nbsp; Gaussian noise + color jitter</p>
+    </div>
+    <p class="figure-caption"><strong>Unseen perturbations.</strong> Under additive Gaussian noise and per-channel color jitter never seen during training, TC-WM's open-loop rollout preserves cube position and manipulator silhouette at near-clean fidelity.</p>
+  </div>
+</section>
+
+<section class="section" id="rollouts">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Open-Loop Rollout</h2>
+
+    <div class="rollout-grid">
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_orig_4fps.gif" alt="Lift original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_recon_4fps.gif" alt="Lift reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_pred_4fps.gif" alt="Lift TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Lift</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_orig_4fps.gif" alt="Can original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_recon_4fps.gif" alt="Can reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_pred_4fps.gif" alt="Can TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Can</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_orig_4fps.gif" alt="Square original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_recon_4fps.gif" alt="Square reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_pred_4fps.gif" alt="Square TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Square</code></p>
+      </div>
+
+            <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_orig_4fps.gif" alt="Wall original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_recon_4fps.gif" alt="Wall reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_pred_4fps.gif" alt="Wall TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Wall</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_orig_4fps.gif" alt="Maze original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_recon_4fps.gif" alt="Maze reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_pred_4fps.gif" alt="Maze TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Maze</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_orig_4fps.gif" alt="Cheetah original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_recon_4fps.gif" alt="Cheetah reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_pred_4fps.gif" alt="Cheetah TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Cheetah</code></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="analysis">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Analysis</h2>
+
+    <img class="figure-img" src="./static/figures/png/architecture_ablation.png" alt="Architecture and projection-head ablations on Robomimic">
+    <p class="figure-caption"><strong>Architecture / projection ablations</strong> on <code>Robomimic</code>. Visual encoder / latent-source choice (a) and projection-head ablation (b), each showing success rate on the left and mirrored SSIM on the right. RP denotes randomly projected DINOv2 embeddings. Linear projection is the best; DINOv2 and DINOv3 dominate as foundation encoders.</p>
+
+
+    <img class="figure-img" src="./static/figures/png/loss_ablation.png" alt="Loss component ablation on Lift">
+    <p class="figure-caption"><strong>Loss components</strong> on <code>Lift</code>. Removing embedding reconstruction collapses both planning and visual fidelity; removing proprioceptive supervision lowers success rate while preserving SSIM; the latent split dimension matters little.</p>
+  </div>
+</section>
+
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre class="bibtex-block"><code>@article{fu2026tcwm,
+  title  = {Learning Task-Centric World Models from Visual Foundations},
+  author = {Fu, Minghao and Feng, Fan and Hansen, Nicklas and Huang, Biwei},
+  journal= {arXiv preprint arXiv:XXXX.XXXXX},
+  year   = {2026}
+}</code></pre>
+  </div>
+</section>
+
+</body>
+</html>
