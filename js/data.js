@@ -56,7 +56,18 @@ export const albums = [
 // Order here = display order. Popular section shows the first `popular: true`
 // papers in this order — keep them roughly by citation count (most cited first).
 export const papers = [
-  {
+{
+    id: "tcwm",
+    title: "Learning Task-Centric World Models from Visual Foundations",
+    authors: '<em>Minghao Fu</em>, Fan Feng, Nicklas Hansen, Biwei Huang',
+    venue: "Manuscript",
+    year: 2026,
+    thumb: "images/papers/tcwm.png",
+    albumId: "world-models",
+    popular: true,
+    links: { project: "tc-wm/index.html", code: "https://github.com/MinghaoFu/TCWM" },
+  },
+{
     id: "climate",
     title: "Learning General Causal Structures with Hidden Dynamic Process for Climate Analysis",
     authors: '<em>Minghao Fu</em>, Biwei Huang, Zijian Li, Yujia Zheng, Ignavier Ng, Guangyi Chen, Yingyao Hu†, Kun Zhang†',
@@ -67,32 +78,7 @@ export const papers = [
     popular: true,
     links: { arxiv: "https://arxiv.org/pdf/2501.12500" },
   },
-  {
-    id: "child",
-    title: "Towards Identifiability of Hierarchical Temporal Causal Representation Learning",
-    authors: 'Zijian Li*, <em>Minghao Fu*</em>, Junxian Huang, Yifan Shen, Ruichu Cai, Yuewen Sun, Guangyi Chen, Kun Zhang',
-    venue: "NeurIPS 2025",
-    year: 2025,
-    thumb: "images/papers/child.png",
-    albumId: "latent-space",
-    popular: true,
-    links: {
-      arxiv: "https://arxiv.org/pdf/2510.18310",
-      code:  "https://github.com/MinghaoFu/CHiLD",
-    },
-  },
-  {
-    id: "online-ts",
-    title: "Online Time Series Forecasting with Theoretical Guarantees",
-    authors: 'Zijian Li, Changze Zhou, <em>Minghao Fu</em>, Sanjay Manjunath, Fan Feng, Guangyi Chen, Yingyao Hu, Ruichu Cai, Kun Zhang',
-    venue: "NeurIPS 2025",
-    year: 2025,
-    thumb: "images/papers/online.png",
-    albumId: "latent-space",
-    popular: true,
-    links: { arxiv: "https://arxiv.org/pdf/2510.18281" },
-  },
-  {
+{
     id: "adadiff",
     title: "Ada-Diffuser: Latent-Aware Adaptive Diffusion for Decision-Making",
     authors: 'Fan Feng, Selena Ge, <em>Minghao Fu</em>, Zijian Li, Yujia Zheng, Zeyu Tang, Yingyao Hu, Biwei Huang, Kun Zhang',
@@ -103,7 +89,7 @@ export const papers = [
     popular: true,
     links: { arxiv: "https://openreview.net/pdf?id=lZ2iSl8ihf" },
   },
-  {
+{
     id: "personax",
     title: "PersonaX: Multimodal Datasets with LLM-Inferred Behavior Traits",
     authors: 'Loka Li*, Wong Yu Kang*, <em>Minghao Fu</em>, Guangyi Chen, Zhenhao Chen, Gongxu Luo, Yuewen Sun, Salman Khan, Peter Spirtes, Kun Zhang',
@@ -119,30 +105,32 @@ export const papers = [
       dataset: "https://huggingface.co/Persona-X/datasets",
     },
   },
-  {
-    id: "rebuttal",
-    title: "How Effective is Your Rebuttal? Identifying Causal Models from the OpenReview System",
-    authors: 'Loka Li, Ibrahim Aldarmaki, <em>Minghao Fu</em>, Wong Yu Kang, Yu Deng, Qiuhao Huang, Jianliang Yang, Jin Tian, et al.',
-    venue: "Preprint",
+{
+    id: "child",
+    title: "Towards Identifiability of Hierarchical Temporal Causal Representation Learning",
+    authors: 'Zijian Li*, <em>Minghao Fu*</em>, Junxian Huang, Yifan Shen, Ruichu Cai, Yuewen Sun, Guangyi Chen, Kun Zhang',
+    venue: "NeurIPS 2025",
     year: 2025,
-    thumb: null,
+    thumb: "images/papers/child.png",
     albumId: "latent-space",
-    popular: false,
-    links: {},
-  },
-  // ===== World Models album =====
-  {
-    id: "tcwm",
-    title: "Learning Task-Centric World Models from Visual Foundations",
-    authors: '<em>Minghao Fu</em>, Fan Feng, Nicklas Hansen, Biwei Huang',
-    venue: "Manuscript",
-    year: 2026,
-    thumb: "images/papers/tcwm.png",
-    albumId: "world-models",
     popular: true,
-    links: { project: "tc-wm/index.html", code: "https://github.com/MinghaoFu/TCWM" },
+    links: {
+      arxiv: "https://arxiv.org/pdf/2510.18310",
+      code:  "https://github.com/MinghaoFu/CHiLD",
+    },
   },
-  {
+{
+    id: "online-ts",
+    title: "Online Time Series Forecasting with Theoretical Guarantees",
+    authors: 'Zijian Li, Changze Zhou, <em>Minghao Fu</em>, Sanjay Manjunath, Fan Feng, Guangyi Chen, Yingyao Hu, Ruichu Cai, Kun Zhang',
+    venue: "NeurIPS 2025",
+    year: 2025,
+    thumb: "images/papers/online.png",
+    albumId: "latent-space",
+    popular: true,
+    links: { arxiv: "https://arxiv.org/pdf/2510.18281" },
+  },
+{
     id: "task-sufficient-wams",
     title: "Learning Task-Sufficient World Models by Synergizing Agentic Exploration and Structured Modeling",
     authors: 'Fan Feng, Yujia Zheng, <em>Minghao Fu</em>, Yongqiang Chen, Guangyi Chen, Kevin Murphy, Biwei Huang, Kun Zhang',
@@ -153,7 +141,7 @@ export const papers = [
     popular: false,
     links: {},
   },
-  {
+{
     id: "dreamsac",
     title: "DreamSAC: Learning Hamiltonian World Models via Symmetry Exploration",
     authors: 'Jinzhou Tang, Fan Feng, <em>Minghao Fu</em>, Wenkai Lin, Biwei Huang, Kuan Wang',
@@ -164,6 +152,18 @@ export const papers = [
     popular: false,
     links: {},
   },
+{
+    id: "rebuttal",
+    title: "How Effective is Your Rebuttal? Identifying Causal Models from the OpenReview System",
+    authors: 'Loka Li, Ibrahim Aldarmaki, <em>Minghao Fu</em>, Wong Yu Kang, Yu Deng, Qiuhao Huang, Jianliang Yang, Jin Tian, et al.',
+    venue: "Preprint",
+    year: 2025,
+    thumb: null,
+    albumId: "latent-space",
+    popular: false,
+    links: {},
+  }
+
 ];
 
 // Blog posts. Add newest-first. Each blog still lives at blogs/<slug>/index.html.
