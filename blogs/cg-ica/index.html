@@ -2,130 +2,157 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-      content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2, user-scalable=yes">
-  <title>Stable Causal Graph &hArr; Complete Nonlinear ICA: Even in Your Cyclic Graph / Dense Generation! - Minghao Fu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Stable Causal Graph ⇔ Complete Nonlinear ICA — Minghao Fu</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.png">
+  <meta name="theme-color" content="#121212">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon.png">
-  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-spotify.css">
   <script>
-  MathJax = {
-    tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] }
-  };
+  MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] } };
+  // Apply persisted theme (or clock default) before paint to avoid flash.
+  (function(){
+    try{
+      var t = localStorage.getItem("mf-theme-v1");
+      if (t !== "light" && t !== "dark"){
+        var h = new Date().getHours();
+        t = (h >= 7 && h < 19) ? "light" : "dark";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    }catch(e){}
+  })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 </head>
 <body>
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="../../index.html">Minghao Fu</a>
-    <div class="nav-links">
-      <a href="../../index.html" class="nav-link">Home</a>
-      <a href="../../blog.html" class="nav-link active">Blogs</a>
+<div id="app" class="no-player">
+  <aside id="sidebar">
+    <nav class="side-nav">
+      <a class="side-nav-item" href="../../index.html">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12.5 3.247a1 1 0 00-1 0L4 7.577V20h4.5v-6a1 1 0 011-1h5a1 1 0 011 1v6H20V7.577l-7.5-4.33zm-1.5-1.732a3 3 0 013 0l7.5 4.33a2 2 0 011 1.732V21a1 1 0 01-1 1h-6.5a1 1 0 01-1-1v-6h-3v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7.577a2 2 0 011-1.732l7.5-4.33z"/></svg>
+        <span class="label">Home</span>
+      </a>
+      <a class="side-nav-item active" href="../../index.html#/blogs">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M14.5 2.134a1 1 0 011 0l6 3.464a1 1 0 01.5.866V21a1 1 0 01-1 1h-6a1 1 0 01-1-1V3a1 1 0 01.5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1zm6 0a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1z"/></svg>
+        <span class="label">Blogs</span>
+      </a>
+    </nav>
+  </aside>
+
+  <header id="topbar">
+    <div class="nav-arrows">
+      <a class="nav-arrow" href="../../index.html#/blogs" aria-label="Back">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M11.03.47a.75.75 0 010 1.06L4.56 8l6.47 6.47a.75.75 0 11-1.06 1.06L2.44 8 9.97.47a.75.75 0 011.06 0z"/></svg>
+      </a>
     </div>
-  </div>
-</nav>
-<div class="page">
-  <main>
-    <a href="../../blog.html" class="blog-back">&larr; Back to Blogs</a>
+    <div class="topbar-spacer"></div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+      <svg id="theme-icon" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"></svg>
+    </button>
+    <a class="profile-chip" href="../../index.html">
+      <span>Minghao Fu</span>
+    </a>
+  </header>
 
-    <header class="blog-hero card">
-      <h1 class="blog-h1">Stable Causal Graph &hArr; Complete Nonlinear ICA:<br>Even in Your Cyclic Graph / Dense Generation!</h1>
-      <div class="blog-meta">October 2024 &middot; Computation Draft</div>
-      <p class="blog-abstract">
-        These are some of my computation drafts exploring the equivalence between <strong>stable causal graphs</strong> and <strong>complete nonlinear ICA</strong> (beyond the acyclic/lower-triangle case in <em>Fu et al., 2025</em>). The key insight is extending functional equivalence to the non-DAG setting &mdash; showing these two concepts remain equivalent even with cyclic structures.
-      </p>
-      <div class="link-row" style="margin-top:14px;margin-bottom:0">
-        <a class="link-btn" href="cg-ica.pdf" target="_blank">Original Handwritten Draft (PDF)</a>
-      </div>
-    </header>
+  <main id="view">
+    <div class="view-inner" style="padding-top:24px;max-width:920px;margin:0 auto">
+      <a href="../../index.html#/blogs" class="post-back">← Back to Blogs</a>
 
-    <section class="section">
-      <h2>Setup</h2>
-      <div class="card blog-card">
-        <p>
-          Consider a structural causal model with exogenous variables $e = (e_1, e_2, e_3)$, latent sources $s = (s_1, s_2, s_3)$, and observed variables $x = (x_1, x_2, x_3)$, where each layer is generated through an invertible mechanism:
+      <header class="post-hero">
+        <h1 class="post-h1">Stable Causal Graph ⇔ Complete Nonlinear ICA:<br>Even in Your Cyclic Graph / Dense Generation!</h1>
+        <div class="post-meta">October 2024 · Computation Draft</div>
+        <p class="post-abstract">
+          These are some of my computation drafts exploring the equivalence between <strong>stable causal graphs</strong> and <strong>complete nonlinear ICA</strong> (beyond the acyclic/lower-triangle case in <em>Fu et al., 2025</em>). The key insight is extending functional equivalence to the non-DAG setting — showing these two concepts remain equivalent even with cyclic structures.
         </p>
-        <div class="math-block">$$e \;\xrightarrow{s = f_s(e)}\; s \;\xrightarrow{x = f_x(s)}\; x$$</div>
-        <p>By the chain rule on the Jacobians:</p>
-        <div class="math-block">$$J_x(e) = J_x(s) \cdot J_s(e) = \frac{\partial x}{\partial s} \cdot \frac{\partial s}{\partial e}$$</div>
-        <p>
-          Since all mappings are invertible, the Jacobian $J_x(e)$ is invertible. If the causal graphs over $s$ and $x$ are DAGs with adjacency matrices $B_1$ and $B_2$, we can write:
-        </p>
-        <div class="math-block">$$J_x(e) = (I - B_1)^{-1} \cdot (I - B_2)^{-1}$$</div>
-        <p>This gives us the <strong>functional equivalence</strong> between the mixing function's Jacobian and the causal structure.</p>
-        <div class="blog-note">
-          Note: self-loops can be handled following <em>Lacerda et al., 2012</em>. If the system is not stable (e.g., $e_3 \to x_1$ explodes), identifiability breaks down.
+        <div style="margin-top:16px">
+          <a class="link-btn" href="cg-ica.pdf" target="_blank">Original Handwritten Draft (PDF)</a>
         </div>
-      </div>
-    </section>
+      </header>
 
-    <section class="section">
-      <h2>Main Result: The Equivalence</h2>
-
-      <div class="card blog-card">
-        <h3 class="blog-subhead">Direction 1: Complete Nonlinear ICA $\Rightarrow$ Stable Causal Graph</h3>
-        <p>
-          Suppose we have a complete nonlinear ICA model $x = g(e)$ where $J_g(e)$ is invertible and square. Since $J_g(e)$ is an invertible matrix, it always admits a <strong>LUP decomposition</strong>:
-        </p>
-        <div class="math-block">$$J_g(e) = L \cdot U \cdot P$$</div>
-        <p>where:</p>
-        <ul class="blog-list">
-          <li>$L$ &mdash; lower triangular matrix (non-zero diagonal)</li>
-          <li>$U$ &mdash; upper triangular matrix (non-zero diagonal)</li>
-          <li>$P$ &mdash; permutation matrix</li>
-        </ul>
-        <p>
-          If we fix the scaling and the permutation $P$, the LUP decomposition is <strong>unique</strong>.
-          Both $L$ and $U$ have non-zero diagonals, so we can express them as:
-        </p>
-        <div class="math-block">
-          $$J_s(e) = (I - U')^{-1} \quad \text{(up to a permutation } P' \text{)}$$
-          $$J_x(s) = (I - L')^{-1}$$
+      <section class="post-section">
+        <h2>Setup</h2>
+        <div class="post-card">
+          <p>Consider a structural causal model with exogenous variables $e = (e_1, e_2, e_3)$, latent sources $s = (s_1, s_2, s_3)$, and observed variables $x = (x_1, x_2, x_3)$, where each layer is generated through an invertible mechanism:</p>
+          <div class="math-block">$$e \;\xrightarrow{s = f_s(e)}\; s \;\xrightarrow{x = f_x(s)}\; x$$</div>
+          <p>By the chain rule on the Jacobians:</p>
+          <div class="math-block">$$J_x(e) = J_x(s) \cdot J_s(e) = \frac{\partial x}{\partial s} \cdot \frac{\partial s}{\partial e}$$</div>
+          <p>Since all mappings are invertible, the Jacobian $J_x(e)$ is invertible. If the causal graphs over $s$ and $x$ are DAGs with adjacency matrices $B_1$ and $B_2$, we can write:</p>
+          <div class="math-block">$$J_x(e) = (I - B_1)^{-1} \cdot (I - B_2)^{-1}$$</div>
+          <p>This gives us the <strong>functional equivalence</strong> between the mixing function's Jacobian and the causal structure.</p>
+          <div class="post-note">Note: self-loops can be handled following <em>Lacerda et al., 2012</em>. If the system is not stable (e.g., $e_3 \to x_1$ explodes), identifiability breaks down.</div>
         </div>
-        <p>
-          where $U'$ is strictly upper triangular and $L'$ is strictly lower triangular (both are DAG adjacency matrices). Since $J_s(e)$ and $J_x(s)$ are bounded, the resulting causal system is <strong>stable</strong>. Self-loops can be freely introduced following <em>Lacerda et al., 2012</em>.
-        </p>
-      </div>
+      </section>
 
-      <div class="card blog-card">
-        <h3 class="blog-subhead">Direction 2: Stable Causal Graph $\Rightarrow$ Complete Nonlinear ICA</h3>
-        <p>
-          Conversely, if we have a stable causal graph, the Jacobian of the full mapping $x = g(e)$ takes the form $(I - B_1)^{-1}(I - B_2)^{-1}$, which is invertible. This is precisely the structure of a complete nonlinear ICA model.
-        </p>
-      </div>
-    </section>
+      <section class="post-section">
+        <h2>Main Result: The Equivalence</h2>
 
-    <section class="section">
-      <h2>TL;DR</h2>
-      <div class="card blog-card" style="text-align:center">
-        <p>Two days of "multiplying matrices" led to:</p>
-        <div class="math-block">$$\boxed{\text{Stable Causal Graph} \iff \text{Complete Nonlinear ICA}}$$</div>
-      </div>
-    </section>
+        <div class="post-card">
+          <h3 class="post-subhead">Direction 1: Complete Nonlinear ICA $\Rightarrow$ Stable Causal Graph</h3>
+          <p>Suppose we have a complete nonlinear ICA model $x = g(e)$ where $J_g(e)$ is invertible and square. Since $J_g(e)$ is an invertible matrix, it always admits a <strong>LUP decomposition</strong>:</p>
+          <div class="math-block">$$J_g(e) = L \cdot U \cdot P$$</div>
+          <p>where:</p>
+          <ul class="post-list">
+            <li>$L$ — lower triangular matrix (non-zero diagonal)</li>
+            <li>$U$ — upper triangular matrix (non-zero diagonal)</li>
+            <li>$P$ — permutation matrix</li>
+          </ul>
+          <p>If we fix the scaling and the permutation $P$, the LUP decomposition is <strong>unique</strong>. Both $L$ and $U$ have non-zero diagonals, so we can express them as:</p>
+          <div class="math-block">
+            $$J_s(e) = (I - U')^{-1} \quad \text{(up to a permutation } P' \text{)}$$
+            $$J_x(s) = (I - L')^{-1}$$
+          </div>
+          <p>where $U'$ is strictly upper triangular and $L'$ is strictly lower triangular (both are DAG adjacency matrices). Since $J_s(e)$ and $J_x(s)$ are bounded, the resulting causal system is <strong>stable</strong>. Self-loops can be freely introduced following <em>Lacerda et al., 2012</em>.</p>
+        </div>
 
-    <section class="section">
-      <h2>Example: A Chain Graph</h2>
-      <div class="card blog-card">
-        <p>Consider a simple chain $x_1 \to x_2 \to x_3$ with adjacency matrix:</p>
-        <div class="math-block">$$B = \begin{bmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
-        <p>Its Markov equivalence class contains DAGs with the same set of conditional independencies. The corresponding "super matrix" (union of all edges in the equivalence class) is:</p>
-        <div class="math-block">$$\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
-        <p>
-          This illustrates that while the causal direction within a Markov equivalence class is ambiguous from observational data alone, the stable causal graph structure still guarantees complete nonlinear ICA identifiability.
-        </p>
-      </div>
-    </section>
+        <div class="post-card">
+          <h3 class="post-subhead">Direction 2: Stable Causal Graph $\Rightarrow$ Complete Nonlinear ICA</h3>
+          <p>Conversely, if we have a stable causal graph, the Jacobian of the full mapping $x = g(e)$ takes the form $(I - B_1)^{-1}(I - B_2)^{-1}$, which is invertible. This is precisely the structure of a complete nonlinear ICA model.</p>
+        </div>
+      </section>
 
+      <section class="post-section">
+        <h2>TL;DR</h2>
+        <div class="post-card" style="text-align:center">
+          <p>Two days of "multiplying matrices" led to:</p>
+          <div class="math-block">$$\boxed{\text{Stable Causal Graph} \iff \text{Complete Nonlinear ICA}}$$</div>
+        </div>
+      </section>
+
+      <section class="post-section">
+        <h2>Example: A Chain Graph</h2>
+        <div class="post-card">
+          <p>Consider a simple chain $x_1 \to x_2 \to x_3$ with adjacency matrix:</p>
+          <div class="math-block">$$B = \begin{bmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
+          <p>Its Markov equivalence class contains DAGs with the same set of conditional independencies. The corresponding "super matrix" (union of all edges in the equivalence class) is:</p>
+          <div class="math-block">$$\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
+          <p>This illustrates that while the causal direction within a Markov equivalence class is ambiguous from observational data alone, the stable causal graph structure still guarantees complete nonlinear ICA identifiability.</p>
+        </div>
+      </section>
+    </div>
   </main>
-
-  <footer class="footer">&copy; <span id="year"></span> Minghao Fu.</footer>
 </div>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+// Theme toggle inline (avoid pulling the whole app.js module for a static page).
+(function(){
+  var ICON_SUN  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>';
+  var ICON_MOON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  var icon = document.getElementById("theme-icon");
+  function paint(){
+    var t = document.documentElement.getAttribute("data-theme") || "dark";
+    icon.outerHTML = (t === "dark" ? ICON_SUN : ICON_MOON).replace("<svg ", '<svg id="theme-icon" width="20" height="20" ');
+  }
+  paint();
+  document.getElementById("theme-toggle").addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme") || "dark";
+    var next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try{ localStorage.setItem("mf-theme-v1", next); }catch(e){}
+    paint();
+  });
+})();
 </script>
 </body>
 </html>
