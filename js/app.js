@@ -1,7 +1,6 @@
 import {
-  me, papers, albums, news, education, experience, service,
+  me, papers, albums, news, education, experience, service, blogs,
   papersByAlbum, albumById, paperById, popularPapers,
-  formatDuration, albumRuntime, formatReads,
 } from "./data.js";
 
 // ============ SVG icon set ============
@@ -30,6 +29,49 @@ const ICON = {
   sun:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>`,
   moon:    `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
 };
+
+// ============ Reader counter (counterapi.dev) ============
+// One free public counter. /up increments + returns; bare URL just reads.
+// We only increment once per browser session, then re-read on later visits.
+const READER_NAMESPACE = "minghaofu-site";
+const READER_KEY = "homepage";
+const READER_CACHE_KEY = "mf-reader-count-v1";
+const READER_SESSION_KEY = "mf-reader-hit-v1";
+
+function getCachedReaderCount(){
+  try{
+    const v = parseInt(localStorage.getItem(READER_CACHE_KEY) || "0", 10);
+    return isNaN(v) ? 0 : v;
+  }catch(e){ return 0; }
+}
+function setCachedReaderCount(n){
+  try{ localStorage.setItem(READER_CACHE_KEY, String(n)); }catch(e){}
+}
+function formatReaders(n){
+  return Number(n).toLocaleString("en-US");
+}
+function readersText(){
+  return formatReaders(me.monthlyReadersBase + getCachedReaderCount());
+}
+async function refreshReaderCount(){
+  let alreadyHit = false;
+  try{ alreadyHit = !!sessionStorage.getItem(READER_SESSION_KEY); }catch(e){}
+  const path = alreadyHit
+    ? `https://api.counterapi.dev/v1/${READER_NAMESPACE}/${READER_KEY}`
+    : `https://api.counterapi.dev/v1/${READER_NAMESPACE}/${READER_KEY}/up`;
+  try{
+    const r = await fetch(path, { mode: "cors" });
+    if (!r.ok) return;
+    const d = await r.json();
+    if (typeof d.count === "number"){
+      setCachedReaderCount(d.count);
+      try{ sessionStorage.setItem(READER_SESSION_KEY, "1"); }catch(e){}
+      document.querySelectorAll("[data-readers]").forEach(el => {
+        el.textContent = readersText();
+      });
+    }
+  }catch(e){ /* offline, blocked, or API down — keep cached/base value */ }
+}
 
 // ============ Theme (light / dark) ============
 const THEME_KEY = "mf-theme-v1";
@@ -74,24 +116,16 @@ function savePlayer(){
   try{ localStorage.setItem(PLAYER_KEY, JSON.stringify(player)); }catch(e){}
 }
 
-let progressTimer = null;
-let progressElapsed = 0;
-
 function play(paperId){
-  if (player.paperId !== paperId){
-    progressElapsed = 0;
-  }
   player.paperId = paperId;
   player.isPlaying = true;
   savePlayer();
   renderPlayer();
-  startProgress();
   highlightPlayingRows();
 }
 function pause(){
   player.isPlaying = false;
   savePlayer();
-  stopProgress();
   renderPlayer();
   highlightPlayingRows();
 }
@@ -100,43 +134,16 @@ function togglePlay(){
     if (papers.length) play(papers[0].id);
     return;
   }
-  if (player.isPlaying) pause(); else { player.isPlaying = true; savePlayer(); startProgress(); renderPlayer(); highlightPlayingRows(); }
+  if (player.isPlaying) pause();
+  else { player.isPlaying = true; savePlayer(); renderPlayer(); highlightPlayingRows(); }
 }
 function nextTrack(dir = 1){
   const idx = papers.findIndex(p => p.id === player.paperId);
   if (idx === -1){ if (papers.length) play(papers[0].id); return; }
   const next = papers[(idx + dir + papers.length) % papers.length];
-  progressElapsed = 0;
   play(next.id);
 }
 
-function startProgress(){
-  stopProgress();
-  if (!player.isPlaying) return;
-  progressTimer = setInterval(() => {
-    const p = paperById(player.paperId);
-    if (!p) return;
-    progressElapsed += 1;
-    if (progressElapsed >= (p.durationSec || 1)){
-      progressElapsed = 0;
-      nextTrack(1);
-      return;
-    }
-    updateProgressUI();
-  }, 1000);
-}
-function stopProgress(){
-  if (progressTimer){ clearInterval(progressTimer); progressTimer = null; }
-}
-function updateProgressUI(){
-  const p = paperById(player.paperId);
-  if (!p) return;
-  const dur = p.durationSec || 1;
-  const fill = document.querySelector(".player-center .progress-fill");
-  const elapsedEl = document.querySelector(".player-center .progress-time.elapsed");
-  if (fill) fill.style.width = `${(progressElapsed / dur) * 100}%`;
-  if (elapsedEl) elapsedEl.textContent = formatDuration(progressElapsed);
-}
 function highlightPlayingRows(){
   document.querySelectorAll(".track").forEach(el => {
     const id = el.getAttribute("data-paper-id");
@@ -180,6 +187,7 @@ function parseRoute(){
   const h = location.hash.replace(/^#\/?/, "");
   if (!h) return { name: "home" };
   if (h.startsWith("album/")) return { name: "album", id: h.slice(6) };
+  if (h.startsWith("blogs"))  return { name: "blogs" };
   if (h.startsWith("search")) {
     const q = new URLSearchParams(h.split("?")[1] || "").get("q") || "";
     return { name: "search", q };
@@ -198,6 +206,7 @@ function renderRoute(){
   view.innerHTML = "";
   if (r.name === "album")       renderAlbum(view, r.id);
   else if (r.name === "search") renderSearch(view, r.q);
+  else if (r.name === "blogs")  renderBlogs(view);
   else                          renderHome(view);
   renderSidebar();
   highlightPlayingRows();
@@ -212,49 +221,16 @@ function renderSidebar(){
       <button class="side-nav-item ${r.name === "home" ? "active" : ""}" data-nav="home">
         ${ICON.home}<span class="label">Home</span>
       </button>
-      <button class="side-nav-item ${r.name === "search" ? "active" : ""}" data-nav="search">
-        ${ICON.search}<span class="label">Search</span>
+      <button class="side-nav-item ${r.name === "blogs" ? "active" : ""}" data-nav="blogs">
+        ${ICON.library}<span class="label">Blogs</span>
       </button>
     </nav>
-    <section class="side-library">
-      <div class="side-library-head">
-        <span class="head-label" style="display:flex;align-items:center;gap:8px;">${ICON.library}<span>Your Library</span></span>
-      </div>
-      <div class="side-library-list">
-        <a class="lib-row" href="cv.pdf" target="_blank" rel="noopener">
-          <div class="lib-cover cv">CV</div>
-          <div class="lib-meta">
-            <div class="lib-title">Curriculum Vitae</div>
-            <div class="lib-sub">PDF · ${me.name}</div>
-          </div>
-        </a>
-        <a class="lib-row" href="blog.html">
-          <div class="lib-cover blog">B</div>
-          <div class="lib-meta">
-            <div class="lib-title">Blogs</div>
-            <div class="lib-sub">Liner notes · ${me.name}</div>
-          </div>
-        </a>
-        ${albums.map(a => `
-          <button class="lib-row ${r.name === "album" && r.id === a.id ? "active" : ""}" data-album="${a.id}">
-            <div class="lib-cover" style="background:${albumGradient(a)}">${escapeHtml(a.title[0])}</div>
-            <div class="lib-meta">
-              <div class="lib-title">${escapeHtml(a.title)}</div>
-              <div class="lib-sub">Album · ${escapeHtml(me.name)}</div>
-            </div>
-          </button>
-        `).join("")}
-      </div>
-    </section>
   `;
   side.querySelectorAll("[data-nav]").forEach(btn => {
     btn.addEventListener("click", () => {
       const n = btn.getAttribute("data-nav");
-      navigate(n === "home" ? "#/" : "#/search");
+      navigate(n === "blogs" ? "#/blogs" : "#/");
     });
-  });
-  side.querySelectorAll("[data-album]").forEach(btn => {
-    btn.addEventListener("click", () => navigate("#/album/" + btn.getAttribute("data-album")));
   });
 }
 
@@ -307,7 +283,7 @@ function renderHome(view){
         <h1 class="hero-title">${escapeHtml(me.name)}</h1>
         <p class="hero-tagline">${escapeHtml(me.tagline)}</p>
         <div class="hero-meta">
-          <span>${me.monthlyReaders} monthly readers</span>
+          <span><span data-readers>${readersText()}</span> monthly readers</span>
         </div>
       </div>
     </section>
@@ -319,14 +295,14 @@ function renderHome(view){
         <button class="icon-btn lg" aria-label="More">${ICON.more}</button>
       </div>
 
-      <section class="section">
+      <section class="section" id="popular-section">
         <div class="section-head">
           <h2 class="section-title">Popular</h2>
         </div>
-        <div class="tracklist popular">
+        <div class="tracklist popular" id="popular-list">
           ${top.map((p,i) => popularRowHTML(p, i+1)).join("")}
         </div>
-        <div style="margin-top:8px"><a class="section-link" href="#/search?q=">Show all</a></div>
+        ${papers.length > top.length ? `<div style="margin-top:8px"><button class="section-link" id="popular-toggle">See more</button></div>` : ""}
       </section>
 
       <section class="section">
@@ -344,6 +320,19 @@ function renderHome(view){
       </section>
 
       <section class="section">
+        <div class="section-head"><h2 class="section-title">About</h2></div>
+        <div class="about-card">
+          <img src="${me.photo}" alt="${escapeHtml(me.name)}">
+          <div>
+            <h3>About</h3>
+            <div class="name">${escapeHtml(me.name)}</div>
+            <div class="role">${escapeHtml(me.role)}</div>
+            <div class="bio">${me.bio.map(p => `<p>${p}</p>`).join("")}</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
         <div class="section-head"><h2 class="section-title">News</h2></div>
         <div class="news-list">
           ${news.map(n => `
@@ -351,19 +340,6 @@ function renderHome(view){
               <div class="when">${escapeHtml(n.date)}</div>
               <div class="what">${n.html}</div>
             </div>`).join("")}
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head"><h2 class="section-title">About</h2></div>
-        <div class="about-card">
-          <img src="${me.photo}" alt="${escapeHtml(me.name)}">
-          <div>
-            <h3>About</h3>
-            <div class="name">${escapeHtml(me.name)}</div>
-            <div class="role">${escapeHtml(me.role)} · ${me.monthlyReaders} monthly readers</div>
-            <div class="bio">${me.bio.map(p => `<p>${p}</p>`).join("")}</div>
-          </div>
         </div>
       </section>
 
@@ -376,6 +352,7 @@ function renderHome(view){
               <div>
                 <div class="where">${escapeHtml(e.where)}</div>
                 <div class="what">${escapeHtml(e.what)}</div>
+                ${e.advisor ? `<div class="advisor">Advised by ${e.advisor}</div>` : ""}
               </div>
               <div class="when">${escapeHtml(e.when)}</div>
             </div>`).join("")}
@@ -383,7 +360,8 @@ function renderHome(view){
         <div class="timeline-col">
           <h3 class="section-title">Experience</h3>
           ${experience.map(e => `
-            <div class="timeline-row no-logo">
+            <div class="timeline-row ${e.logo ? "" : "no-logo"}">
+              ${e.logo ? `<img src="${e.logo}" alt="">` : ""}
               <div>
                 <div class="where">${escapeHtml(e.where)}</div>
                 <div class="what">${escapeHtml(e.what)}</div>
@@ -407,6 +385,20 @@ function renderHome(view){
     const target = popularPapers(1)[0] || papers[0];
     if (target) play(target.id);
   });
+  // "See more" toggle on Popular: expand to all papers, then collapse back.
+  const popToggle = view.querySelector("#popular-toggle");
+  const popList = view.querySelector("#popular-list");
+  let expanded = false;
+  popToggle?.addEventListener("click", () => {
+    expanded = !expanded;
+    const rows = expanded ? papers : popularPapers(5);
+    popList.innerHTML = rows.map((p,i) => popularRowHTML(p, i+1)).join("");
+    bindTrackHandlers(popList);
+    highlightPlayingRows();
+    popToggle.textContent = expanded ? "Show less" : "See more";
+  });
+  // Refresh visit counter (first hit per session = increment, then read-only).
+  refreshReaderCount();
   const followBtn = view.querySelector("#follow-btn");
   followBtn?.addEventListener("click", () => {
     const following = followBtn.classList.toggle("following");
@@ -435,10 +427,6 @@ function renderAlbum(view, id){
     return;
   }
   const tracks = papersByAlbum(album.id);
-  const runtime = albumRuntime(album.id);
-  const runtimeStr = runtime > 0
-    ? `${Math.floor(runtime/60)} min ${runtime%60} sec`
-    : "—";
   const bg = album.cover
     ? `background-image:url('${album.cover}')`
     : `background:${albumGradient(album)}`;
@@ -454,7 +442,7 @@ function renderAlbum(view, id){
           <span class="dot">•</span>
           <span>${escapeHtml(String(album.year))}</span>
           <span class="dot">•</span>
-          <span>${tracks.length} ${tracks.length === 1 ? "track" : "tracks"}, ${runtimeStr}</span>
+          <span>${tracks.length} ${tracks.length === 1 ? "track" : "tracks"}</span>
         </div>
         ${album.blurb ? `<p style="margin-top:10px;color:rgba(255,255,255,.9);font-size:14px;max-width:560px;">${escapeHtml(album.blurb)}</p>` : ""}
       </div>
@@ -475,7 +463,6 @@ function renderAlbum(view, id){
             <div class="col-venue">Venue</div>
             <div class="col-year">Year</div>
             <div class="col-actions" aria-hidden="true"></div>
-            <div class="col-dur">⏱</div>
           </div>
           ${tracks.map((p,i) => trackRowHTML(p, i+1, { showAlbum:false, showYear:true })).join("")}
         </div>
@@ -524,7 +511,6 @@ function renderSearch(view, q){
                 <div class="col-album">Album</div>
                 <div class="col-venue">Venue</div>
                 <div class="col-actions" aria-hidden="true"></div>
-                <div class="col-dur">⏱</div>
               </div>
               ${matchPapers.map((p,i) => trackRowHTML(p, i+1, { showAlbum:true })).join("")}
             </div>
@@ -541,6 +527,56 @@ function renderSearch(view, q){
   bindAlbumCardHandlers(view);
 }
 
+// ============ Blogs view ============
+function renderBlogs(view){
+  const heroBg = blogs[0]
+    ? `background:linear-gradient(135deg, ${blogs[0].coverHex[0]}, ${blogs[0].coverHex[1]})`
+    : `background:linear-gradient(135deg,#3a1c5a,#7a3da8)`;
+  view.innerHTML = `
+    <section class="view-hero album-hero">
+      <div class="view-hero-bg" style="${heroBg}"></div>
+      <div class="view-hero-text">
+        <div class="hero-eyebrow"><span>Playlist</span></div>
+        <h1 class="hero-title album">Blogs</h1>
+        <div class="hero-meta">
+          <strong>${escapeHtml(me.name)}</strong>
+          <span class="dot">•</span>
+          <span>${blogs.length} ${blogs.length === 1 ? "post" : "posts"}</span>
+          <span class="dot">•</span>
+          <span>Liner notes</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="view-inner">
+      ${blogs.length ? `
+        <div class="tracklist">
+          <div class="tracklist-header">
+            <div class="col-num">#</div>
+            <div class="col-title">Title</div>
+            <div class="col-venue">Posted</div>
+            <div class="col-actions" aria-hidden="true"></div>
+          </div>
+          ${blogs.map((b,i) => `
+            <a class="track" href="${b.href}">
+              <div class="col-num"><span class="num-text">${i+1}</span></div>
+              <div class="col-title">
+                <div class="thumb-fallback" style="background:linear-gradient(135deg, ${b.coverHex[0]}, ${b.coverHex[1]})">B</div>
+                <div class="meta">
+                  <div class="t">${escapeHtml(b.title)}</div>
+                  <div class="a">${escapeHtml(b.desc)}</div>
+                </div>
+              </div>
+              <div class="col-venue">${escapeHtml(b.date)}</div>
+              <div class="col-actions"></div>
+            </a>
+          `).join("")}
+        </div>
+      ` : `<div class="empty"><h3>No posts yet</h3></div>`}
+    </div>
+  `;
+}
+
 // ============ Track row ============
 function linkButtonsHTML(p){
   const L = p.links || {};
@@ -552,7 +588,7 @@ function linkButtonsHTML(p){
   return `<div class="col-actions">${btns.join("")}</div>`;
 }
 
-// Avril-style popular row: # | thumb | title+venue badge | reads | actions | duration
+// Popular row: # | thumb | title+venue badge | actions
 function popularRowHTML(p, num){
   const isPlaying = player.paperId === p.id && player.isPlaying;
   const isAccepted = !/preprint/i.test(p.venue);
@@ -564,12 +600,11 @@ function popularRowHTML(p, num){
       <div class="col-title">
         <div class="meta">
           <div class="t">${escapeHtml(p.title)}</div>
+          <div class="a">${p.authors}</div>
           <div class="meta-row"><span class="${venueClass}">${escapeHtml(p.venue)}</span></div>
         </div>
       </div>
-      <div class="col-plays">${formatReads(p.reads)}</div>
       ${linkButtonsHTML(p)}
-      <div class="col-dur">${formatDuration(p.durationSec || 0)}</div>
     </div>
   `;
 }
@@ -597,7 +632,6 @@ function trackRowHTML(p, num, opts = {}){
     cols.push(`<div class="col-year">${escapeHtml(String(p.year))}</div>`);
   }
   cols.push(linkButtonsHTML(p));
-  cols.push(`<div class="col-dur">${formatDuration(p.durationSec || 0)}</div>`);
   return `<div class="track${isPlaying ? " playing" : ""}" role="button" tabindex="0" data-paper-id="${p.id}">${cols.join("")}</div>`;
 }
 
@@ -649,54 +683,29 @@ function bindAlbumCardHandlers(root){
 // ============ Player bar ============
 function renderPlayer(){
   const p = player.paperId ? paperById(player.paperId) : null;
-  const dur = p?.durationSec || 0;
-  const elapsed = p ? progressElapsed : 0;
-  const pct = dur ? (elapsed / dur) * 100 : 0;
   const node = document.getElementById("player");
   node.innerHTML = `
     <div class="player-left">
       ${p ? thumbHTML(p) : `<div class="thumb-fallback" style="background:#222">♪</div>`}
       <div class="pl-meta">
-        <div class="pl-title">${p ? escapeHtml(p.title) : "Select a paper to play"}</div>
+        <div class="pl-title">${p ? escapeHtml(p.title) : "Select a paper to read"}</div>
         <div class="pl-sub">${p ? p.authors : escapeHtml(me.name)}</div>
       </div>
     </div>
 
     <div class="player-center">
       <div class="player-controls">
-        <button class="icon-btn" aria-label="Shuffle">${ICON.shuffle}</button>
         <button class="icon-btn" data-act="prev" aria-label="Previous">${ICON.prev}</button>
         <button class="play-pause" data-act="toggle" aria-label="${player.isPlaying ? "Pause" : "Play"}">${player.isPlaying ? ICON.pause : ICON.play}</button>
         <button class="icon-btn" data-act="next" aria-label="Next">${ICON.next}</button>
-        <button class="icon-btn" aria-label="Repeat">${ICON.repeat}</button>
-      </div>
-      <div class="player-progress">
-        <span class="progress-time elapsed">${formatDuration(elapsed)}</span>
-        <div class="progress-track" data-act="seek">
-          <div class="progress-fill" style="width:${pct}%"></div>
-        </div>
-        <span class="progress-time">${formatDuration(dur)}</span>
       </div>
     </div>
 
-    <div class="player-right">
-      <button class="icon-btn" aria-label="Queue">${ICON.queue}</button>
-      <div class="volume">
-        <button class="icon-btn" aria-label="Volume">${ICON.vol}</button>
-        <div class="progress-track"><div class="progress-fill" style="width:70%"></div></div>
-      </div>
-    </div>
+    <div class="player-right"></div>
   `;
   node.querySelector('[data-act="toggle"]')?.addEventListener("click", togglePlay);
   node.querySelector('[data-act="prev"]')?.addEventListener("click", () => nextTrack(-1));
   node.querySelector('[data-act="next"]')?.addEventListener("click", () => nextTrack(1));
-  node.querySelector('[data-act="seek"]')?.addEventListener("click", e => {
-    if (!p) return;
-    const r = e.currentTarget.getBoundingClientRect();
-    const ratio = (e.clientX - r.left) / r.width;
-    progressElapsed = Math.max(0, Math.min(p.durationSec - 1, Math.floor(p.durationSec * ratio)));
-    updateProgressUI();
-  });
 }
 
 // ============ Boot ============
@@ -709,7 +718,6 @@ function boot(){
   renderSidebar();
   renderRoute();
   renderPlayer();
-  if (player.isPlaying) startProgress();
   window.addEventListener("hashchange", renderRoute);
 }
 document.addEventListener("DOMContentLoaded", boot);
