@@ -43,7 +43,7 @@ export const albums = [
   },
   {
     id: "world-models",
-    title: "World Models",
+    title: "What is Physical Language?",
     year: 2026,
     coverHex: ["#1c5d4e", "#0a1f1a"],
     cover: "images/papers/tcwm.png",
@@ -53,12 +53,43 @@ export const albums = [
 ];
 
 // Each paper has an albumId pointing into albums[]. Edit to regroup.
-// Order here = display order. Popular section shows the first `popular: true`
-// papers in this order — keep them roughly by citation count (most cited first).
+// Order here = display order (newest-first along the conference cycle:
+// NeurIPS → ICLR → ICML → NeurIPS …). Popular section shows the first N
+// `popular: true` entries — keep "frontier" papers at the top.
 export const papers = [
+  // ===== Frontier (just submitted) =====
+  {
+    id: "tcwm",
+    title: "Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations",
+    authors: '<em>Minghao Fu</em>, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Nicklas Hansen, Biwei Huang',
+    venue: "arXiv 2026",
+    year: 2026,
+    thumb: "images/papers/tcwm.png",
+    albumId: "world-models",
+    popular: true,
+    // TODO: add arxiv: "https://arxiv.org/pdf/<id>" once arxiv assigns the public ID
+    // (arXiv submission was queued as submit/7634303 — replace when announced).
+    links: { project: "tc-wm/index.html", code: "https://github.com/MinghaoFu/TC-WM" },
+  },
+  {
+    id: "scar",
+    title: "SCAR: Self-Supervised Continuous Action Representation Learning",
+    authors: 'Hongjia Liu, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, <em>Minghao Fu</em>, Xinyue Wang, Haofei Lu, Biwei Huang',
+    venue: "arXiv 2026",
+    year: 2026,
+    thumb: "images/papers/scar.png",
+    albumId: "world-models",
+    popular: true,
+    links: { arxiv: "https://arxiv.org/pdf/2605.16412" },
+  },
+  // ===== ICML 2026 (July 2026) =====
   {
     id: "climate",
-    title: "Learning General Causal Structures with Hidden Dynamic Process for Climate Analysis",
+    // Displayed title is intentionally shortened (drops "for Climate Analysis")
+    // to position me as a representation-learning researcher, not a climate
+    // expert. Canonical title on arxiv/ICML stays the full version:
+    //   "Learning General Causal Structures with Hidden Dynamic Process for Climate Analysis"
+    title: "Learning General Causal Structures with Hidden Dynamic Process",
     authors: '<em>Minghao Fu</em>, Biwei Huang, Zijian Li, Yujia Zheng, Ignavier Ng, Guangyi Chen, Yingyao Hu†, Kun Zhang†',
     venue: "ICML 2026",
     year: 2026,
@@ -68,34 +99,36 @@ export const papers = [
     links: { arxiv: "https://arxiv.org/pdf/2501.12500" },
   },
   {
-    id: "child",
-    title: "Towards Identifiability of Hierarchical Temporal Causal Representation Learning",
-    authors: 'Zijian Li*, <em>Minghao Fu*</em>, Junxian Huang, Yifan Shen, Ruichu Cai, Yuewen Sun, Guangyi Chen, Kun Zhang',
-    venue: "NeurIPS 2025",
-    year: 2025,
-    thumb: "images/papers/child.png",
-    albumId: "latent-space",
+    id: "task-sufficient-wams",
+    title: "Learning Task-Sufficient World Models by Synergizing Agentic Exploration and Structured Modeling",
+    authors: '<a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Yujia Zheng, <em>Minghao Fu</em>, Yongqiang Chen, Guangyi Chen, Kevin Murphy, Biwei Huang, Kun Zhang',
+    venue: "ICML 2026",
+    year: 2026,
+    thumb: "images/papers/task-sufficient.png",
+    albumId: "world-models",
+    popular: true,
+    links: {},
+  },
+  // ===== CVPR 2026 (June 2026) =====
+  {
+    id: "dreamsac",
+    title: "DreamSAC: Learning Hamiltonian World Models via Symmetry Exploration",
+    authors: 'Jinzhou Tang, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, <em>Minghao Fu</em>, Wenjun Lin, Biwei Huang, Keze Wang',
+    venue: "CVPR 2026",
+    year: 2026,
+    thumb: "images/papers/dreamsac.png",
+    albumId: "world-models",
     popular: true,
     links: {
-      arxiv: "https://arxiv.org/pdf/2510.18310",
-      code:  "https://github.com/MinghaoFu/CHiLD",
+      arxiv: "https://arxiv.org/pdf/2603.07545",
+      code:  "https://github.com/tangjzh/DreamSAC",
     },
   },
-  {
-    id: "online-ts",
-    title: "Online Time Series Forecasting with Theoretical Guarantees",
-    authors: 'Zijian Li, Changze Zhou, <em>Minghao Fu</em>, Sanjay Manjunath, Fan Feng, Guangyi Chen, Yingyao Hu, Ruichu Cai, Kun Zhang',
-    venue: "NeurIPS 2025",
-    year: 2025,
-    thumb: "images/papers/online.png",
-    albumId: "latent-space",
-    popular: true,
-    links: { arxiv: "https://arxiv.org/pdf/2510.18281" },
-  },
+  // ===== ICLR 2026 (May 2026) =====
   {
     id: "adadiff",
     title: "Ada-Diffuser: Latent-Aware Adaptive Diffusion for Decision-Making",
-    authors: 'Fan Feng, Selena Ge, <em>Minghao Fu</em>, Zijian Li, Yujia Zheng, Zeyu Tang, Yingyao Hu, Biwei Huang, Kun Zhang',
+    authors: '<a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Selena Ge, <em>Minghao Fu</em>, Zijian Li, Yujia Zheng, Zeyu Tang, Yingyao Hu, Biwei Huang, Kun Zhang',
     venue: "ICLR 2026",
     year: 2026,
     thumb: "images/papers/adadiff.png",
@@ -119,50 +152,31 @@ export const papers = [
       dataset: "https://huggingface.co/Persona-X/datasets",
     },
   },
+  // ===== NeurIPS 2025 (Dec 2025) =====
   {
-    id: "rebuttal",
-    title: "How Effective is Your Rebuttal? Identifying Causal Models from the OpenReview System",
-    authors: 'Loka Li, Ibrahim Aldarmaki, <em>Minghao Fu</em>, Wong Yu Kang, Yu Deng, Qiuhao Huang, Jianliang Yang, Jin Tian, et al.',
-    venue: "Preprint",
+    id: "child",
+    title: "Towards Identifiability of Hierarchical Temporal Causal Representation Learning",
+    authors: 'Zijian Li*, <em>Minghao Fu*</em>, Junxian Huang, Yifan Shen, Ruichu Cai†, Yuewen Sun, Guangyi Chen, Kun Zhang†',
+    venue: "NeurIPS 2025",
     year: 2025,
-    thumb: null,
+    thumb: "images/papers/child.png",
     albumId: "latent-space",
-    popular: false,
-    links: {},
-  },
-  // ===== World Models album =====
-  {
-    id: "tcwm",
-    title: "Learning Task-Centric World Models from Visual Foundations",
-    authors: '<em>Minghao Fu</em>, Fan Feng, Nicklas Hansen, Biwei Huang',
-    venue: "Manuscript",
-    year: 2026,
-    thumb: "images/papers/tcwm.png",
-    albumId: "world-models",
     popular: true,
-    links: { project: "tc-wm/index.html", code: "https://github.com/MinghaoFu/TCWM" },
+    links: {
+      arxiv: "https://arxiv.org/pdf/2510.18310",
+      code:  "https://github.com/MinghaoFu/CHiLD",
+    },
   },
   {
-    id: "task-sufficient-wams",
-    title: "Learning Task-Sufficient World Models by Synergizing Agentic Exploration and Structured Modeling",
-    authors: 'Fan Feng, Yujia Zheng, <em>Minghao Fu</em>, Yongqiang Chen, Guangyi Chen, Kevin Murphy, Biwei Huang, Kun Zhang',
-    venue: "ICML 2026",
-    year: 2026,
-    thumb: null,
-    albumId: "world-models",
-    popular: false,
-    links: {},
-  },
-  {
-    id: "dreamsac",
-    title: "DreamSAC: Learning Hamiltonian World Models via Symmetry Exploration",
-    authors: 'Jinzhou Tang, Fan Feng, <em>Minghao Fu</em>, Wenkai Lin, Biwei Huang, Kuan Wang',
-    venue: "CVPR 2026",
-    year: 2026,
-    thumb: null,
-    albumId: "world-models",
-    popular: false,
-    links: {},
+    id: "online-ts",
+    title: "Online Time Series Forecasting with Theoretical Guarantees",
+    authors: 'Zijian Li, Changze Zhou, <em>Minghao Fu</em>, Sanjay Manjunath, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Guangyi Chen, Yingyao Hu*, Ruichu Cai, Kun Zhang*',
+    venue: "NeurIPS 2025",
+    year: 2025,
+    thumb: "images/papers/online.png",
+    albumId: "latent-space",
+    popular: true,
+    links: { arxiv: "https://arxiv.org/pdf/2510.18281" },
   },
 ];
 
@@ -179,10 +193,13 @@ export const blogs = [
 ];
 
 export const news = [
-  { date: "Jan 2026", html: 'Two papers on <strong>Reinforcement Learning</strong> and <strong>Multi-modality</strong> were accepted to ICLR 2026.' },
+  { date: "May 2026", html: 'New preprint on arXiv: <strong>Back to Parsimonious Latents — Learning Task-Centric World Models from Visual Foundations</strong>.' },
+  { date: "May 2026", html: 'Two papers on <strong>causal representation learning</strong> and <strong>world models</strong> were accepted to <strong>ICML 2026</strong>.' },
+  { date: "Mar 2026", html: '<strong>DreamSAC</strong> (Hamiltonian world models via symmetry exploration) accepted to <strong>CVPR 2026</strong>.' },
+  { date: "Jan 2026", html: 'Two papers on <strong>Reinforcement Learning</strong> and <strong>Multi-modality</strong> were accepted to <strong>ICLR 2026</strong>.' },
   { date: "Dec 2025", html: 'Attended <strong>NeurIPS 2025</strong> in San Diego, CA, USA.' },
   { date: "Nov 2025", html: 'Presented our work at <strong>The 5th Measurement Errors and Latent Variables Workshop</strong> at JHU. Thanks to <a href="https://econ.jhu.edu/directory/yingyao-hu/">Dean Hu</a> for invitation.' },
-  { date: "Sep 2025", html: 'Two papers on <strong>Temporal State-Space Models</strong> were accepted to NeurIPS 2025.' },
+  { date: "Sep 2025", html: 'Two papers on <strong>Temporal State-Space Models</strong> were accepted to <strong>NeurIPS 2025</strong>.' },
 ];
 
 export const education = [
@@ -212,7 +229,6 @@ export const education = [
     what: "B.S., Software Engineering",
     when: "Sep 2019 – Jun 2023",
     logo: "images/schools/uestc.png",
-    advisor: '<a href="https://cfm.uestc.edu.cn/~shaojie/">Jie Shao</a>',
   },
 ];
 

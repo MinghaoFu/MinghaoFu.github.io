@@ -28,6 +28,22 @@ const ICON = {
   dataset: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/></svg>`,
   sun:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>`,
   moon:    `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+  mail:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>`,
+  linkedin:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>`,
+  xtwitter:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>`,
+  scholar: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>`,
+  cvdoc:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>`,
+};
+
+// Map social label → icon (lowercase keys for resilience)
+const SOCIAL_ICON = {
+  email:    "mail",
+  github:   "github",
+  scholar:  "scholar",
+  linkedin: "linkedin",
+  twitter:  "xtwitter",
+  x:        "xtwitter",
+  cv:       "cvdoc",
 };
 
 // ============ Reader counter (counterapi.dev) ============
@@ -291,7 +307,16 @@ function renderHome(view){
     <div class="view-inner">
       <div class="view-actions">
         <button class="play-fab lg" id="hero-play" aria-label="Play top track">${ICON.play}</button>
-        <button class="follow-btn" id="follow-btn">Follow</button>
+        <div class="follow-wrap">
+          <button class="follow-btn" id="follow-btn" aria-haspopup="true" aria-expanded="false">Follow</button>
+          <div class="follow-popover" id="follow-popover" role="menu" hidden>
+            ${me.socials.map(s => {
+              const key = (s.label || "").toLowerCase();
+              const iconName = SOCIAL_ICON[key] || "external";
+              return `<a class="follow-icon" href="${s.href}" target="_blank" rel="noopener" title="${escapeHtml(s.label)}" aria-label="${escapeHtml(s.label)}">${ICON[iconName] || ICON.external}</a>`;
+            }).join("")}
+          </div>
+        </div>
         <button class="icon-btn lg" aria-label="More">${ICON.more}</button>
       </div>
 
@@ -400,10 +425,20 @@ function renderHome(view){
   // Refresh visit counter (first hit per session = increment, then read-only).
   refreshReaderCount();
   const followBtn = view.querySelector("#follow-btn");
-  followBtn?.addEventListener("click", () => {
-    const following = followBtn.classList.toggle("following");
-    followBtn.textContent = following ? "Following" : "Follow";
+  const followPop = view.querySelector("#follow-popover");
+  followBtn?.addEventListener("click", e => {
+    e.stopPropagation();
+    const isOpen = !followPop.hidden;
+    followPop.hidden = isOpen;
+    followBtn.setAttribute("aria-expanded", String(!isOpen));
   });
+  followPop?.addEventListener("click", e => e.stopPropagation());
+  document.addEventListener("click", () => {
+    if (followPop && !followPop.hidden){
+      followPop.hidden = true;
+      followBtn?.setAttribute("aria-expanded", "false");
+    }
+  }, { once: false });
   // Discography filter chips
   const chipBar = view.querySelector("#disco-chips");
   const grid = view.querySelector("#disco-grid");
