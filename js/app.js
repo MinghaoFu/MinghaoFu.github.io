@@ -491,15 +491,8 @@ function renderAlbum(view, id){
       </div>
 
       ${tracks.length ? `
-        <div class="tracklist">
-          <div class="tracklist-header">
-            <div class="col-num">#</div>
-            <div class="col-title">Title</div>
-            <div class="col-venue">Venue</div>
-            <div class="col-year">Year</div>
-            <div class="col-actions" aria-hidden="true"></div>
-          </div>
-          ${tracks.map((p,i) => trackRowHTML(p, i+1, { showAlbum:false, showYear:true })).join("")}
+        <div class="tracklist popular">
+          ${tracks.map((p,i) => popularRowHTML(p, i+1)).join("")}
         </div>
       ` : `<div class="empty"><h3>No tracks yet</h3><p>This album is still in production.</p></div>`}
     </div>
@@ -539,15 +532,8 @@ function renderSearch(view, q){
         ${matchPapers.length ? `
           <section class="section">
             <div class="section-head"><h2 class="section-title">Papers</h2></div>
-            <div class="tracklist">
-              <div class="tracklist-header">
-                <div class="col-num">#</div>
-                <div class="col-title">Title</div>
-                <div class="col-album">Album</div>
-                <div class="col-venue">Venue</div>
-                <div class="col-actions" aria-hidden="true"></div>
-              </div>
-              ${matchPapers.map((p,i) => trackRowHTML(p, i+1, { showAlbum:true })).join("")}
+            <div class="tracklist popular">
+              ${matchPapers.map((p,i) => popularRowHTML(p, i+1)).join("")}
             </div>
           </section>` : ""}
         ${(!matchAlbums.length && !matchPapers.length) ? `
