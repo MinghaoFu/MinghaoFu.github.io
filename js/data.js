@@ -39,7 +39,7 @@ export const albums = [
     coverHex: ["#2a4f8b", "#0c1830"],
     cover: "images/papers/child.png",
     tag: "album",
-    blurb: "Identifying latent causal variables and structures behind observed data — most of the Kun Zhang collaboration.",
+    blurb: "Identifying latent causal variables and structures behind observed data.",
   },
   {
     id: "world-models",
@@ -48,7 +48,7 @@ export const albums = [
     coverHex: ["#1c5d4e", "#0a1f1a"],
     cover: "images/papers/tcwm.png",
     tag: "album",
-    blurb: "Task-centric and embodied world models for decision-making.",
+    blurb: "What representation is the \"language\" of physical agents? When will we have the \"GPT Moment\" of physical world models?",
   },
 ];
 
