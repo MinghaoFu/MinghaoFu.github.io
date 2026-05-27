@@ -432,19 +432,57 @@ input{font:inherit;color:inherit}
 .play-fab.lg{width:64px;height:64px}
 .play-fab.lg svg{width:28px;height:28px}
 
+.follow-wrap{position:relative}
 .follow-btn{
   padding:8px 32px;
   border:1px solid #878787;
   border-radius:999px;
-  color:#fff;
+  color:var(--text);
   font-weight:700;
   font-size:14px;
   background:transparent;
   cursor:pointer;
-  transition:border-color .15s, transform .15s, color .15s;
+  transition:border-color .15s, transform .15s, color .15s, background .15s;
 }
-.follow-btn:hover{border-color:#fff;transform:scale(1.03)}
-.follow-btn.following{border-color:#fff;color:#fff}
+.follow-btn:hover{border-color:var(--text);transform:scale(1.03)}
+.follow-btn[aria-expanded="true"]{background:var(--hover-bg);border-color:var(--text)}
+
+.follow-popover{
+  position:absolute;
+  top:calc(100% + 12px);
+  left:0;
+  background:var(--bg-elev);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px;
+  display:flex;
+  gap:8px;
+  box-shadow:0 12px 32px rgba(0,0,0,.45);
+  z-index:60;
+  animation:followPop .14s ease-out;
+}
+.follow-popover[hidden]{display:none}
+@keyframes followPop{
+  from{opacity:0;transform:translateY(-4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.follow-icon{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:var(--bg-card);
+  color:var(--text-sub);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:color .15s, background .15s, transform .12s;
+}
+.follow-icon:hover{
+  color:var(--text);
+  background:var(--bg-card-hover);
+  transform:scale(1.08);
+}
+.follow-icon svg{width:18px;height:18px}
 .icon-btn{
   width:32px;
   height:32px;
@@ -576,6 +614,17 @@ input{font:inherit;color:inherit}
 }
 .track:hover .col-title .a em,
 .track.playing .col-title .a em{color:var(--text)}
+/* Linked co-authors (e.g. Fan Feng) — visually identical to plain authors;
+   underline only appears on hover so the click target is still discoverable. */
+.track .col-title .a a{
+  color:inherit;
+  text-decoration:none;
+}
+.track .col-title .a a:hover{
+  color:var(--text);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
 .track:hover .col-title .a{color:var(--text)}
 
 .track .col-album,
