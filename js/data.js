@@ -67,9 +67,11 @@ export const papers = [
     thumb: "images/papers/tcwm.png",
     albumId: "world-models",
     popular: true,
-    // TODO: add arxiv: "https://arxiv.org/pdf/<id>" once arxiv assigns the public ID
-    // (arXiv submission was queued as submit/7634303 — replace when announced).
-    links: { project: "tc-wm/index.html", code: "https://github.com/MinghaoFu/TC-WM" },
+    links: {
+      arxiv:   "https://arxiv.org/pdf/2605.25620",
+      project: "tc-wm/index.html",
+      code:    "https://github.com/MinghaoFu/TC-WM",
+    },
   },
   {
     id: "scar",
@@ -182,6 +184,14 @@ export const papers = [
 
 // Blog posts. Add newest-first. Each blog still lives at blogs/<slug>/index.html.
 export const blogs = [
+  {
+    slug: "anti-diversity-latent-space",
+    date: "May 2026",
+    title: "Anti-Diversity is All You Need to Get a Unified Latent Space",
+    desc: "Identifiability theory runs on the diversity of an auxiliary variable. But when that variable is a nuisance, you flip the sign — maximize cross-entropy via gradient reversal — and recover the invariant latent instead. Intuition + proof sketch, with SCAR as a worked example.",
+    href: "blogs/anti-diversity-latent-space/index.html",
+    coverHex: ["#1a3a5a", "#0f6d5f"],
+  },
   {
     slug: "cg-ica",
     date: "Oct 2024",
