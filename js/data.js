@@ -202,14 +202,17 @@ export const blogs = [
   },
 ];
 
+// News is curated to read as one focused direction: representation /
+// self-supervised learning and world models (RL included as it is tightly
+// coupled to world models). Avoid naming scattered sub-areas.
 export const news = [
-  { date: "May 2026", html: 'New preprint on arXiv: <strong>Back to Parsimonious Latents — Learning Task-Centric World Models from Visual Foundations</strong>.' },
-  { date: "May 2026", html: 'Two papers on <strong>causal representation learning</strong> and <strong>world models</strong> were accepted to <strong>ICML 2026</strong>.' },
-  { date: "Mar 2026", html: '<strong>DreamSAC</strong> (Hamiltonian world models via symmetry exploration) accepted to <strong>CVPR 2026</strong>.' },
-  { date: "Jan 2026", html: 'Two papers on <strong>Reinforcement Learning</strong> and <strong>Multi-modality</strong> were accepted to <strong>ICLR 2026</strong>.' },
+  { date: "May 2026", html: 'New preprint on <strong>world models</strong>: <strong>Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations</strong>.' },
+  { date: "May 2026", html: 'Two papers on <strong>representation learning</strong> and <strong>world models</strong> were accepted to <strong>ICML 2026</strong>.' },
+  { date: "Mar 2026", html: 'Our paper on <strong>world models</strong> was accepted to <strong>CVPR 2026</strong>.' },
+  { date: "Jan 2026", html: 'Two papers on <strong>representation learning</strong> and <strong>reinforcement learning</strong> were accepted to <strong>ICLR 2026</strong>.' },
   { date: "Dec 2025", html: 'Attended <strong>NeurIPS 2025</strong> in San Diego, CA, USA.' },
-  { date: "Nov 2025", html: 'Presented our work at <strong>The 5th Measurement Errors and Latent Variables Workshop</strong> at JHU. Thanks to <a href="https://econ.jhu.edu/directory/yingyao-hu/">Dean Hu</a> for invitation.' },
-  { date: "Sep 2025", html: 'Two papers on <strong>Temporal State-Space Models</strong> were accepted to <strong>NeurIPS 2025</strong>.' },
+  { date: "Nov 2025", html: 'Presented our work at <strong>The 5th Measurement Errors and Latent Variables Workshop</strong> at JHU. Thanks to <a href="https://econ.jhu.edu/directory/yingyao-hu/">Dean Hu</a> for the invitation.' },
+  { date: "Sep 2025", html: 'Two papers on <strong>representation learning</strong> were accepted to <strong>NeurIPS 2025</strong>.' },
 ];
 
 export const education = [
