@@ -304,15 +304,22 @@ input{font:inherit;color:inherit}
   background-repeat:no-repeat;
   background-color:#121212;
 }
-/* Strong fade so the bottom-left text overlay stays readable on any image */
+/* Strong fade so the bottom-left text overlay stays readable on any image.
+   Dark mode: black overlay deepens the image and blends to the dark page bg.
+   Light mode: white overlay so the figure stays bright; fades to white page bg. */
 .view-hero-bg::before{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.10) 40%, rgba(0,0,0,.70) 85%, #121212 100%),
-    linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.20) 35%, rgba(0,0,0,0) 60%);
   pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.12) 40%, rgba(0,0,0,.72) 85%, var(--bg-base) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.20) 35%, rgba(0,0,0,0) 60%);
+}
+:root[data-theme="light"] .view-hero-bg::before{
+  background:
+    linear-gradient(180deg, transparent 0%, transparent 45%, rgba(255,255,255,.55) 80%, var(--bg-base) 100%),
+    linear-gradient(90deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.15) 28%, rgba(255,255,255,0) 55%);
 }
 .view-hero-text{
   position:absolute;
@@ -320,8 +327,11 @@ input{font:inherit;color:inherit}
   right:32px;
   bottom:28px;
   z-index:2;
-  color:#fff;
-  text-shadow:0 2px 14px rgba(0,0,0,.55);
+  color:var(--text);
+  text-shadow:0 2px 14px rgba(0,0,0,.45);
+}
+:root[data-theme="light"] .view-hero-text{
+  text-shadow:0 1px 2px rgba(255,255,255,.85), 0 2px 12px rgba(255,255,255,.7);
 }
 .hero-eyebrow{
   display:inline-flex;
@@ -483,6 +493,47 @@ input{font:inherit;color:inherit}
   transform:scale(1.08);
 }
 .follow-icon svg{width:18px;height:18px}
+
+/* ⋯ More menu — vertical list of actions */
+.more-wrap{position:relative;display:inline-flex}
+.more-popover{
+  position:absolute;
+  top:calc(100% + 12px);
+  left:50%;
+  transform:translateX(-50%);
+  min-width:240px;
+  background:var(--bg-elev);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:6px;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  box-shadow:0 12px 32px rgba(0,0,0,.45);
+  z-index:60;
+  animation:followPop .14s ease-out;
+}
+.more-popover[hidden]{display:none}
+.more-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  padding:10px 12px;
+  border-radius:6px;
+  color:var(--text);
+  background:transparent;
+  border:none;
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  text-align:left;
+  text-decoration:none;
+  transition:background .12s;
+}
+.more-item:hover{background:var(--hover-bg)}
+.more-item svg{width:18px;height:18px;color:var(--text-sub);flex-shrink:0}
+.more-item:hover svg{color:var(--text)}
 .icon-btn{
   width:32px;
   height:32px;
