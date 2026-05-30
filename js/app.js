@@ -33,6 +33,7 @@ const ICON = {
   xtwitter:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>`,
   scholar: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>`,
   cvdoc:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>`,
+  link:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
 };
 
 // Map social label → icon (lowercase keys for resilience)
@@ -317,7 +318,15 @@ function renderHome(view){
             }).join("")}
           </div>
         </div>
-        <button class="icon-btn lg" aria-label="More">${ICON.more}</button>
+        <div class="more-wrap">
+          <button class="icon-btn lg" id="more-btn" aria-haspopup="true" aria-expanded="false" aria-label="More">${ICON.more}</button>
+          <div class="more-popover" id="more-popover" role="menu" hidden>
+            <button class="more-item" data-act="copy-link" role="menuitem">${ICON.link}<span>Copy link to profile</span></button>
+            <a class="more-item" role="menuitem" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fminghaofu.com%2F&text=${encodeURIComponent(me.name + " — " + me.tagline)}">${ICON.xtwitter}<span>Share on X</span></a>
+            <a class="more-item" role="menuitem" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fminghaofu.com%2F">${ICON.linkedin}<span>Share on LinkedIn</span></a>
+            <a class="more-item" role="menuitem" target="_blank" rel="noopener" href="https://github.com/MinghaoFu/MinghaoFu.github.io">${ICON.github}<span>View source on GitHub</span></a>
+          </div>
+        </div>
       </div>
 
       <section class="section" id="popular-section">
@@ -408,7 +417,12 @@ function renderHome(view){
   bindAlbumCardHandlers(view);
   view.querySelector("#hero-play")?.addEventListener("click", () => {
     const target = popularPapers(1)[0] || papers[0];
-    if (target) play(target.id);
+    if (!target) return;
+    play(target.id);
+    // Open the headline paper in a new tab (prefer arXiv → project → code).
+    const L = target.links || {};
+    const url = L.arxiv || L.project || L.code || L.dataset;
+    if (url) window.open(url, "_blank", "noopener");
   });
   // "See more" toggle on Popular: expand to all papers, then collapse back.
   const popToggle = view.querySelector("#popular-toggle");
@@ -433,12 +447,41 @@ function renderHome(view){
     followBtn.setAttribute("aria-expanded", String(!isOpen));
   });
   followPop?.addEventListener("click", e => e.stopPropagation());
+
+  // More (⋯) menu — copy link, share, view source
+  const moreBtn = view.querySelector("#more-btn");
+  const morePop = view.querySelector("#more-popover");
+  moreBtn?.addEventListener("click", e => {
+    e.stopPropagation();
+    const isOpen = !morePop.hidden;
+    morePop.hidden = isOpen;
+    moreBtn.setAttribute("aria-expanded", String(!isOpen));
+  });
+  morePop?.addEventListener("click", e => e.stopPropagation());
+  morePop?.querySelector('[data-act="copy-link"]')?.addEventListener("click", async e => {
+    const btn = e.currentTarget;
+    const label = btn.querySelector("span");
+    const original = label.textContent;
+    try {
+      await navigator.clipboard.writeText("https://minghaofu.com/");
+      label.textContent = "✓ Copied!";
+    } catch {
+      label.textContent = "Couldn't copy";
+    }
+    setTimeout(() => { label.textContent = original; }, 1500);
+  });
+
+  // Close both popovers when clicking elsewhere
   document.addEventListener("click", () => {
     if (followPop && !followPop.hidden){
       followPop.hidden = true;
       followBtn?.setAttribute("aria-expanded", "false");
     }
-  }, { once: false });
+    if (morePop && !morePop.hidden){
+      morePop.hidden = true;
+      moreBtn?.setAttribute("aria-expanded", "false");
+    }
+  });
   // Discography filter chips
   const chipBar = view.querySelector("#disco-chips");
   const grid = view.querySelector("#disco-grid");
