@@ -25,6 +25,19 @@
   })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+  <style>
+    .post-card figure{margin:20px 0}
+    .post-card figure svg{width:100%;height:auto;max-width:620px;display:block;margin:0 auto;color:var(--text)}
+    .post-card figcaption{font-size:13px;color:var(--text-sub);text-align:center;margin-top:10px;line-height:1.55;max-width:640px;margin-left:auto;margin-right:auto}
+    .fig-node{fill:var(--bg-elev);stroke:currentColor;stroke-width:1.6}
+    .fig-lbl{fill:currentColor;font-family:"Source Sans 3",serif;font-style:italic}
+    .fig-mix{stroke:currentColor;stroke-width:1.6;fill:none;opacity:.85}
+    .fig-causal{stroke:#1DB954;stroke-width:2;fill:none}
+    .fig-anno{fill:var(--text-sub);font-family:"Inter",sans-serif}
+    .fig-cell-on{fill:#1DB954;fill-opacity:.85}
+    .fig-cell-off{fill:currentColor;fill-opacity:.07}
+    .fig-bracket{stroke:currentColor;stroke-width:1.6;fill:none}
+  </style>
 </head>
 <body>
 <div id="app" class="no-player">
@@ -64,7 +77,7 @@
         <h1 class="post-h1">Stable Causal Graph ⇔ Complete Nonlinear ICA:<br>Even in Your Cyclic Graph / Dense Generation!</h1>
         <div class="post-meta">October 2024 · Computation Draft</div>
         <p class="post-abstract">
-          These are some of my computation drafts exploring the equivalence between <strong>stable causal graphs</strong> and <strong>complete nonlinear ICA</strong> (beyond the acyclic/lower-triangle case in <em>Fu et al., 2025</em>). The key insight is extending functional equivalence to the non-DAG setting — showing these two concepts remain equivalent even with cyclic structures.
+          These are some of my computation drafts exploring the equivalence between <strong>stable causal graphs</strong> and <strong>complete nonlinear ICA</strong> (beyond the acyclic/lower-triangle case in <em>Fu et al., 2025</em>). The key insight is extending functional equivalence to the non-DAG setting, showing these two concepts remain equivalent even with cyclic structures.
         </p>
         <div style="margin-top:16px">
           <a class="link-btn" href="cg-ica.pdf" target="_blank">Original Handwritten Draft (PDF)</a>
@@ -80,6 +93,49 @@
           <div class="math-block">$$J_x(e) = J_x(s) \cdot J_s(e) = \frac{\partial x}{\partial s} \cdot \frac{\partial s}{\partial e}$$</div>
           <p>Since all mappings are invertible, the Jacobian $J_x(e)$ is invertible. If the causal graphs over $s$ and $x$ are DAGs with adjacency matrices $B_1$ and $B_2$, we can write:</p>
           <div class="math-block">$$J_x(e) = (I - B_1)^{-1} \cdot (I - B_2)^{-1}$$</div>
+
+          <figure>
+            <svg viewBox="0 0 640 330" role="img" aria-label="Two-stage generative process: exogenous e maps to sources s maps to observations x, with a causal graph at each stage">
+              <defs>
+                <marker id="mix" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 z" fill="currentColor"/></marker>
+                <marker id="caus" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 z" fill="#1DB954"/></marker>
+              </defs>
+              <!-- mixing arrows e->s -->
+              <line class="fig-mix" x1="140" y1="71" x2="140" y2="146" marker-end="url(#mix)"/>
+              <line class="fig-mix" x1="300" y1="71" x2="300" y2="146" marker-end="url(#mix)"/>
+              <line class="fig-mix" x1="460" y1="71" x2="460" y2="146" marker-end="url(#mix)"/>
+              <!-- mixing arrows s->x -->
+              <line class="fig-mix" x1="140" y1="185" x2="140" y2="260" marker-end="url(#mix)"/>
+              <line class="fig-mix" x1="300" y1="185" x2="300" y2="260" marker-end="url(#mix)"/>
+              <line class="fig-mix" x1="460" y1="185" x2="460" y2="260" marker-end="url(#mix)"/>
+              <!-- causal edges among s (B1) -->
+              <line class="fig-causal" x1="160" y1="166" x2="280" y2="166" marker-end="url(#caus)"/>
+              <line class="fig-causal" x1="320" y1="166" x2="440" y2="166" marker-end="url(#caus)"/>
+              <!-- causal edges among x (B2) -->
+              <line class="fig-causal" x1="160" y1="280" x2="280" y2="280" marker-end="url(#caus)"/>
+              <line class="fig-causal" x1="320" y1="280" x2="440" y2="280" marker-end="url(#caus)"/>
+              <!-- nodes: e row -->
+              <circle class="fig-node" cx="140" cy="52" r="19"/><text class="fig-lbl" x="140" y="57" text-anchor="middle" font-size="16">e₁</text>
+              <circle class="fig-node" cx="300" cy="52" r="19"/><text class="fig-lbl" x="300" y="57" text-anchor="middle" font-size="16">e₂</text>
+              <circle class="fig-node" cx="460" cy="52" r="19"/><text class="fig-lbl" x="460" y="57" text-anchor="middle" font-size="16">e₃</text>
+              <!-- s row -->
+              <circle class="fig-node" cx="140" cy="166" r="19"/><text class="fig-lbl" x="140" y="171" text-anchor="middle" font-size="16">s₁</text>
+              <circle class="fig-node" cx="300" cy="166" r="19"/><text class="fig-lbl" x="300" y="171" text-anchor="middle" font-size="16">s₂</text>
+              <circle class="fig-node" cx="460" cy="166" r="19"/><text class="fig-lbl" x="460" y="171" text-anchor="middle" font-size="16">s₃</text>
+              <!-- x row -->
+              <circle class="fig-node" cx="140" cy="280" r="19"/><text class="fig-lbl" x="140" y="285" text-anchor="middle" font-size="16">x₁</text>
+              <circle class="fig-node" cx="300" cy="280" r="19"/><text class="fig-lbl" x="300" y="285" text-anchor="middle" font-size="16">x₂</text>
+              <circle class="fig-node" cx="460" cy="280" r="19"/><text class="fig-lbl" x="460" y="285" text-anchor="middle" font-size="16">x₃</text>
+              <!-- mixing labels -->
+              <text class="fig-lbl" x="312" y="113" font-size="14">fₛ</text>
+              <text class="fig-lbl" x="312" y="227" font-size="14">fₓ</text>
+              <!-- right annotations -->
+              <text class="fig-anno" x="498" y="100" font-size="14">Jₛ(e) = (I − B₁)⁻¹</text>
+              <text class="fig-anno" x="498" y="214" font-size="14">Jₓ(s) = (I − B₂)⁻¹</text>
+            </svg>
+            <figcaption>The two-stage generative process. Exogenous noise $e$ maps to latent sources $s$, which map to observations $x$. Each stage carries a causal graph (green: adjacency $B_1$ over $s$, $B_2$ over $x$), and the stage Jacobians are $J_s(e)=(I-B_1)^{-1}$ and $J_x(s)=(I-B_2)^{-1}$. The full mixing Jacobian is their product, $J_x(e)=(I-B_1)^{-1}(I-B_2)^{-1}$.</figcaption>
+          </figure>
+
           <p>This gives us the <strong>functional equivalence</strong> between the mixing function's Jacobian and the causal structure.</p>
           <div class="post-note">Note: self-loops can be handled following <em>Lacerda et al., 2012</em>. If the system is not stable (e.g., $e_3 \to x_1$ explodes), identifiability breaks down.</div>
         </div>
@@ -94,15 +150,56 @@
           <div class="math-block">$$J_g(e) = L \cdot U \cdot P$$</div>
           <p>where:</p>
           <ul class="post-list">
-            <li>$L$ — lower triangular matrix (non-zero diagonal)</li>
-            <li>$U$ — upper triangular matrix (non-zero diagonal)</li>
-            <li>$P$ — permutation matrix</li>
+            <li>$L$: lower triangular matrix (non-zero diagonal)</li>
+            <li>$U$: upper triangular matrix (non-zero diagonal)</li>
+            <li>$P$: permutation matrix</li>
           </ul>
           <p>If we fix the scaling and the permutation $P$, the LUP decomposition is <strong>unique</strong>. Both $L$ and $U$ have non-zero diagonals, so we can express them as:</p>
           <div class="math-block">
             $$J_s(e) = (I - U')^{-1} \quad \text{(up to a permutation } P' \text{)}$$
             $$J_x(s) = (I - L')^{-1}$$
           </div>
+
+          <figure>
+            <svg viewBox="0 0 672 220" role="img" aria-label="LUP decomposition of the mixing Jacobian maps to two triangular matrices, hence two stacked DAGs">
+              <text class="fig-lbl" x="10" y="112" font-size="18">J<tspan font-size="12" dy="5">g</tspan><tspan dy="-5">(e) =</tspan></text>
+              <!-- L (lower triangular) -->
+              <g>
+                <rect class="fig-cell-on"  x="89"  y="71"  width="24" height="24"/><rect class="fig-cell-off" x="115" y="71"  width="24" height="24"/><rect class="fig-cell-off" x="141" y="71"  width="24" height="24"/>
+                <rect class="fig-cell-on"  x="89"  y="97"  width="24" height="24"/><rect class="fig-cell-on"  x="115" y="97"  width="24" height="24"/><rect class="fig-cell-off" x="141" y="97"  width="24" height="24"/>
+                <rect class="fig-cell-on"  x="89"  y="123" width="24" height="24"/><rect class="fig-cell-on"  x="115" y="123" width="24" height="24"/><rect class="fig-cell-on"  x="141" y="123" width="24" height="24"/>
+                <path class="fig-bracket" d="M84,67 L80,67 L80,151 L84,151"/><path class="fig-bracket" d="M170,67 L174,67 L174,151 L170,151"/>
+                <text class="fig-lbl" x="127" y="176" text-anchor="middle" font-size="17">L</text>
+                <text class="fig-anno" x="127" y="196" text-anchor="middle" font-size="12">(I−L′)⁻¹ = Jₓ(s)</text>
+              </g>
+              <text class="fig-lbl" x="186" y="114" text-anchor="middle" font-size="16">×</text>
+              <!-- U (upper triangular) -->
+              <g>
+                <rect class="fig-cell-on"  x="210" y="71"  width="24" height="24"/><rect class="fig-cell-on"  x="236" y="71"  width="24" height="24"/><rect class="fig-cell-on"  x="262" y="71"  width="24" height="24"/>
+                <rect class="fig-cell-off" x="210" y="97"  width="24" height="24"/><rect class="fig-cell-on"  x="236" y="97"  width="24" height="24"/><rect class="fig-cell-on"  x="262" y="97"  width="24" height="24"/>
+                <rect class="fig-cell-off" x="210" y="123" width="24" height="24"/><rect class="fig-cell-off" x="236" y="123" width="24" height="24"/><rect class="fig-cell-on"  x="262" y="123" width="24" height="24"/>
+                <path class="fig-bracket" d="M205,67 L201,67 L201,151 L205,151"/><path class="fig-bracket" d="M291,67 L295,67 L295,151 L291,151"/>
+                <text class="fig-lbl" x="248" y="176" text-anchor="middle" font-size="17">U</text>
+                <text class="fig-anno" x="248" y="196" text-anchor="middle" font-size="12">(I−U′)⁻¹ = Jₛ(e)</text>
+              </g>
+              <text class="fig-lbl" x="307" y="114" text-anchor="middle" font-size="16">×</text>
+              <!-- P (permutation) -->
+              <g>
+                <rect class="fig-cell-off" x="331" y="71"  width="24" height="24"/><rect class="fig-cell-off" x="357" y="71"  width="24" height="24"/><rect class="fig-cell-on"  x="383" y="71"  width="24" height="24"/>
+                <rect class="fig-cell-off" x="331" y="97"  width="24" height="24"/><rect class="fig-cell-on"  x="357" y="97"  width="24" height="24"/><rect class="fig-cell-off" x="383" y="97"  width="24" height="24"/>
+                <rect class="fig-cell-on"  x="331" y="123" width="24" height="24"/><rect class="fig-cell-off" x="357" y="123" width="24" height="24"/><rect class="fig-cell-off" x="383" y="123" width="24" height="24"/>
+                <path class="fig-bracket" d="M326,67 L322,67 L322,151 L326,151"/><path class="fig-bracket" d="M412,67 L416,67 L416,151 L412,151"/>
+                <text class="fig-lbl" x="369" y="176" text-anchor="middle" font-size="17">P</text>
+                <text class="fig-anno" x="369" y="196" text-anchor="middle" font-size="12">relabel sources</text>
+              </g>
+              <!-- implication to stable causal graph -->
+              <text class="fig-lbl" x="452" y="114" font-size="22">⟹</text>
+              <text class="fig-anno" x="492" y="104" font-size="13">two stacked DAGs:</text>
+              <text class="fig-anno" x="492" y="124" font-size="13">a stable causal graph</text>
+            </svg>
+            <figcaption>An invertible square Jacobian always factors as $J_g(e)=L\,U\,P$. Fixing the scaling and the permutation $P$ makes this factorization unique. The upper-triangular $U$ becomes a DAG over the sources, $J_s(e)=(I-U')^{-1}$, and the lower-triangular $L$ becomes a DAG over the observations, $J_x(s)=(I-L')^{-1}$. Two triangular factors are two stacked DAGs, which is exactly a stable causal graph.</figcaption>
+          </figure>
+
           <p>where $U'$ is strictly upper triangular and $L'$ is strictly lower triangular (both are DAG adjacency matrices). Since $J_s(e)$ and $J_x(s)$ are bounded, the resulting causal system is <strong>stable</strong>. Self-loops can be freely introduced following <em>Lacerda et al., 2012</em>.</p>
         </div>
 
@@ -127,6 +224,48 @@
           <div class="math-block">$$B = \begin{bmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
           <p>Its Markov equivalence class contains DAGs with the same set of conditional independencies. The corresponding "super matrix" (union of all edges in the equivalence class) is:</p>
           <div class="math-block">$$\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}$$</div>
+
+          <figure>
+            <svg viewBox="0 0 600 260" role="img" aria-label="Markov equivalence class of the chain and its super-graph">
+              <defs>
+                <marker id="a3" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 z" fill="currentColor"/></marker>
+              </defs>
+              <text class="fig-anno" x="300" y="20" text-anchor="middle" font-size="13">Markov equivalence class (same skeleton, no collider at x₂)</text>
+              <!-- G1: x1 -> x2 -> x3 -->
+              <line class="fig-mix" x1="60"  y1="78" x2="95"  y2="78" marker-end="url(#a3)"/>
+              <line class="fig-mix" x1="125" y1="78" x2="160" y2="78" marker-end="url(#a3)"/>
+              <circle class="fig-node" cx="45" cy="78" r="15"/><text class="fig-lbl" x="45" y="82" text-anchor="middle" font-size="12">x₁</text>
+              <circle class="fig-node" cx="110" cy="78" r="15"/><text class="fig-lbl" x="110" y="82" text-anchor="middle" font-size="12">x₂</text>
+              <circle class="fig-node" cx="175" cy="78" r="15"/><text class="fig-lbl" x="175" y="82" text-anchor="middle" font-size="12">x₃</text>
+              <text class="fig-anno" x="110" y="118" text-anchor="middle" font-size="12">x₁→x₂→x₃</text>
+              <!-- G2: x1 <- x2 -> x3 -->
+              <line class="fig-mix" x1="295" y1="78" x2="260" y2="78" marker-end="url(#a3)"/>
+              <line class="fig-mix" x1="325" y1="78" x2="360" y2="78" marker-end="url(#a3)"/>
+              <circle class="fig-node" cx="245" cy="78" r="15"/><text class="fig-lbl" x="245" y="82" text-anchor="middle" font-size="12">x₁</text>
+              <circle class="fig-node" cx="310" cy="78" r="15"/><text class="fig-lbl" x="310" y="82" text-anchor="middle" font-size="12">x₂</text>
+              <circle class="fig-node" cx="375" cy="78" r="15"/><text class="fig-lbl" x="375" y="82" text-anchor="middle" font-size="12">x₃</text>
+              <text class="fig-anno" x="310" y="118" text-anchor="middle" font-size="12">x₁←x₂→x₃</text>
+              <!-- G3: x1 <- x2 <- x3 -->
+              <line class="fig-mix" x1="495" y1="78" x2="460" y2="78" marker-end="url(#a3)"/>
+              <line class="fig-mix" x1="560" y1="78" x2="525" y2="78" marker-end="url(#a3)"/>
+              <circle class="fig-node" cx="445" cy="78" r="15"/><text class="fig-lbl" x="445" y="82" text-anchor="middle" font-size="12">x₁</text>
+              <circle class="fig-node" cx="510" cy="78" r="15"/><text class="fig-lbl" x="510" y="82" text-anchor="middle" font-size="12">x₂</text>
+              <circle class="fig-node" cx="575" cy="78" r="15"/><text class="fig-lbl" x="575" y="82" text-anchor="middle" font-size="12">x₃</text>
+              <text class="fig-anno" x="510" y="118" text-anchor="middle" font-size="12">x₁←x₂←x₃</text>
+              <!-- union arrow -->
+              <line class="fig-mix" x1="300" y1="140" x2="300" y2="172" marker-end="url(#a3)"/>
+              <text class="fig-anno" x="318" y="162" font-size="12">union of edges</text>
+              <!-- super-graph: undirected skeleton -->
+              <line x1="250" y1="205" x2="285" y2="205" stroke="#1DB954" stroke-width="2"/>
+              <line x1="315" y1="205" x2="350" y2="205" stroke="#1DB954" stroke-width="2"/>
+              <circle class="fig-node" cx="235" cy="205" r="15"/><text class="fig-lbl" x="235" y="209" text-anchor="middle" font-size="12">x₁</text>
+              <circle class="fig-node" cx="300" cy="205" r="15"/><text class="fig-lbl" x="300" y="209" text-anchor="middle" font-size="12">x₂</text>
+              <circle class="fig-node" cx="365" cy="205" r="15"/><text class="fig-lbl" x="365" y="209" text-anchor="middle" font-size="12">x₃</text>
+              <text class="fig-anno" x="300" y="245" text-anchor="middle" font-size="12">super-graph: skeleton (union of all edges)</text>
+            </svg>
+            <figcaption>The chain $x_1\to x_2\to x_3$ shares its skeleton with two other orientations that imply the same conditional independencies. These three DAGs form one Markov equivalence class. Their union of edges is the undirected "super-graph". Direction is ambiguous from observational data, yet the stable causal graph structure still guarantees complete nonlinear ICA identifiability.</figcaption>
+          </figure>
+
           <p>This illustrates that while the causal direction within a Markov equivalence class is ambiguous from observational data alone, the stable causal graph structure still guarantees complete nonlinear ICA identifiability.</p>
         </div>
       </section>
