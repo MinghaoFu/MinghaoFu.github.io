@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../style-spotify.css">
+  <link rel="stylesheet" href="../../style-spotify.css?v=20260530a">
   <script>
   MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] } };
   (function(){
@@ -239,7 +239,7 @@
       <section class="post-section">
         <h2>7. SCAR: embodiment is just one instance of the nuisance</h2>
         <div class="post-card">
-          <p>Make the abstract nuisance concrete and you get <a href="https://arxiv.org/abs/2605.16412" target="_blank" rel="noopener">SCAR</a>. Different robots, such as a Franka arm, an ALOHA bimanual rig, or a Procgen agent, execute the <em>same</em> manipulation skill with their own action vocabularies. The embodiment ID $e$ is the textbook nuisance: you want a unified latent action that captures the controllable change shared across bodies, blind to which body produced it. Set $u=e$, run the gradient-reversal game on an embodiment classifier, and the theorem above yields a unified latent action space invariant to embodiment.</p>
+          <p>Make the abstract nuisance concrete and you get <a href="https://arxiv.org/abs/2605.16412" target="_blank" rel="noopener">SCAR</a> (Liu et al., 2026), a cross-embodiment robotics paper led by Hongjia Liu that this analysis is drawn from. Different robots, such as a Franka arm, an ALOHA bimanual rig, or a Procgen agent, execute the <em>same</em> manipulation skill with their own action vocabularies. The embodiment ID $e$ is the textbook nuisance: you want a unified latent action that captures the controllable change shared across bodies, blind to which body produced it. Set $u=e$, run the gradient-reversal game on an embodiment classifier, and the theorem above yields a unified latent action space invariant to embodiment.</p>
           <figure>
             <img src="pipeline.png" alt="SCAR pipeline: inverse-dynamics encoder, gradient-reversal embodiment classifier, forward dynamics model">
             <figcaption>SCAR instantiates the two stages. An inverse-dynamics model recovers an action coordinate from visual transitions (Stage 1, $\tilde a=\rho(a)$), and a linear encoder trained against an embodiment classifier through a gradient-reversal layer projects it into $V^\perp$ (Stage 2). Embodiment $e$ is one instance of the generic nuisance $u$.</figcaption>
