@@ -36,10 +36,10 @@
   <div id="tcwm-navbar" class="navbar-menu">
     <div class="navbar-start nav-center">
       <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#task-centric">Task-Centric</a>
       <a class="navbar-item" href="#datasets">Environments</a>
       <a class="navbar-item" href="#method">Method</a>
       <a class="navbar-item" href="#results">Results</a>
-      <a class="navbar-item" href="#task-centric">Task-Centric</a>
       <a class="navbar-item" href="#rollouts">Open-Loop Rollout</a>
       <a class="navbar-item" href="#analysis">Analysis</a>
     </div>
@@ -105,6 +105,66 @@
     <p class="figure-caption"><strong>Figure 2: Robomimic highlight.</strong> (1) Success rate. (2) Latent-rollout MSE. (3&ndash;4) Linear probes on <code>Lift</code> and <code>Can</code>. (5) TC-WM avoids the latent collapse seen when rolling out directly on foundation embeddings.</p>
   </div>
 </section>
+
+<section class="section" id="task-centric">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Where the Task-Centric Latent Acts</h2>
+    <p class="section-lede">An interactive look at <em>what the task-centric latent encodes</em>. We perturb a model's latent along its dominant direction, decode, and map <em>where</em> that variation lands in the image. Compare <strong>TC-WM</strong> (task-centric, proprio-aligned), the same model with the <strong>alignment removed</strong>, and <strong>DINO-WM</strong> (dynamics on the raw foundation embedding, no task-centric sub-space). Drag the sliders; switch the latent block for the two TC-WM panels.</p>
+    <div class="fp-widget">
+      <div class="fp-ctrl">
+        <label>task <select id="fp_task"><option value="square" selected>Square</option><option value="lift">Lift</option><option value="can">Can</option></select></label>
+        <label>block (TC-WM) <select id="fp_block"><option value="z">z &nbsp;full</option><option value="s" selected>z&#8203;ˢ &nbsp;task-centric</option><option value="c">z&#8203;ᶜ &nbsp;complement</option></select></label>
+        <label>threshold <span class="fp-val" id="fp_thrv">0.12</span><input type="range" id="fp_thr" min="0" max="0.90" step="0.01" value="0.12"></label>
+        <label>gamma <span class="fp-val" id="fp_gamv">0.80</span><input type="range" id="fp_gam" min="0.30" max="1.80" step="0.05" value="0.80"></label>
+        <label>gain <span class="fp-val" id="fp_gainv">1.00</span><input type="range" id="fp_gain" min="0.50" max="2.50" step="0.05" value="1.00"></label>
+        <button id="fp_reset" type="button">reset</button>
+      </div>
+      <div class="fp-canv">
+        <figure><canvas id="fp_a" width="224" height="224"></canvas><figcaption>TC-WM &middot; task-centric</figcaption></figure>
+        <figure><canvas id="fp_n" width="224" height="224"></canvas><figcaption>TC-WM &middot; alignment removed</figcaption></figure>
+        <figure><canvas id="fp_d" width="224" height="224"></canvas><figcaption>DINO-WM</figcaption></figure>
+      </div>
+    </div>
+    <p class="figure-caption"><strong>Task-centric structure.</strong> On <code>Square</code> with the task-centric block z&#8203;ˢ, TC-WM concentrates its variation on the manipulated nut and the gripper and leaves the fixed peg dark; with the alignment removed, the same block also fires on the peg. The alignment is <em>partial</em> &mdash; it routes task structure into z&#8203;ˢ without imposing a hard z&#8203;ˢ/z&#8203;ᶜ split &mdash; so the effect is sharpest in z&#8203;ˢ and subtler in the full latent z. Quantitative results are in the paper.</p>
+  </div>
+</section>
+<style>
+.fp-widget{background:var(--bg-card);border:1px solid var(--rule);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow-card);margin-bottom:14px}
+.fp-ctrl{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;margin-bottom:18px}
+.fp-ctrl label{display:flex;flex-direction:column;gap:6px;font-family:var(--font-tag);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
+.fp-ctrl input[type=range]{width:140px;accent-color:var(--accent)}
+.fp-ctrl select{font-family:var(--font-body);font-size:13px;padding:6px 9px;border:1px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink)}
+.fp-val{color:var(--accent);font-weight:700;font-family:var(--font-mono)}
+#fp_reset{font-family:var(--font-mono);font-size:11px;padding:8px 13px;border:1px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink-muted);cursor:pointer}
+#fp_reset:hover{color:var(--ink);border-color:var(--accent)}
+.fp-canv{display:flex;gap:16px;flex-wrap:wrap}
+.fp-canv figure{margin:0;flex:1;min-width:190px}
+.fp-canv canvas{width:100%;max-width:300px;border:1px solid var(--rule);border-radius:10px;display:block;background:#15171b;margin:0 auto}
+.fp-canv figcaption{font-family:var(--font-mono);font-size:11px;font-weight:600;margin-top:8px;text-align:center;color:var(--ink-muted)}
+.fp-canv figure:nth-child(1) figcaption{color:var(--accent)}
+.fp-canv figure:nth-child(2) figcaption{color:#b5532b}
+</style>
+<script>
+(function(){
+const FP={"square": {"base": "./static/analysis/footprint/square__base.png", "dwbase": "./static/analysis/footprint/square__dwbase.png", "dw": "./static/analysis/footprint/square__dw.png", "z": {"a": "./static/analysis/footprint/square__z_a.png", "n": "./static/analysis/footprint/square__z_n.png"}, "s": {"a": "./static/analysis/footprint/square__s_a.png", "n": "./static/analysis/footprint/square__s_n.png"}, "c": {"a": "./static/analysis/footprint/square__c_a.png", "n": "./static/analysis/footprint/square__c_n.png"}}, "lift": {"base": "./static/analysis/footprint/lift__base.png", "dwbase": "./static/analysis/footprint/lift__dwbase.png", "dw": "./static/analysis/footprint/lift__dw.png", "z": {"a": "./static/analysis/footprint/lift__z_a.png", "n": "./static/analysis/footprint/lift__z_n.png"}, "s": {"a": "./static/analysis/footprint/lift__s_a.png", "n": "./static/analysis/footprint/lift__s_n.png"}, "c": {"a": "./static/analysis/footprint/lift__c_a.png", "n": "./static/analysis/footprint/lift__c_n.png"}}, "can": {"base": "./static/analysis/footprint/can__base.png", "dwbase": "./static/analysis/footprint/can__dwbase.png", "dw": "./static/analysis/footprint/can__dw.png", "z": {"a": "./static/analysis/footprint/can__z_a.png", "n": "./static/analysis/footprint/can__z_n.png"}, "s": {"a": "./static/analysis/footprint/can__s_a.png", "n": "./static/analysis/footprint/can__s_n.png"}, "c": {"a": "./static/analysis/footprint/can__c_a.png", "n": "./static/analysis/footprint/can__c_n.png"}}}; const LUT=[[0, 0, 3], [0, 0, 4], [0, 0, 6], [1, 0, 7], [1, 1, 9], [1, 1, 11], [2, 1, 14], [2, 2, 16], [3, 2, 18], [4, 3, 20], [4, 3, 22], [5, 4, 24], [6, 4, 27], [7, 5, 29], [8, 6, 31], [9, 6, 33], [10, 7, 35], [11, 7, 38], [13, 8, 40], [14, 8, 42], [15, 9, 45], [16, 9, 47], [18, 10, 50], [19, 10, 52], [20, 11, 54], [22, 11, 57], [23, 11, 59], [25, 11, 62], [26, 11, 64], [28, 12, 67], [29, 12, 69], [31, 12, 71], [32, 12, 74], [34, 11, 76], [36, 11, 78], [38, 11, 80], [39, 11, 82], [41, 11, 84], [43, 10, 86], [45, 10, 88], [46, 10, 90], [48, 10, 92], [50, 9, 93], [52, 9, 95], [53, 9, 96], [55, 9, 97], [57, 9, 98], [59, 9, 100], [60, 9, 101], [62, 9, 102], [64, 9, 102], [65, 9, 103], [67, 10, 104], [69, 10, 105], [70, 10, 105], [72, 11, 106], [74, 11, 106], [75, 12, 107], [77, 12, 107], [79, 13, 108], [80, 13, 108], [82, 14, 108], [83, 14, 109], [85, 15, 109], [87, 15, 109], [88, 16, 109], [90, 17, 109], [91, 17, 110], [93, 18, 110], [95, 18, 110], [96, 19, 110], [98, 20, 110], [99, 20, 110], [101, 21, 110], [102, 21, 110], [104, 22, 110], [106, 23, 110], [107, 23, 110], [109, 24, 110], [110, 24, 110], [112, 25, 110], [114, 25, 109], [115, 26, 109], [117, 27, 109], [118, 27, 109], [120, 28, 109], [122, 28, 109], [123, 29, 108], [125, 29, 108], [126, 30, 108], [128, 31, 107], [129, 31, 107], [131, 32, 107], [133, 32, 106], [134, 33, 106], [136, 33, 106], [137, 34, 105], [139, 34, 105], [141, 35, 105], [142, 36, 104], [144, 36, 104], [145, 37, 103], [147, 37, 103], [149, 38, 102], [150, 38, 102], [152, 39, 101], [153, 40, 100], [155, 40, 100], [156, 41, 99], [158, 41, 99], [160, 42, 98], [161, 43, 97], [163, 43, 97], [164, 44, 96], [166, 44, 95], [167, 45, 95], [169, 46, 94], [171, 46, 93], [172, 47, 92], [174, 48, 91], [175, 49, 91], [177, 49, 90], [178, 50, 89], [180, 51, 88], [181, 51, 87], [183, 52, 86], [184, 53, 86], [186, 54, 85], [187, 55, 84], [189, 55, 83], [190, 56, 82], [191, 57, 81], [193, 58, 80], [194, 59, 79], [196, 60, 78], [197, 61, 77], [199, 62, 76], [200, 62, 75], [201, 63, 74], [203, 64, 73], [204, 65, 72], [205, 66, 71], [207, 68, 70], [208, 69, 68], [209, 70, 67], [210, 71, 66], [212, 72, 65], [213, 73, 64], [214, 74, 63], [215, 75, 62], [217, 77, 61], [218, 78, 59], [219, 79, 58], [220, 80, 57], [221, 82, 56], [222, 83, 55], [223, 84, 54], [224, 86, 52], [226, 87, 51], [227, 88, 50], [228, 90, 49], [229, 91, 48], [230, 92, 46], [230, 94, 45], [231, 95, 44], [232, 97, 43], [233, 98, 42], [234, 100, 40], [235, 101, 39], [236, 103, 38], [237, 104, 37], [237, 106, 35], [238, 108, 34], [239, 109, 33], [240, 111, 31], [240, 112, 30], [241, 114, 29], [242, 116, 28], [242, 117, 26], [243, 119, 25], [243, 121, 24], [244, 122, 22], [245, 124, 21], [245, 126, 20], [246, 128, 18], [246, 129, 17], [247, 131, 16], [247, 133, 14], [248, 135, 13], [248, 136, 12], [248, 138, 11], [249, 140, 9], [249, 142, 8], [249, 144, 8], [250, 145, 7], [250, 147, 6], [250, 149, 6], [250, 151, 6], [251, 153, 6], [251, 155, 6], [251, 157, 6], [251, 158, 7], [251, 160, 7], [251, 162, 8], [251, 164, 10], [251, 166, 11], [251, 168, 13], [251, 170, 14], [251, 172, 16], [251, 174, 18], [251, 176, 20], [251, 177, 22], [251, 179, 24], [251, 181, 26], [251, 183, 28], [251, 185, 30], [250, 187, 33], [250, 189, 35], [250, 191, 37], [250, 193, 40], [249, 195, 42], [249, 197, 44], [249, 199, 47], [248, 201, 49], [248, 203, 52], [248, 205, 55], [247, 207, 58], [247, 209, 60], [246, 211, 63], [246, 213, 66], [245, 215, 69], [245, 217, 72], [244, 219, 75], [244, 220, 79], [243, 222, 82], [243, 224, 86], [243, 226, 89], [242, 228, 93], [242, 230, 96], [241, 232, 100], [241, 233, 104], [241, 235, 108], [241, 237, 112], [241, 238, 116], [241, 240, 121], [241, 242, 125], [242, 243, 129], [242, 244, 133], [243, 246, 137], [244, 247, 141], [245, 248, 145], [246, 250, 149], [247, 251, 153], [249, 252, 157], [250, 253, 160], [252, 254, 164]]; const cache={};
+function load(u){return new Promise(r=>{const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{const c=document.createElement('canvas');c.width=224;c.height=224;const x=c.getContext('2d');x.drawImage(im,0,0,224,224);r(x.getImageData(0,0,224,224));};im.src=u;});}
+async function hyd(o){if(typeof o==='string')return await load(o);if(o&&typeof o==='object'){const k=Object.keys(o),v=await Promise.all(k.map(x=>hyd(o[x])));const r={};k.forEach((x,i)=>r[x]=v[i]);return r;}return o;}
+async function task(t){if(!cache[t])cache[t]=await hyd(FP[t]);return cache[t];}
+function draw(id,std,base,thr,gam,gain){
+  const cx=document.getElementById(id).getContext('2d'),out=cx.createImageData(224,224),O=out.data,S=std.data,B=base.data,dn=Math.max(1e-6,1-thr);
+  for(let i=0;i<224*224;i++){let nm=(S[i*4]/255-thr)/dn;nm=nm<0?0:(nm>1?1:nm);let g=Math.pow(nm,gam)*gain;g=g>1?1:g;const c=LUT[Math.round(g*255)],al=0.25+0.95*g,j=i*4;
+  O[j]=Math.min(255,B[j]*0.40+c[0]*al);O[j+1]=Math.min(255,B[j+1]*0.40+c[1]*al);O[j+2]=Math.min(255,B[j+2]*0.40+c[2]*al);O[j+3]=255;}
+  cx.putImageData(out,0,0);}
+async function render(){
+  const t=document.getElementById('fp_task').value,bk=document.getElementById('fp_block').value;
+  const thr=+document.getElementById('fp_thr').value,gam=+document.getElementById('fp_gam').value,gain=+document.getElementById('fp_gain').value;
+  document.getElementById('fp_thrv').textContent=thr.toFixed(2);document.getElementById('fp_gamv').textContent=gam.toFixed(2);document.getElementById('fp_gainv').textContent=gain.toFixed(2);
+  const d=await task(t);draw('fp_a',d[bk].a,d.base,thr,gam,gain);draw('fp_n',d[bk].n,d.base,thr,gam,gain);draw('fp_d',d.dw,d.dwbase,thr,gam,gain);}
+['fp_task','fp_block','fp_thr','fp_gam','fp_gain'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+document.getElementById('fp_reset').addEventListener('click',()=>{document.getElementById('fp_thr').value=0.12;document.getElementById('fp_gam').value=0.80;document.getElementById('fp_gain').value=1.00;render();});
+render();
+})();
+</script>
 
 <section class="section" id="datasets">
   <div class="container is-max-desktop">
@@ -181,67 +241,6 @@
     <p class="figure-caption"><strong>Unseen perturbations.</strong> Under additive Gaussian noise and per-channel color jitter never seen during training, TC-WM's open-loop rollout preserves cube position and manipulator silhouette at near-clean fidelity.</p>
   </div>
 </section>
-
-
-<section class="section" id="task-centric">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Where the Task-Centric Latent Acts</h2>
-    <p class="section-lede">An interactive look at <em>what the task-centric latent encodes</em>. We perturb a model's latent along its dominant direction, decode, and map <em>where</em> that variation lands in the image. Compare <strong>TC-WM</strong> (task-centric, proprio-aligned), the same model with the <strong>alignment removed</strong>, and <strong>DINO-WM</strong> (dynamics on the raw foundation embedding, no task-centric sub-space). Drag the sliders; switch the latent block for the two TC-WM panels.</p>
-    <div class="fp-widget">
-      <div class="fp-ctrl">
-        <label>task <select id="fp_task"><option value="square" selected>Square</option><option value="lift">Lift</option><option value="can">Can</option></select></label>
-        <label>block (TC-WM) <select id="fp_block"><option value="z">z &nbsp;full</option><option value="s" selected>z&#8203;ˢ &nbsp;task-centric</option><option value="c">z&#8203;ᶜ &nbsp;complement</option></select></label>
-        <label>threshold <span class="fp-val" id="fp_thrv">0.12</span><input type="range" id="fp_thr" min="0" max="0.90" step="0.01" value="0.12"></label>
-        <label>gamma <span class="fp-val" id="fp_gamv">0.80</span><input type="range" id="fp_gam" min="0.30" max="1.80" step="0.05" value="0.80"></label>
-        <label>gain <span class="fp-val" id="fp_gainv">1.00</span><input type="range" id="fp_gain" min="0.50" max="2.50" step="0.05" value="1.00"></label>
-        <button id="fp_reset" type="button">reset</button>
-      </div>
-      <div class="fp-canv">
-        <figure><canvas id="fp_a" width="224" height="224"></canvas><figcaption>TC-WM &middot; task-centric</figcaption></figure>
-        <figure><canvas id="fp_n" width="224" height="224"></canvas><figcaption>TC-WM &middot; alignment removed</figcaption></figure>
-        <figure><canvas id="fp_d" width="224" height="224"></canvas><figcaption>DINO-WM</figcaption></figure>
-      </div>
-    </div>
-    <p class="figure-caption"><strong>Task-centric structure.</strong> On <code>Square</code> with the task-centric block z&#8203;ˢ, TC-WM concentrates its variation on the manipulated nut and the gripper and leaves the fixed peg dark; with the alignment removed, the same block also fires on the peg. The alignment is <em>partial</em> &mdash; it routes task structure into z&#8203;ˢ without imposing a hard z&#8203;ˢ/z&#8203;ᶜ split &mdash; so the effect is sharpest in z&#8203;ˢ and subtler in the full latent z. Quantitative results are in the paper.</p>
-  </div>
-</section>
-<style>
-.fp-widget{background:var(--bg-card);border:1px solid var(--rule);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow-card);margin-bottom:14px}
-.fp-ctrl{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;margin-bottom:18px}
-.fp-ctrl label{display:flex;flex-direction:column;gap:6px;font-family:var(--font-tag);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
-.fp-ctrl input[type=range]{width:140px;accent-color:var(--accent)}
-.fp-ctrl select{font-family:var(--font-body);font-size:13px;padding:6px 9px;border:1px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink)}
-.fp-val{color:var(--accent);font-weight:700;font-family:var(--font-mono)}
-#fp_reset{font-family:var(--font-mono);font-size:11px;padding:8px 13px;border:1px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink-muted);cursor:pointer}
-#fp_reset:hover{color:var(--ink);border-color:var(--accent)}
-.fp-canv{display:flex;gap:16px;flex-wrap:wrap}
-.fp-canv figure{margin:0;flex:1;min-width:190px}
-.fp-canv canvas{width:100%;max-width:300px;border:1px solid var(--rule);border-radius:10px;display:block;background:#15171b;margin:0 auto}
-.fp-canv figcaption{font-family:var(--font-mono);font-size:11px;font-weight:600;margin-top:8px;text-align:center;color:var(--ink-muted)}
-.fp-canv figure:nth-child(1) figcaption{color:var(--accent)}
-.fp-canv figure:nth-child(2) figcaption{color:#b5532b}
-</style>
-<script>
-(function(){
-const FP={"square": {"base": "./static/analysis/footprint/square__base.png", "dwbase": "./static/analysis/footprint/square__dwbase.png", "dw": "./static/analysis/footprint/square__dw.png", "z": {"a": "./static/analysis/footprint/square__z_a.png", "n": "./static/analysis/footprint/square__z_n.png"}, "s": {"a": "./static/analysis/footprint/square__s_a.png", "n": "./static/analysis/footprint/square__s_n.png"}, "c": {"a": "./static/analysis/footprint/square__c_a.png", "n": "./static/analysis/footprint/square__c_n.png"}}, "lift": {"base": "./static/analysis/footprint/lift__base.png", "dwbase": "./static/analysis/footprint/lift__dwbase.png", "dw": "./static/analysis/footprint/lift__dw.png", "z": {"a": "./static/analysis/footprint/lift__z_a.png", "n": "./static/analysis/footprint/lift__z_n.png"}, "s": {"a": "./static/analysis/footprint/lift__s_a.png", "n": "./static/analysis/footprint/lift__s_n.png"}, "c": {"a": "./static/analysis/footprint/lift__c_a.png", "n": "./static/analysis/footprint/lift__c_n.png"}}, "can": {"base": "./static/analysis/footprint/can__base.png", "dwbase": "./static/analysis/footprint/can__dwbase.png", "dw": "./static/analysis/footprint/can__dw.png", "z": {"a": "./static/analysis/footprint/can__z_a.png", "n": "./static/analysis/footprint/can__z_n.png"}, "s": {"a": "./static/analysis/footprint/can__s_a.png", "n": "./static/analysis/footprint/can__s_n.png"}, "c": {"a": "./static/analysis/footprint/can__c_a.png", "n": "./static/analysis/footprint/can__c_n.png"}}}; const LUT=[[0, 0, 3], [0, 0, 4], [0, 0, 6], [1, 0, 7], [1, 1, 9], [1, 1, 11], [2, 1, 14], [2, 2, 16], [3, 2, 18], [4, 3, 20], [4, 3, 22], [5, 4, 24], [6, 4, 27], [7, 5, 29], [8, 6, 31], [9, 6, 33], [10, 7, 35], [11, 7, 38], [13, 8, 40], [14, 8, 42], [15, 9, 45], [16, 9, 47], [18, 10, 50], [19, 10, 52], [20, 11, 54], [22, 11, 57], [23, 11, 59], [25, 11, 62], [26, 11, 64], [28, 12, 67], [29, 12, 69], [31, 12, 71], [32, 12, 74], [34, 11, 76], [36, 11, 78], [38, 11, 80], [39, 11, 82], [41, 11, 84], [43, 10, 86], [45, 10, 88], [46, 10, 90], [48, 10, 92], [50, 9, 93], [52, 9, 95], [53, 9, 96], [55, 9, 97], [57, 9, 98], [59, 9, 100], [60, 9, 101], [62, 9, 102], [64, 9, 102], [65, 9, 103], [67, 10, 104], [69, 10, 105], [70, 10, 105], [72, 11, 106], [74, 11, 106], [75, 12, 107], [77, 12, 107], [79, 13, 108], [80, 13, 108], [82, 14, 108], [83, 14, 109], [85, 15, 109], [87, 15, 109], [88, 16, 109], [90, 17, 109], [91, 17, 110], [93, 18, 110], [95, 18, 110], [96, 19, 110], [98, 20, 110], [99, 20, 110], [101, 21, 110], [102, 21, 110], [104, 22, 110], [106, 23, 110], [107, 23, 110], [109, 24, 110], [110, 24, 110], [112, 25, 110], [114, 25, 109], [115, 26, 109], [117, 27, 109], [118, 27, 109], [120, 28, 109], [122, 28, 109], [123, 29, 108], [125, 29, 108], [126, 30, 108], [128, 31, 107], [129, 31, 107], [131, 32, 107], [133, 32, 106], [134, 33, 106], [136, 33, 106], [137, 34, 105], [139, 34, 105], [141, 35, 105], [142, 36, 104], [144, 36, 104], [145, 37, 103], [147, 37, 103], [149, 38, 102], [150, 38, 102], [152, 39, 101], [153, 40, 100], [155, 40, 100], [156, 41, 99], [158, 41, 99], [160, 42, 98], [161, 43, 97], [163, 43, 97], [164, 44, 96], [166, 44, 95], [167, 45, 95], [169, 46, 94], [171, 46, 93], [172, 47, 92], [174, 48, 91], [175, 49, 91], [177, 49, 90], [178, 50, 89], [180, 51, 88], [181, 51, 87], [183, 52, 86], [184, 53, 86], [186, 54, 85], [187, 55, 84], [189, 55, 83], [190, 56, 82], [191, 57, 81], [193, 58, 80], [194, 59, 79], [196, 60, 78], [197, 61, 77], [199, 62, 76], [200, 62, 75], [201, 63, 74], [203, 64, 73], [204, 65, 72], [205, 66, 71], [207, 68, 70], [208, 69, 68], [209, 70, 67], [210, 71, 66], [212, 72, 65], [213, 73, 64], [214, 74, 63], [215, 75, 62], [217, 77, 61], [218, 78, 59], [219, 79, 58], [220, 80, 57], [221, 82, 56], [222, 83, 55], [223, 84, 54], [224, 86, 52], [226, 87, 51], [227, 88, 50], [228, 90, 49], [229, 91, 48], [230, 92, 46], [230, 94, 45], [231, 95, 44], [232, 97, 43], [233, 98, 42], [234, 100, 40], [235, 101, 39], [236, 103, 38], [237, 104, 37], [237, 106, 35], [238, 108, 34], [239, 109, 33], [240, 111, 31], [240, 112, 30], [241, 114, 29], [242, 116, 28], [242, 117, 26], [243, 119, 25], [243, 121, 24], [244, 122, 22], [245, 124, 21], [245, 126, 20], [246, 128, 18], [246, 129, 17], [247, 131, 16], [247, 133, 14], [248, 135, 13], [248, 136, 12], [248, 138, 11], [249, 140, 9], [249, 142, 8], [249, 144, 8], [250, 145, 7], [250, 147, 6], [250, 149, 6], [250, 151, 6], [251, 153, 6], [251, 155, 6], [251, 157, 6], [251, 158, 7], [251, 160, 7], [251, 162, 8], [251, 164, 10], [251, 166, 11], [251, 168, 13], [251, 170, 14], [251, 172, 16], [251, 174, 18], [251, 176, 20], [251, 177, 22], [251, 179, 24], [251, 181, 26], [251, 183, 28], [251, 185, 30], [250, 187, 33], [250, 189, 35], [250, 191, 37], [250, 193, 40], [249, 195, 42], [249, 197, 44], [249, 199, 47], [248, 201, 49], [248, 203, 52], [248, 205, 55], [247, 207, 58], [247, 209, 60], [246, 211, 63], [246, 213, 66], [245, 215, 69], [245, 217, 72], [244, 219, 75], [244, 220, 79], [243, 222, 82], [243, 224, 86], [243, 226, 89], [242, 228, 93], [242, 230, 96], [241, 232, 100], [241, 233, 104], [241, 235, 108], [241, 237, 112], [241, 238, 116], [241, 240, 121], [241, 242, 125], [242, 243, 129], [242, 244, 133], [243, 246, 137], [244, 247, 141], [245, 248, 145], [246, 250, 149], [247, 251, 153], [249, 252, 157], [250, 253, 160], [252, 254, 164]]; const cache={};
-function load(u){return new Promise(r=>{const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{const c=document.createElement('canvas');c.width=224;c.height=224;const x=c.getContext('2d');x.drawImage(im,0,0,224,224);r(x.getImageData(0,0,224,224));};im.src=u;});}
-async function hyd(o){if(typeof o==='string')return await load(o);if(o&&typeof o==='object'){const k=Object.keys(o),v=await Promise.all(k.map(x=>hyd(o[x])));const r={};k.forEach((x,i)=>r[x]=v[i]);return r;}return o;}
-async function task(t){if(!cache[t])cache[t]=await hyd(FP[t]);return cache[t];}
-function draw(id,std,base,thr,gam,gain){
-  const cx=document.getElementById(id).getContext('2d'),out=cx.createImageData(224,224),O=out.data,S=std.data,B=base.data,dn=Math.max(1e-6,1-thr);
-  for(let i=0;i<224*224;i++){let nm=(S[i*4]/255-thr)/dn;nm=nm<0?0:(nm>1?1:nm);let g=Math.pow(nm,gam)*gain;g=g>1?1:g;const c=LUT[Math.round(g*255)],al=0.25+0.95*g,j=i*4;
-  O[j]=Math.min(255,B[j]*0.40+c[0]*al);O[j+1]=Math.min(255,B[j+1]*0.40+c[1]*al);O[j+2]=Math.min(255,B[j+2]*0.40+c[2]*al);O[j+3]=255;}
-  cx.putImageData(out,0,0);}
-async function render(){
-  const t=document.getElementById('fp_task').value,bk=document.getElementById('fp_block').value;
-  const thr=+document.getElementById('fp_thr').value,gam=+document.getElementById('fp_gam').value,gain=+document.getElementById('fp_gain').value;
-  document.getElementById('fp_thrv').textContent=thr.toFixed(2);document.getElementById('fp_gamv').textContent=gam.toFixed(2);document.getElementById('fp_gainv').textContent=gain.toFixed(2);
-  const d=await task(t);draw('fp_a',d[bk].a,d.base,thr,gam,gain);draw('fp_n',d[bk].n,d.base,thr,gam,gain);draw('fp_d',d.dw,d.dwbase,thr,gam,gain);}
-['fp_task','fp_block','fp_thr','fp_gam','fp_gain'].forEach(id=>document.getElementById(id).addEventListener('input',render));
-document.getElementById('fp_reset').addEventListener('click',()=>{document.getElementById('fp_thr').value=0.12;document.getElementById('fp_gam').value=0.80;document.getElementById('fp_gain').value=1.00;render();});
-render();
-})();
-</script>
 
 
 <section class="section" id="rollouts">
