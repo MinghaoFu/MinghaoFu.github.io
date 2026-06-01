@@ -13,6 +13,8 @@ export const me = {
   // Edit base any time; the counter (counterapi.dev) handles the deltas.
   monthlyReadersBase: 12847,
   tagline: "I work on representation learning.",
+  // Shown obfuscated ([at]/[dot]) in the About card to deter scrapers.
+  contact: "isminghaofu [at] gmail [dot] com",
   bio: [
     'Ph.D. student at the Halıcıoğlu Data Science Institute, <a href="https://www.ucsd.edu/">UC San Diego</a>, advised by <a href="https://biweihuang.com/">Biwei Huang</a>.',
     'Previously M.S. at <a href="https://mbzuai.ac.ae/">MBZUAI</a>, visiting student at <a href="https://www.cmu.edu/">CMU</a> with <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>, <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>, and <a href="https://econ.jhu.edu/directory/yingyao-hu/">Yingyao Hu</a>. B.S. from <a href="https://en.uestc.edu.cn/">UESTC</a>, time at Shanghai AI Lab.',
