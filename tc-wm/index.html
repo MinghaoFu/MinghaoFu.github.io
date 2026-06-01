@@ -81,10 +81,10 @@
 
 
 
+
 <section class="section" id="task-centric">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Where the Task-Centric Latent Acts</h2>
-    <p class="section-lede">An interactive look at <em>what the task-centric latent encodes</em>. We perturb a model's latent along its dominant direction, decode, and map <em>where</em> that variation lands in the image. The clip in the corner shows the full task trajectory &mdash; the goal &mdash; so you can judge whether the highlighted structure is the task-relevant one. Compare <strong>TC-WM</strong> (task-centric, proprio-aligned), the same model with the <strong>alignment removed</strong>, and <strong>DINO-WM</strong> (raw foundation embedding, no task-centric sub-space).</p>
     <div class="fp-widget">
       <div class="fp-head">
         <div class="fp-ctrl">
@@ -103,7 +103,7 @@
         <figure><canvas id="fp_d" width="224" height="224"></canvas><figcaption>DINO-WM</figcaption></figure>
       </div>
     </div>
-    <p class="figure-caption"><strong>Task-centric structure.</strong> On <code>Square</code> with the task-centric block z&#8203;ˢ, TC-WM concentrates its variation on the manipulated nut and the gripper and leaves the fixed peg dark; with the alignment removed, the same block also fires on the peg. The alignment is <em>partial</em> &mdash; it routes task structure into z&#8203;ˢ without imposing a hard z&#8203;ˢ/z&#8203;ᶜ split &mdash; so the effect is sharpest in z&#8203;ˢ and subtler in the full latent z. Quantitative results are in the paper.</p>
+    <p class="figure-caption"><strong>Where the task-centric latent acts.</strong> We perturb each model's latent and map where the change lands. TC-WM's task-centric block z&#8203;ˢ stays on the manipulated object (<code>Square</code>: nut&nbsp;+&nbsp;gripper) and leaves distractors like the peg dark; removing the alignment &mdash; or using DINO-WM's raw embedding &mdash; spreads it wider. The corner clip shows the task goal.</p>
   </div>
 </section>
 <style>
