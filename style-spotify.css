@@ -930,6 +930,8 @@ input{font:inherit;color:inherit}
 .about-card .bio p{margin-bottom:10px}
 .about-card .bio a{color:var(--link);font-weight:500}
 .about-card .bio a:hover{text-decoration:underline}
+.about-card .contact{margin-top:14px;font-size:14px;color:var(--text-sub)}
+.about-card .contact span{color:var(--text);font-weight:500;letter-spacing:.01em}
 
 /* ============ Education timeline (Spotify-style row) ============ */
 .timeline-section{display:grid;grid-template-columns:1fr 1fr;gap:24px}
