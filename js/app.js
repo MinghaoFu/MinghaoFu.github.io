@@ -362,6 +362,7 @@ function renderHome(view){
             <div class="name">${escapeHtml(me.name)}</div>
             <div class="role">${escapeHtml(me.role)}</div>
             <div class="bio">${me.bio.map(p => `<p>${p}</p>`).join("")}</div>
+            ${me.contact ? `<div class="contact">Email: <span>${escapeHtml(me.contact)}</span></div>` : ""}
           </div>
         </div>
       </section>
