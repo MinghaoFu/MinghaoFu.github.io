@@ -35,8 +35,8 @@
   </div>
   <div id="tcwm-navbar" class="navbar-menu">
     <div class="navbar-start nav-center">
-      <a class="navbar-item" href="#abstract">Abstract</a>
       <a class="navbar-item" href="#task-centric">Task-Centric</a>
+      <a class="navbar-item" href="#abstract">Abstract</a>
       <a class="navbar-item" href="#datasets">Environments</a>
       <a class="navbar-item" href="#method">Method</a>
       <a class="navbar-item" href="#results">Results</a>
@@ -75,34 +75,6 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="abstract">
-  <div class="container is-max-desktop">
-    <div class="abstract-block">
-      <h2 class="title is-3 has-text-centered">Abstract</h2>
-      <p class="abstract-text">
-        World models enable agents to predict future dynamics conditioned on actions, making the choice of latent representation central to planning and control. Such representations are often either learned directly from pixels with limited semantic structure or inherited from frozen visual foundation models with excessive task-irrelevant detail, yielding state spaces that are poorly matched to downstream planning and control. This is especially challenging in reward-free offline settings, where the model must learn from fixed trajectories without reward supervision or online interaction.
-      </p>
-      <p class="abstract-text">
-        To address this, we propose <strong>TC-WM</strong>, a framework for turning foundation-model embeddings into compact, task-sufficient world representations. The key design is to treat the pretrained embedding space as a semantic scaffold rather than as the final state space: TC-WM linearly projects high-dimensional visual embeddings into a compact latent as the dynamic space, aligns a subspace with the agent's physical state via contrastive learning, and reconstructs embeddings to preserve useful visual structure. This combines the generality of foundation features with the controllability of task-centric dynamics. Theoretically, we show that TC-WM suffices to identify the task-centric latent factors up to a simple transformation. Empirically, TC-WM enables test-time planning across diverse environments (<em>e.g.</em>, <code>Robomimic</code> and <code>D4RL</code>), achieving better world-modeling quality and more precise control than state-of-the-art approaches.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="section figure-teaser">
-  <div class="container is-max-desktop">
-    <img class="figure-img" src="./static/figures/png/world_model_variants.png" alt="Comparison of world-model paradigms (a)-(c) and TC-WM (d)-(e)">
-    <p class="figure-caption"><strong>Figure 1: Comparison of world-model paradigms.</strong> <em>(a)</em> Generative WM (MDN-RNN, IRIS) — predict pixels directly. <em>(b)</em> Latent WM (TD-MPC, MuZero) — predict in a learned latent. <em>(c)</em> Embedding WM (DINO-WM, V-JEPA) — predict in a frozen foundation embedding. <em>(d)</em> <strong>TC-WM dynamics</strong> — predict in a compact latent <em>inside</em> the embedding. <em>(e)</em> <strong>Task-centric structure</strong> — align <span style="font-style:italic">z<sup>s</sup></span> with proprioception, anchor <span style="font-style:italic">z<sup>c</sup></span> via embedding reconstruction.</p>
-  </div>
-</section>
-
-<section class="section figure-teaser">
-  <div class="container is-max-desktop">
-    <img class="figure-img" src="./static/figures/png/teaser_five_panel.png" alt="Robomimic highlight: success rate, latent-rollout MSE, linear probing on Lift and Can, and anti-collapse">
-    <p class="figure-caption"><strong>Figure 2: Robomimic highlight.</strong> (1) Success rate. (2) Latent-rollout MSE. (3&ndash;4) Linear probes on <code>Lift</code> and <code>Can</code>. (5) TC-WM avoids the latent collapse seen when rolling out directly on foundation embeddings.</p>
   </div>
 </section>
 
@@ -165,6 +137,34 @@ document.getElementById('fp_reset').addEventListener('click',()=>{document.getEl
 render();
 })();
 </script>
+
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="abstract-block">
+      <h2 class="title is-3 has-text-centered">Abstract</h2>
+      <p class="abstract-text">
+        World models enable agents to predict future dynamics conditioned on actions, making the choice of latent representation central to planning and control. Such representations are often either learned directly from pixels with limited semantic structure or inherited from frozen visual foundation models with excessive task-irrelevant detail, yielding state spaces that are poorly matched to downstream planning and control. This is especially challenging in reward-free offline settings, where the model must learn from fixed trajectories without reward supervision or online interaction.
+      </p>
+      <p class="abstract-text">
+        To address this, we propose <strong>TC-WM</strong>, a framework for turning foundation-model embeddings into compact, task-sufficient world representations. The key design is to treat the pretrained embedding space as a semantic scaffold rather than as the final state space: TC-WM linearly projects high-dimensional visual embeddings into a compact latent as the dynamic space, aligns a subspace with the agent's physical state via contrastive learning, and reconstructs embeddings to preserve useful visual structure. This combines the generality of foundation features with the controllability of task-centric dynamics. Theoretically, we show that TC-WM suffices to identify the task-centric latent factors up to a simple transformation. Empirically, TC-WM enables test-time planning across diverse environments (<em>e.g.</em>, <code>Robomimic</code> and <code>D4RL</code>), achieving better world-modeling quality and more precise control than state-of-the-art approaches.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section figure-teaser">
+  <div class="container is-max-desktop">
+    <img class="figure-img" src="./static/figures/png/world_model_variants.png" alt="Comparison of world-model paradigms (a)-(c) and TC-WM (d)-(e)">
+    <p class="figure-caption"><strong>Figure 1: Comparison of world-model paradigms.</strong> <em>(a)</em> Generative WM (MDN-RNN, IRIS) — predict pixels directly. <em>(b)</em> Latent WM (TD-MPC, MuZero) — predict in a learned latent. <em>(c)</em> Embedding WM (DINO-WM, V-JEPA) — predict in a frozen foundation embedding. <em>(d)</em> <strong>TC-WM dynamics</strong> — predict in a compact latent <em>inside</em> the embedding. <em>(e)</em> <strong>Task-centric structure</strong> — align <span style="font-style:italic">z<sup>s</sup></span> with proprioception, anchor <span style="font-style:italic">z<sup>c</sup></span> via embedding reconstruction.</p>
+  </div>
+</section>
+
+<section class="section figure-teaser">
+  <div class="container is-max-desktop">
+    <img class="figure-img" src="./static/figures/png/teaser_five_panel.png" alt="Robomimic highlight: success rate, latent-rollout MSE, linear probing on Lift and Can, and anti-collapse">
+    <p class="figure-caption"><strong>Figure 2: Robomimic highlight.</strong> (1) Success rate. (2) Latent-rollout MSE. (3&ndash;4) Linear probes on <code>Lift</code> and <code>Can</code>. (5) TC-WM avoids the latent collapse seen when rolling out directly on foundation embeddings.</p>
+  </div>
+</section>
 
 <section class="section" id="datasets">
   <div class="container is-max-desktop">
