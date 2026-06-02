@@ -248,8 +248,9 @@ export const education = [
 ];
 
 export const experience = [
-  { where: "Cradle AI",       what: "Cofounder & CTO",                    when: "Jun 2024 – Jun 2025", logo: "images/schools/cradle.png" },
-  { where: "Shanghai AI Lab", what: "Research Intern, Ark NLP Group",     when: "Nov 2022 – Mar 2023", logo: "images/schools/shanghai-ai-lab.png" },
+  { where: "ByteDance",       what: "Research Scientist Intern, Foundation Team", when: "Jun 2026 – Sep 2026", location: "San Jose, CA", logo: "images/schools/bytedance.png" },
+  { where: "Cradle AI",       what: "Cofounder & CTO",                            when: "Jun 2024 – Jun 2025", location: "Abu Dhabi, UAE", logo: "images/schools/cradle.png" },
+  { where: "Shanghai AI Lab", what: "Research Intern, Ark NLP Group",             when: "Nov 2022 – Mar 2023", location: "Shanghai, China", logo: "images/schools/shanghai-ai-lab.png" },
 ];
 
 export const service = [
