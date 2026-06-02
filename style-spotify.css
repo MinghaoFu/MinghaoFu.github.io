@@ -957,6 +957,7 @@ input{font:inherit;color:inherit}
 .timeline-row .where{color:var(--text);font-weight:600;font-size:15px}
 .timeline-row .what{color:var(--text-sub);font-size:13px;margin-top:2px}
 .timeline-row .when{color:var(--text-mute);font-size:12px;text-align:right;white-space:nowrap}
+.timeline-row .loc{color:var(--text-mute);font-size:12px;margin-top:3px}
 .timeline-row .advisor{color:var(--text-mute);font-size:12px;margin-top:4px}
 .timeline-row .advisor a{color:var(--text-sub);font-weight:500}
 .timeline-row .advisor a:hover{color:var(--text);text-decoration:underline}
