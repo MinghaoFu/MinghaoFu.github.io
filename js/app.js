@@ -400,6 +400,7 @@ function renderHome(view){
               <div>
                 <div class="where">${escapeHtml(e.where)}</div>
                 <div class="what">${escapeHtml(e.what)}</div>
+                ${e.location ? `<div class="loc">${escapeHtml(e.location)}</div>` : ""}
               </div>
               <div class="when">${escapeHtml(e.when)}</div>
             </div>`).join("")}
