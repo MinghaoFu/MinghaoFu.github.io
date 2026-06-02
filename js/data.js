@@ -226,7 +226,7 @@ export const education = [
     advisor: '<a href="https://biweihuang.com/">Biwei Huang</a>',
   },
   {
-    where: "Carnegie Mellon",
+    where: "Carnegie Mellon University",
     what: "Visiting Student, CLeaR",
     when: "Jun 2024 – Nov 2024",
     logo: "images/schools/cmu.png",
