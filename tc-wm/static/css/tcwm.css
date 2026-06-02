@@ -118,11 +118,24 @@ a:hover { color: var(--accent-deep); }
   line-height: 1.14 !important;
   letter-spacing: -0.006em;
   color: var(--ink) !important;
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 0.55rem !important;
   max-width: 880px;
   animation: fadeUp 0.75s ease-out both;
 }
 .publication-title .accent { color: var(--accent); font-style: italic; }
+
+.publication-subtitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.28rem, 2.5vw, 1.72rem);
+  line-height: 1.28;
+  letter-spacing: -0.004em;
+  color: var(--ink);
+  max-width: 760px;
+  margin: 0 auto 1.5rem;
+  animation: fadeUp 0.8s ease-out 0.06s both;
+}
+.publication-subtitle .accent { color: var(--accent); font-style: italic; }
 
 .tagline {
   font-family: var(--font-display);
