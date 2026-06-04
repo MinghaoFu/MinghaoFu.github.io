@@ -45,6 +45,18 @@
       color:var(--accent);
       margin-bottom:6px;
     }
+    /* demo video grid */
+    .video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0 4px}
+    .video-grid .vcell video{width:100%;border-radius:8px;display:block;background:var(--bg-elev)}
+    .video-grid .vlabel{
+      display:block;
+      font-size:12.5px;
+      font-weight:600;
+      color:var(--text-sub);
+      text-align:center;
+      margin-top:6px;
+    }
+    @media (max-width:640px){.video-grid{grid-template-columns:1fr}}
     /* the V vs V-perp schematic */
     .schematic{
       display:flex;
@@ -247,6 +259,28 @@
           <figure>
             <img src="pipeline.png" alt="SCAR pipeline: inverse-dynamics encoder, gradient-reversal embodiment classifier, forward dynamics model">
             <figcaption>SCAR instantiates the two stages. An inverse-dynamics model recovers an action coordinate from visual transitions (Stage 1, $\tilde a=\rho(a)$), and a linear encoder trained against an embodiment classifier through a gradient-reversal layer projects it into $V^\perp$ (Stage 2). Embodiment $e$ is one instance of the generic nuisance $u$.</figcaption>
+          </figure>
+          <p>Here is the ablation in motion, on one held-out episode. In each clip the left panel is a source demonstration from an ALOHA AgileX rig; the right two panels show the same skill on a Franka, the real episode next to the world model's rollout driven by the latent actions extracted from the source. The four cells differ only in the regularizer.</p>
+          <figure>
+            <div class="video-grid">
+              <div class="vcell">
+                <video src="videos/transfer_shared_latent.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <span class="vlabel">Shared-Latent (no regularizer)</span>
+              </div>
+              <div class="vcell">
+                <video src="videos/transfer_scar_kl.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <span class="vlabel">SCAR-kl (KL only)</span>
+              </div>
+              <div class="vcell">
+                <video src="videos/transfer_scar_grl.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <span class="vlabel">SCAR-grl (gradient reversal only)</span>
+              </div>
+              <div class="vcell">
+                <video src="videos/transfer_scar_kl_grl.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <span class="vlabel">SCAR-kl-grl (full method)</span>
+              </div>
+            </div>
+            <figcaption>Cross-embodiment transfer, one ablation per cell (videos courtesy of Hongjia Liu). Without anti-alignment, the Shared-Latent baseline lets embodiment-specific nuisance leak into the latent action. Adding the gradient-reversal game (bottom row) is what makes the transferred rollout track the source motion: the encoder is pushed into $V^\perp$, so the latent it hands the world model no longer remembers which body produced it.</figcaption>
           </figure>
           <p>One honest caveat, worth stating because it is easy to overclaim. The recovery in §5 is <em>per-value</em>: each $\Phi_e$ is a bijection, but the family may differ across embodiments. Transferring a latent action from body $e_1$ to body $e_2$ therefore needs the alignment map $\Phi_{e_2}\!\circ\Phi_{e_1}^{-1}$ learned from paired data, or an extra separability assumption that makes the $\Phi_e$ coincide. The theorem buys invariance and per-body identifiability. It does not, by itself, hand you zero-shot cross-embodiment transfer for free.</p>
         </div>
