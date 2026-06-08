@@ -152,8 +152,8 @@
       </div>
     </div>
     <p class="figure-caption"><strong>Where the task-centric latent acts.</strong>
-      <span id="fp_cap_anim">Each panel replays a real demonstration &mdash; every frame is the model's decode of that timestep, and the glow marks where advancing the selected latent block by one step changes the decode. The <b>block</b> and the threshold/gamma/gain sliders retune the glow live, frame by frame. With alignment the task block z&#8203;ˢ keeps the change on the gripper and manipulated object; removing it &mdash; or reading DINO-WM's raw embedding &mdash; lets it spread across the scene.</span>
-      <span id="fp_cap_static" hidden>Frozen over the whole trajectory: we map where advancing each block moves the decode, accumulated across the demonstration. TC-WM's task block z&#8203;ˢ stays on the manipulated object (<code>Square</code>: nut&nbsp;+&nbsp;gripper) and leaves distractors like the peg dark; removing the alignment &mdash; or using DINO-WM's raw embedding &mdash; spreads it wider. Same sliders, one frame.</span>
+      <span id="fp_cap_anim">As the demonstration replays, the glow marks where each model's latent drives the change. With alignment it stays on the manipulated object; without it, and in DINO-WM, it spreads across the scene.</span>
+      <span id="fp_cap_static" hidden>Accumulated over the whole demonstration, the glow marks where each model's latent drives the change. With alignment it stays on the manipulated object; without it, and in DINO-WM, it spreads wider.</span>
     </p>
   </div>
 </section>
