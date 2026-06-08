@@ -86,47 +86,115 @@
 <section class="section" id="task-centric">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Where the Task-Centric Latent Acts</h2>
-    <div class="fp-widget">
-      <div class="fp-head">
-        <div class="fp-ctrl">
-          <label>task <select id="fp_task"><option value="square" selected>Square</option><option value="lift">Lift</option><option value="can">Can</option></select></label>
-          <label>block (TC-WM) <select id="fp_block"><option value="z">z &nbsp;full</option><option value="s" selected>z&#8203;ˢ &nbsp;task-centric</option><option value="c">z&#8203;ᶜ &nbsp;complement</option></select></label>
-          <label>threshold <span class="fp-val" id="fp_thrv">0.12</span><input type="range" id="fp_thr" min="0" max="0.90" step="0.01" value="0.12"></label>
-          <label>gamma <span class="fp-val" id="fp_gamv">0.80</span><input type="range" id="fp_gam" min="0.30" max="1.80" step="0.05" value="0.80"></label>
-          <label>gain <span class="fp-val" id="fp_gainv">1.00</span><input type="range" id="fp_gain" min="0.50" max="2.50" step="0.05" value="1.00"></label>
-          <button id="fp_reset" type="button">reset</button>
+    <div class="tc-card">
+      <div class="tc-bar">
+        <div class="tc-bar-left">
+          <div class="tc-group">
+            <span class="tc-label">View</span>
+            <div class="tc-seg" id="tc_modeseg" role="tablist" aria-label="View mode">
+              <button type="button" class="tc-seg-btn is-on" data-mode="anim">Animated replay</button>
+              <button type="button" class="tc-seg-btn" data-mode="static">Static footprint</button>
+            </div>
+          </div>
+          <div class="tc-group">
+            <span class="tc-label">Task</span>
+            <div class="tc-pills" id="tc_taskpills" role="tablist" aria-label="Task">
+              <button type="button" class="tc-pill is-on" data-task="square">Square</button>
+              <button type="button" class="tc-pill" data-task="lift">Lift</button>
+              <button type="button" class="tc-pill" data-task="can">Can</button>
+            </div>
+          </div>
         </div>
-        <figure class="fp-traj"><img id="fp_traj" data-task="square" src="./static/datasets/rollouts/square_mmbench_idx8_orig_4fps.gif" alt="Full task trajectory" loading="lazy"></figure>
       </div>
-      <div class="fp-canv">
-        <figure><canvas id="fp_a" width="224" height="224"></canvas><figcaption>TC-WM &middot; task-centric</figcaption></figure>
-        <figure><canvas id="fp_n" width="224" height="224"></canvas><figcaption>TC-WM &middot; alignment removed</figcaption></figure>
-        <figure><canvas id="fp_d" width="224" height="224"></canvas><figcaption>DINO-WM</figcaption></figure>
+
+      <div class="tc-static-row" id="fp_ctrl">
+        <div class="tc-group">
+          <span class="tc-label">Block</span>
+          <div class="tc-seg tc-seg-sm" id="tc_blockseg" aria-label="Latent block">
+            <button type="button" class="tc-seg-btn" data-block="z">z</button>
+            <button type="button" class="tc-seg-btn is-on" data-block="s">z&#8203;ˢ</button>
+            <button type="button" class="tc-seg-btn" data-block="c">z&#8203;ᶜ</button>
+          </div>
+        </div>
+        <div class="tc-slider">
+          <span class="tc-label">Threshold <b class="tc-val" id="fp_thrv">0.12</b></span>
+          <input type="range" id="fp_thr" min="0" max="0.90" step="0.01" value="0.12">
+        </div>
+        <div class="tc-slider">
+          <span class="tc-label">Gamma <b class="tc-val" id="fp_gamv">0.80</b></span>
+          <input type="range" id="fp_gam" min="0.30" max="1.80" step="0.05" value="0.80">
+        </div>
+        <div class="tc-slider">
+          <span class="tc-label">Gain <b class="tc-val" id="fp_gainv">1.00</b></span>
+          <input type="range" id="fp_gain" min="0.50" max="2.50" step="0.05" value="1.00">
+        </div>
+        <button type="button" id="fp_reset" class="tc-reset">reset</button>
+      </div>
+
+      <div class="tc-panels">
+        <figure class="tc-panel is-a">
+          <figcaption class="tc-panel-head"><span class="tc-name"><span class="tc-dot"></span>TC-WM &middot; task-centric</span><span class="tc-chip">concentrated</span></figcaption>
+          <canvas id="fp_ca" width="224" height="224"></canvas>
+        </figure>
+        <figure class="tc-panel is-n">
+          <figcaption class="tc-panel-head"><span class="tc-name"><span class="tc-dot"></span>TC-WM &middot; no alignment</span><span class="tc-chip">diffuse</span></figcaption>
+          <canvas id="fp_cn" width="224" height="224"></canvas>
+        </figure>
+        <figure class="tc-panel is-d">
+          <figcaption class="tc-panel-head"><span class="tc-name"><span class="tc-dot"></span>DINO-WM</span><span class="tc-chip">diffuse</span></figcaption>
+          <canvas id="fp_cd" width="224" height="224"></canvas>
+        </figure>
+      </div>
+      <div class="tc-vsrc" aria-hidden="true">
+        <video id="vid_a" muted loop playsinline preload="auto" crossorigin="anonymous"><source src="./static/analysis/clips_pack/square_align.mp4" type="video/mp4"></video>
+        <video id="vid_n" muted loop playsinline preload="auto" crossorigin="anonymous"><source src="./static/analysis/clips_pack/square_noalign.mp4" type="video/mp4"></video>
+        <video id="vid_d" muted loop playsinline preload="auto" crossorigin="anonymous"><source src="./static/analysis/clips_pack/square_dino.mp4" type="video/mp4"></video>
       </div>
     </div>
-    <p class="figure-caption"><strong>Where the task-centric latent acts.</strong> We perturb each model's latent and map where the change lands. TC-WM's task-centric block z&#8203;ˢ stays on the manipulated object (<code>Square</code>: nut&nbsp;+&nbsp;gripper) and leaves distractors like the peg dark; removing the alignment &mdash; or using DINO-WM's raw embedding &mdash; spreads it wider. The corner clip shows the task goal.</p>
+    <p class="figure-caption"><strong>Where the task-centric latent acts.</strong>
+      <span id="fp_cap_anim">Each panel replays a real demonstration &mdash; every frame is the model's decode of that timestep, and the glow marks where advancing the selected latent block by one step changes the decode. The <b>block</b> and the threshold/gamma/gain sliders retune the glow live, frame by frame. With alignment the task block z&#8203;ˢ keeps the change on the gripper and manipulated object; removing it &mdash; or reading DINO-WM's raw embedding &mdash; lets it spread across the scene.</span>
+      <span id="fp_cap_static" hidden>Frozen over the whole trajectory: we map where advancing each block moves the decode, accumulated across the demonstration. TC-WM's task block z&#8203;ˢ stays on the manipulated object (<code>Square</code>: nut&nbsp;+&nbsp;gripper) and leaves distractors like the peg dark; removing the alignment &mdash; or using DINO-WM's raw embedding &mdash; spreads it wider. Same sliders, one frame.</span>
+    </p>
   </div>
 </section>
 <style>
-.fp-widget{background:var(--bg-card);border:1px solid var(--rule);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow-card);margin-bottom:14px}
-.fp-head{display:grid;grid-template-columns:1fr 104px;gap:18px;align-items:start;margin-bottom:18px}
-.fp-ctrl{display:flex;flex-wrap:wrap;gap:16px 22px;align-items:flex-end;margin-bottom:0}
-.fp-ctrl label{display:flex;flex-direction:column;gap:6px;font-family:var(--font-tag);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
-.fp-ctrl input[type=range]{width:140px;accent-color:var(--accent)}
-.fp-ctrl select{font-family:var(--font-body);font-size:13px;padding:6px 9px;border:1px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink)}
-.fp-val{color:var(--accent);font-weight:700;font-family:var(--font-mono)}
-#fp_reset{font-family:var(--font-mono);font-size:11px;padding:8px 13px;border:1px solid var(--rule);border-radius:8px;background:#fff;color:var(--ink-muted);cursor:pointer}
-#fp_reset:hover{color:var(--ink);border-color:var(--accent)}
-.fp-traj{margin:0;text-align:center}
-.fp-traj img{width:104px;height:auto;border:1px solid var(--rule);border-radius:10px;display:block;background:#15171b}
-.fp-traj figcaption{font-family:var(--font-mono);font-size:10px;color:var(--ink-muted);margin-top:6px;text-align:center;line-height:1.45;letter-spacing:.02em}
-@media(max-width:560px){.fp-head{grid-template-columns:1fr}.fp-traj{justify-self:start;width:120px}}
-.fp-canv{display:flex;gap:16px;flex-wrap:wrap}
-.fp-canv figure{margin:0;flex:1;min-width:190px}
-.fp-canv canvas{width:100%;max-width:300px;border:1px solid var(--rule);border-radius:10px;display:block;background:#15171b;margin:0 auto}
-.fp-canv figcaption{font-family:var(--font-mono);font-size:11px;font-weight:600;margin-top:8px;text-align:center;color:var(--ink-muted)}
-.fp-canv figure:nth-child(1) figcaption{color:var(--accent)}
-.fp-canv figure:nth-child(2) figcaption{color:#b5532b}
+.tc-card{background:var(--bg-card);border:1px solid var(--rule);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow-card);margin-bottom:14px}
+.tc-bar{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.tc-bar-left{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap}
+.tc-group{display:flex;flex-direction:column;gap:8px}
+.tc-label{font-family:var(--font-tag);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+.tc-label .tc-val{color:var(--accent);font-family:var(--font-mono);font-weight:700;letter-spacing:0}
+.tc-seg{display:inline-flex;gap:2px;padding:3px;background:var(--bg-soft);border:1px solid var(--rule);border-radius:11px}
+.tc-seg-btn{font-family:var(--font-tag);font-size:12.5px;font-weight:600;letter-spacing:.01em;color:var(--ink-muted);background:transparent;border:none;border-radius:8px;padding:7px 15px;cursor:pointer;transition:background .15s,color .15s,box-shadow .15s}
+.tc-seg-btn:hover{color:var(--ink)}
+.tc-seg-btn.is-on{background:var(--bg-card);color:var(--accent-deep);box-shadow:0 1px 2px rgba(29,39,51,.10)}
+.tc-seg.tc-seg-sm .tc-seg-btn{padding:6px 13px;font-size:12px}
+.tc-pills{display:inline-flex;gap:7px}
+.tc-pill{font-family:var(--font-tag);font-size:12.5px;font-weight:600;color:var(--ink-2);background:var(--bg-card);border:1px solid var(--rule-strong);border-radius:999px;padding:7px 17px;cursor:pointer;transition:.15s}
+.tc-pill:hover{border-color:var(--accent);color:var(--accent-deep)}
+.tc-pill.is-on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(40,103,158,.25)}
+.tc-static-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 24px;margin-top:18px;padding-top:18px;border-top:1px dashed var(--rule-strong)}
+.tc-slider{display:flex;flex-direction:column;gap:8px}
+.tc-slider input[type=range]{width:128px;accent-color:var(--accent);cursor:pointer}
+.tc-reset{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);background:var(--bg-card);border:1px solid var(--rule-strong);border-radius:8px;padding:7px 14px;cursor:pointer;transition:.15s}
+.tc-reset:hover{color:var(--ink);border-color:var(--accent)}
+.tc-panels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.tc-panel{margin:0;display:flex;flex-direction:column;border:1px solid var(--rule);border-top-width:3px;border-radius:12px;overflow:hidden;background:var(--bg-card);box-shadow:var(--shadow-card)}
+.tc-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px;border-bottom:1px solid var(--rule)}
+.tc-name{display:flex;align-items:center;gap:8px;font-family:var(--font-tag);font-size:11.5px;font-weight:700;color:var(--ink);letter-spacing:.01em}
+.tc-dot{width:7px;height:7px;border-radius:50%;flex:none}
+.tc-chip{font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted);background:var(--bg-soft);border-radius:5px;padding:3px 7px}
+.tc-panel canvas{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#15171b}
+.tc-panel.is-a{border-top-color:var(--accent)} .tc-panel.is-a .tc-dot{background:var(--accent)}
+.tc-panel.is-n{border-top-color:#b5532b} .tc-panel.is-n .tc-dot{background:#b5532b}
+.tc-panel.is-d{border-top-color:#5b6b7a} .tc-panel.is-d .tc-dot{background:#5b6b7a}
+.tc-panel.is-a .tc-chip{color:var(--accent-deep);background:var(--accent-soft)}
+.tc-vsrc{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;left:-9999px}
+@media(max-width:640px){
+  .tc-card{padding:18px 16px}
+  .tc-bar{align-items:flex-start}
+  .tc-panels{grid-template-columns:1fr}
+}
 </style>
 <script>
 (function(){
@@ -139,15 +207,64 @@ function draw(id,std,base,thr,gam,gain){
   for(let i=0;i<224*224;i++){let nm=(S[i*4]/255-thr)/dn;nm=nm<0?0:(nm>1?1:nm);let g=Math.pow(nm,gam)*gain;g=g>1?1:g;const c=LUT[Math.round(g*255)],al=0.25+0.95*g,j=i*4;
   O[j]=Math.min(255,B[j]*0.40+c[0]*al);O[j+1]=Math.min(255,B[j+1]*0.40+c[1]*al);O[j+2]=Math.min(255,B[j+2]*0.40+c[2]*al);O[j+3]=255;}
   cx.putImageData(out,0,0);}
-async function render(){
-  const t=document.getElementById('fp_task').value,bk=document.getElementById('fp_block').value;
-  const thr=+document.getElementById('fp_thr').value,gam=+document.getElementById('fp_gam').value,gain=+document.getElementById('fp_gain').value;
-  document.getElementById('fp_thrv').textContent=thr.toFixed(2);document.getElementById('fp_gamv').textContent=gam.toFixed(2);document.getElementById('fp_gainv').textContent=gain.toFixed(2);
-  const tg=document.getElementById('fp_traj'); if(tg.dataset.task!==t){tg.src=TRAJ[t];tg.dataset.task=t;}
-  const d=await task(t);draw('fp_a',d[bk].a,d.base,thr,gam,gain);draw('fp_n',d[bk].n,d.base,thr,gam,gain);draw('fp_d',d.dw,d.dwbase,thr,gam,gain);}
-['fp_task','fp_block','fp_thr','fp_gam','fp_gain'].forEach(id=>document.getElementById(id).addEventListener('input',render));
-document.getElementById('fp_reset').addEventListener('click',()=>{document.getElementById('fp_thr').value=0.12;document.getElementById('fp_gam').value=0.80;document.getElementById('fp_gain').value=1.00;render();});
-render();
+const PACKDIR='./static/analysis/clips_pack/';
+const PACK={square:{a:'square_align',n:'square_noalign',d:'square_dino'},
+            lift:{a:'lift_align',n:'lift_noalign',d:'lift_dino'},
+            can:{a:'can_align',n:'can_noalign',d:'can_dino'}};
+const TILE=224,GUT=8,GX={z:1*(TILE+GUT),s:2*(TILE+GUT),c:3*(TILE+GUT)};
+function $(id){return document.getElementById(id);}
+let curTask='square',curMode='anim',curBlock='s',raf=0;
+const scr=document.createElement('canvas');scr.width=224;scr.height=224;const sctx=scr.getContext('2d',{willReadFrequently:true});
+const PANELS=[['fp_ca','vid_a'],['fp_cn','vid_n'],['fp_cd','vid_d']];
+function vals(){return{thr:+$('fp_thr').value,gam:+$('fp_gam').value,gain:+$('fp_gain').value};}
+function syncVals(){var v=vals();$('fp_thrv').textContent=v.thr.toFixed(2);$('fp_gamv').textContent=v.gam.toFixed(2);$('fp_gainv').textContent=v.gain.toFixed(2);return v;}
+function tile(video,sx){sctx.drawImage(video,sx,0,TILE,TILE,0,0,224,224);return sctx.getImageData(0,0,224,224);}
+function composeAnim(){
+  var v=syncVals();
+  for(var i=0;i<3;i++){var cv=$(PANELS[i][0]),vd=$(PANELS[i][1]);
+    if(vd.readyState<2||!vd.videoWidth){continue;}
+    var base=tile(vd,0),glow=tile(vd,GX[curBlock]);
+    draw(PANELS[i][0],glow,base,v.thr,v.gam,v.gain);
+  }
+  raf=requestAnimationFrame(composeAnim);
+}
+async function renderStatic(){
+  var v=syncVals();const d=await task(curTask);
+  draw('fp_ca',d[curBlock].a,d.base,v.thr,v.gam,v.gain);
+  draw('fp_cn',d[curBlock].n,d.base,v.thr,v.gam,v.gain);
+  draw('fp_cd',d.dw,d.dwbase,v.thr,v.gam,v.gain);
+}
+function loadVideos(t){
+  PANELS.forEach(function(p){var vd=$(p[1]);vd.querySelector('source').src=PACKDIR+PACK[t][{vid_a:'a',vid_n:'n',vid_d:'d'}[p[1]]]+'.mp4';vd.load();});
+}
+function playVideos(){PANELS.forEach(function(p){var pr=$(p[1]).play();if(pr)pr.catch(function(){});});}
+function pauseVideos(){PANELS.forEach(function(p){$(p[1]).pause();});}
+function startLoop(){if(!raf)raf=requestAnimationFrame(composeAnim);}
+function stopLoop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
+function setMode(m){
+  curMode=m;
+  Array.prototype.forEach.call($('tc_modeseg').children,function(b){b.classList.toggle('is-on',b.dataset.mode===m);});
+  $('fp_cap_anim').hidden=(m!=='anim');$('fp_cap_static').hidden=(m==='anim');
+  if(m==='anim'){playVideos();startLoop();}
+  else{stopLoop();pauseVideos();renderStatic();}
+}
+$('tc_modeseg').addEventListener('click',function(e){var b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode);});
+$('tc_taskpills').addEventListener('click',function(e){
+  var b=e.target.closest('[data-task]');if(!b)return;curTask=b.dataset.task;
+  Array.prototype.forEach.call(this.children,function(x){x.classList.toggle('is-on',x===b);});
+  loadVideos(curTask);
+  if(curMode==='anim')playVideos();else renderStatic();
+});
+$('tc_blockseg').addEventListener('click',function(e){
+  var b=e.target.closest('[data-block]');if(!b)return;curBlock=b.dataset.block;
+  Array.prototype.forEach.call(this.children,function(x){x.classList.toggle('is-on',x===b);});
+  if(curMode!=='anim')renderStatic();
+});
+['fp_thr','fp_gam','fp_gain'].forEach(function(id){$(id).addEventListener('input',function(){if(curMode!=='anim')renderStatic();else syncVals();});});
+$('fp_reset').addEventListener('click',function(){$('fp_thr').value=0.12;$('fp_gam').value=0.80;$('fp_gain').value=1.00;if(curMode!=='anim')renderStatic();else syncVals();});
+if(new URLSearchParams(location.search).get('fpmode')==='static')curMode='static';
+loadVideos(curTask);
+setMode(curMode);
 })();
 </script>
 
