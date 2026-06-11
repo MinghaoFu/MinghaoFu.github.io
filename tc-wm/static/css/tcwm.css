@@ -328,7 +328,7 @@ p code,
   border-radius: 8px;
   padding: 0.5rem 0.5rem 0.45rem;
   text-align: center;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, opacity 0.7s ease, filter 0.7s ease;
 }
 .env-card:hover {
   transform: translateY(-2px);
@@ -374,7 +374,7 @@ p code,
   border: 1px solid var(--rule);
   border-radius: 10px;
   padding: 0.75rem 0.75rem 0.7rem;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, opacity 0.7s ease, filter 0.7s ease;
 }
 .rollout-card:hover {
   transform: translateY(-2px);
@@ -518,3 +518,82 @@ footer.footer .content p {
 }
 .perturb-divider span:nth-child(1) { color: var(--ink-2); }
 .perturb-divider span:nth-child(2) { color: var(--accent); }
+
+/* ==================================================================== */
+/*  Dynamic enhancements (enhance.js) — scroll reveal, hover, lightbox   */
+/* ==================================================================== */
+
+/* --- orchestrated hero entrance (CSS-only, runs on load) --- */
+.hero .kicker, .hero .publication-title, .hero .publication-subtitle, .hero .tagline,
+.hero .publication-authors, .hero .publication-affiliation, .hero .publication-links {
+  animation: fadeUp 0.72s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+}
+.hero .kicker              { animation-delay: 0.04s; }
+.hero .publication-title   { animation-delay: 0.12s; }
+.hero .publication-subtitle{ animation-delay: 0.20s; }
+.hero .tagline             { animation-delay: 0.28s; }
+.hero .publication-authors { animation-delay: 0.36s; }
+.hero .publication-affiliation { animation-delay: 0.42s; }
+.hero .publication-links   { animation-delay: 0.49s; }
+
+/* --- scroll reveal: reveal via opacity+blur (never fights transform-based hover) --- */
+.section > .container > h2.title, .section-lede, .figure-caption,
+.abstract-block, .bibtex-block {
+  transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+              filter 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reveal-on :is(.section > .container > h2.title, .section-lede, .figure-img, .figure-caption,
+               .env-card, .rollout-card, .teaser-wrap, .abstract-block, .bibtex-block):not(.in) {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+/* --- figure hover-lift + click-to-zoom affordance --- */
+.figure-img {
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s ease,
+              opacity 0.8s ease, filter 0.8s ease;
+  cursor: zoom-in;
+}
+.figure-img:hover {
+  transform: translateY(-5px) scale(1.012);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(40, 103, 158, 0.30);
+}
+.env-card img, .rollout-cell img { cursor: zoom-in; }
+
+/* --- teaser video frame --- */
+.teaser-wrap {
+  max-width: 980px; margin: 0 auto; border-radius: 14px; overflow: hidden;
+  box-shadow: var(--shadow-card); border: 1px solid var(--rule); background: #000;
+  transition: opacity 0.8s ease, filter 0.8s ease, box-shadow 0.4s ease;
+}
+.teaser-wrap:hover { box-shadow: var(--shadow-card-hover); }
+.teaser-video { width: 100%; display: block; aspect-ratio: 16 / 9; }
+
+/* --- lightbox --- */
+.lb {
+  position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center;
+  justify-content: center; padding: 3vh 3vw; background: rgba(20, 23, 28, 0.82);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none; transition: opacity 0.28s ease;
+}
+.lb.open { opacity: 1; pointer-events: auto; }
+.lb img {
+  max-width: 95vw; max-height: 92vh; border-radius: 10px; background: var(--bg-card);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5); padding: 0.5rem; cursor: zoom-out;
+  transform: scale(0.96); transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.lb.open img { transform: scale(1); }
+.lb-close {
+  position: absolute; top: 16px; right: 26px; color: #fff; font-family: var(--font-body);
+  font-size: 34px; line-height: 1; cursor: pointer; opacity: 0.8; transition: opacity 0.2s;
+  user-select: none;
+}
+.lb-close:hover { opacity: 1; }
+
+/* --- scroll progress bar --- */
+.scroll-prog {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 2100;
+  background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+  transition: width 0.08s linear;
+}

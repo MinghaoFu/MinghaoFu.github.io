@@ -11,7 +11,19 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260602a">
+  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260610a">
+  <script>
+    /* Enable scroll-reveal before first paint (no flash). Dropped automatically
+       under reduced-motion, or if enhance.js fails to load — so content always shows. */
+    (function () {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reveal-on');
+        setTimeout(function () {
+          if (!window.__revInit) document.documentElement.classList.remove('reveal-on');
+        }, 2500);
+      }
+    })();
+  </script>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
@@ -19,6 +31,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script defer src="./static/js/enhance.js"></script>
 </head>
 <body>
 
@@ -95,10 +108,6 @@
     </div>
   </div>
 </section>
-<style>
-.teaser-wrap{max-width:980px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--rule);background:#000}
-.teaser-video{width:100%;display:block;aspect-ratio:16/9}
-</style>
 
 <section class="section" id="abstract">
   <div class="container is-max-desktop">
