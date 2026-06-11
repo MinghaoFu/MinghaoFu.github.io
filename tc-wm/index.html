@@ -35,8 +35,9 @@
   </div>
   <div id="tcwm-navbar" class="navbar-menu">
     <div class="navbar-start nav-center">
-      <a class="navbar-item" href="#task-centric">Task-Centric</a>
+      <a class="navbar-item" href="#overview">Overview</a>
       <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#task-centric">Task-Centric</a>
       <a class="navbar-item" href="#datasets">Environments</a>
       <a class="navbar-item" href="#method">Method</a>
       <a class="navbar-item" href="#results">Results</a>
@@ -82,6 +83,37 @@
 
 
 
+
+
+<section class="section" id="overview">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Overview</h2>
+    <div class="teaser-wrap">
+      <video class="teaser-video" controls playsinline preload="metadata" poster="./static/videos/tcwm_teaser_poster.jpg">
+        <source src="./static/videos/tcwm_teaser.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="figure-caption"><strong>A one-minute tour.</strong> The problem with pretrained visual representations, how TC-WM maps them into a task-centric latent space, and what that buys for imagined rollouts and planning.</p>
+  </div>
+</section>
+<style>
+.teaser-wrap{max-width:980px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--rule);background:#000}
+.teaser-video{width:100%;display:block;aspect-ratio:16/9}
+</style>
+
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="abstract-block">
+      <h2 class="title is-3 has-text-centered">Abstract</h2>
+      <p class="abstract-text">
+        World models enable agents to predict future dynamics conditioned on actions, making the choice of latent representation central to planning and control. Such representations are often either learned directly from pixels with limited semantic structure or inherited from frozen visual foundation models with excessive task-irrelevant detail, yielding state spaces that are poorly matched to downstream planning and control. This is especially challenging in reward-free offline settings, where the model must learn from fixed trajectories without reward supervision or online interaction.
+      </p>
+      <p class="abstract-text">
+        To address this, we propose <strong>TC-WM</strong>, a framework for turning foundation-model embeddings into compact, task-sufficient world representations. The key design is to treat the pretrained embedding space as a semantic scaffold rather than as the final state space: TC-WM linearly projects high-dimensional visual embeddings into a compact latent as the dynamic space, aligns a subspace with the agent's physical state via contrastive learning, and reconstructs embeddings to preserve useful visual structure. This combines the generality of foundation features with the controllability of task-centric dynamics. Theoretically, we show that TC-WM suffices to identify the task-centric latent factors up to a simple transformation. Empirically, TC-WM enables test-time planning across diverse environments (<em>e.g.</em>, <code>Robomimic</code> and <code>D4RL</code>), achieving better world-modeling quality and more precise control than state-of-the-art approaches.
+      </p>
+    </div>
+  </div>
+</section>
 
 <section class="section" id="task-centric">
   <div class="container is-max-desktop">
@@ -267,20 +299,6 @@ loadVideos(curTask);
 setMode(curMode);
 })();
 </script>
-
-<section class="section" id="abstract">
-  <div class="container is-max-desktop">
-    <div class="abstract-block">
-      <h2 class="title is-3 has-text-centered">Abstract</h2>
-      <p class="abstract-text">
-        World models enable agents to predict future dynamics conditioned on actions, making the choice of latent representation central to planning and control. Such representations are often either learned directly from pixels with limited semantic structure or inherited from frozen visual foundation models with excessive task-irrelevant detail, yielding state spaces that are poorly matched to downstream planning and control. This is especially challenging in reward-free offline settings, where the model must learn from fixed trajectories without reward supervision or online interaction.
-      </p>
-      <p class="abstract-text">
-        To address this, we propose <strong>TC-WM</strong>, a framework for turning foundation-model embeddings into compact, task-sufficient world representations. The key design is to treat the pretrained embedding space as a semantic scaffold rather than as the final state space: TC-WM linearly projects high-dimensional visual embeddings into a compact latent as the dynamic space, aligns a subspace with the agent's physical state via contrastive learning, and reconstructs embeddings to preserve useful visual structure. This combines the generality of foundation features with the controllability of task-centric dynamics. Theoretically, we show that TC-WM suffices to identify the task-centric latent factors up to a simple transformation. Empirically, TC-WM enables test-time planning across diverse environments (<em>e.g.</em>, <code>Robomimic</code> and <code>D4RL</code>), achieving better world-modeling quality and more precise control than state-of-the-art approaches.
-      </p>
-    </div>
-  </div>
-</section>
 
 <section class="section figure-teaser">
   <div class="container is-max-desktop">
