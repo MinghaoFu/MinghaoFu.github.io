@@ -4,7 +4,7 @@
    =================================================================== */
 
 :root {
-  --bg:           #faf8f3;
+  --bg:           #ffffff;
   --bg-card:      #ffffff;
   --bg-soft:      #f1ede5;
   --ink:          #1d2733;
@@ -50,7 +50,7 @@ a:hover { color: var(--accent-deep); }
 
 /* ---------- Navbar ---------------------------------------------------- */
 .navbar {
-  background: rgba(250, 248, 243, 0.86);
+  background: rgba(255, 255, 255, 0.86);
   backdrop-filter: saturate(150%) blur(14px);
   -webkit-backdrop-filter: saturate(150%) blur(14px);
   border-bottom: 1px solid var(--rule);
