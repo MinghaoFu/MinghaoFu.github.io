@@ -2,10 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations.">
-  <meta name="keywords" content="TC-WM, World Models, Visual Foundation Models, Planning">
+  <meta name="description" content="TC-WM learns a compact, task-centric latent from frozen visual foundation embeddings (DINOv2), aligned with proprioception, for reward-free offline planning and control. Paper, code, and an interactive demo.">
+  <meta name="keywords" content="TC-WM, Task-Centric World Models, world models, world model, visual foundation models, DINOv2, representation learning, offline reinforcement learning, planning, control, proprioception, parsimonious latents, Minghao Fu">
+  <meta name="author" content="Minghao Fu, Fan Feng, Nicklas Hansen, Biwei Huang">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Back to Parsimonious Latents &mdash; TC-WM</title>
+  <title>TC-WM: Back to Parsimonious Latents &mdash; Task-Centric World Models from Visual Foundations</title>
+  <link rel="canonical" href="https://minghaofu.com/tc-wm/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="TC-WM Project Page">
+  <meta property="og:title" content="Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations">
+  <meta property="og:description" content="TC-WM projects frozen visual foundation embeddings into a compact, task-centric latent aligned with proprioception, for reward-free offline planning and control.">
+  <meta property="og:url" content="https://minghaofu.com/tc-wm/">
+  <meta property="og:image" content="https://minghaofu.com/tc-wm/static/videos/tcwm_teaser_poster.jpg">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Back to Parsimonious Latents: Task-Centric World Models from Visual Foundations">
+  <meta name="twitter:description" content="A compact, task-centric latent from frozen visual foundation embeddings, aligned with proprioception, for offline planning and control.">
+  <meta name="twitter:image" content="https://minghaofu.com/tc-wm/static/videos/tcwm_teaser_poster.jpg">
+
+  <!-- Structured data: scholarly article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations",
+    "name": "TC-WM: Task-Centric World Models from Visual Foundations",
+    "author": [
+      {"@type":"Person","name":"Minghao Fu","url":"https://minghaofu.com/"},
+      {"@type":"Person","name":"Fan Feng","url":"https://fan-feng.com/"},
+      {"@type":"Person","name":"Nicklas Hansen","url":"https://www.nicklashansen.com/"},
+      {"@type":"Person","name":"Biwei Huang","url":"https://biweihuang.com/"}
+    ],
+    "datePublished": "2026",
+    "publisher": {"@type":"Organization","name":"University of California, San Diego"},
+    "url": "https://minghaofu.com/tc-wm/",
+    "image": "https://minghaofu.com/tc-wm/static/videos/tcwm_teaser_poster.jpg",
+    "abstract": "TC-WM linearly projects frozen visual foundation embeddings into a compact, task-centric latent aligned with the agent's physical state, for reward-free offline planning and control.",
+    "sameAs": ["https://arxiv.org/abs/2605.25620", "https://github.com/MinghaoFu/TC-WM"]
+  }
+  </script>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
