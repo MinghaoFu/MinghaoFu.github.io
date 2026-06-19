@@ -1,7 +1,22 @@
 import {
-  me, papers, albums, news, education, experience, service, blogs,
+  me, papers, albums, news, education, experience, service, blogs, authorLinks,
   papersByAlbum, albumById, paperById, popularPapers,
 } from "./data.js";
+
+// Wrap each author name that has a verified homepage (authorLinks in data.js)
+// in a link. Splits on commas; keeps Minghao's <em> and the */† markers
+// outside the link; names not in the map pass through as plain text.
+function linkifyAuthors(authorsHtml){
+  return String(authorsHtml).split(/,\s*/).map(seg => {
+    if (seg.includes("<em>")) return seg;            // own name — never linked
+    const mk = seg.match(/([*†]+)\s*$/);
+    const marks = mk ? mk[1] : "";
+    const name = (marks ? seg.slice(0, seg.length - mk[0].length) : seg).trim();
+    const url = authorLinks[name];
+    if (!url) return seg;
+    return `<a href="${url}" data-link target="_blank" rel="noopener">${name}</a>${marks}`;
+  }).join(", ");
+}
 
 // ============ SVG icon set ============
 const ICON = {
@@ -666,7 +681,7 @@ function popularRowHTML(p, num){
       <div class="col-title">
         <div class="meta">
           <div class="t">${escapeHtml(p.title)}</div>
-          <div class="a">${p.authors}</div>
+          <div class="a">${linkifyAuthors(p.authors)}</div>
           <div class="meta-row"><span class="${venueClass}">${escapeHtml(p.venue)}</span></div>
         </div>
       </div>
@@ -686,7 +701,7 @@ function trackRowHTML(p, num, opts = {}){
       ${thumbHTML(p)}
       <div class="meta">
         <div class="t">${escapeHtml(p.title)}</div>
-        <div class="a">${p.authors}</div>
+        <div class="a">${linkifyAuthors(p.authors)}</div>
       </div>
     </div>
   `);
@@ -755,7 +770,7 @@ function renderPlayer(){
       ${p ? thumbHTML(p) : `<div class="thumb-fallback" style="background:#222">♪</div>`}
       <div class="pl-meta">
         <div class="pl-title">${p ? escapeHtml(p.title) : "Select a paper to read"}</div>
-        <div class="pl-sub">${p ? p.authors : escapeHtml(me.name)}</div>
+        <div class="pl-sub">${p ? linkifyAuthors(p.authors) : escapeHtml(me.name)}</div>
       </div>
     </div>
 
