@@ -918,7 +918,8 @@ input{font:inherit;color:inherit}
   font-size:32px;
   font-weight:900;
   color:var(--text);
-  margin-bottom:6px;
+  line-height:1.2;
+  margin-bottom:12px;
 }
 .about-card .role{
   color:var(--text-sub);
