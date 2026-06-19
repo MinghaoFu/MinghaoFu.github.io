@@ -17,7 +17,7 @@ export const me = {
   contact: "isminghaofu [at] gmail [dot] com",
   bio: [
     'Ph.D. student at the Halıcıoğlu Data Science Institute, <a href="https://www.ucsd.edu/">UC San Diego</a>, advised by <a href="https://biweihuang.com/">Biwei Huang</a>.',
-    'Previously M.S. at <a href="https://mbzuai.ac.ae/">MBZUAI</a>, visiting student at <a href="https://www.cmu.edu/">CMU</a> with <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>, <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>, and <a href="https://econ.jhu.edu/directory/yingyao-hu/">Yingyao Hu</a>. B.S. from <a href="https://en.uestc.edu.cn/">UESTC</a>, time at Shanghai AI Lab.',
+    'Earlier, I earned my M.S. in the Machine Learning Department at <a href="https://mbzuai.ac.ae/">MBZUAI</a>, advised by <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>, and was a visiting student at the CLeaR Lab at <a href="https://www.cmu.edu/">CMU</a>, where I worked with <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>, Clark Glymour, and Kun Zhang. I received my B.S. in Software Engineering from <a href="https://en.uestc.edu.cn/">UESTC</a> and interned with the Ark NLP Group at Shanghai AI Lab.',
     'My research pursues (1) the theoretical foundations of representation learning, which highlight the importance of (2) collecting diverse data in a principled way — <em>no data diversity, no model intelligence</em>; and (3) how to marry the data diversity to model intelligence, scaling physical world models from first principles.'
   ],
   socials: [
@@ -54,6 +54,36 @@ export const albums = [
   },
 ];
 
+// Author homepages — single source of truth. linkifyAuthors() in app.js wraps
+// any author name found here in a link to their site; names not listed render
+// as plain text. Only personal homepages that were identity-verified are kept
+// here (no Google Scholar / LinkedIn / directory-only entries, by design).
+export const authorLinks = {
+  "Biwei Huang": "https://biweihuang.com",
+  "Kun Zhang": "https://www.andrew.cmu.edu/user/kunz1/index.html",
+  "Nicklas Hansen": "https://www.nicklashansen.com",
+  "Kevin Murphy": "https://www.cs.ubc.ca/~murphyk/",
+  "Yingyao Hu": "https://econ.jhu.edu/directory/yingyao-hu/",
+  "Peter Spirtes": "https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html",
+  "Ruichu Cai": "https://ruichucai.github.io/",
+  "Salman Khan": "https://salman-h-khan.github.io/",
+  "Keze Wang": "https://kezewang.com/",
+  "Fan Feng": "https://fan-feng.com/",
+  "Ignavier Ng": "https://ignavierng.github.io/",
+  "Yujia Zheng": "https://yjzheng.com/",
+  "Guangyi Chen": "https://chengy12.github.io/",
+  "Zijian Li": "https://jozerozero.github.io/",
+  "Yongqiang Chen": "https://lfhase.github.io/",
+  "Zeyu Tang": "https://zeyu.one/",
+  "Yuewen Sun": "https://yuewen-sun.github.io/",
+  "Yifan Shen": "https://sanshuiii.github.io/",
+  "Loka Li": "https://lokali.github.io/",
+  "Xinyue Wang": "https://www.charonwangg.com/",
+  "Jinzhou Tang": "https://tangjzh.github.io/",
+  "Selena Ge": "https://selenageruiqi.github.io/",
+  "Zhenhao Chen": "https://zhenhaochenofficial.github.io/",
+};
+
 // Each paper has an albumId pointing into albums[]. Edit to regroup.
 // Order here = display order (newest-first along the conference cycle:
 // NeurIPS → ICLR → ICML → NeurIPS …). Popular section shows the first N
@@ -63,7 +93,7 @@ export const papers = [
   {
     id: "tcwm",
     title: "Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations",
-    authors: '<em>Minghao Fu</em>, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Nicklas Hansen, Biwei Huang',
+    authors: '<em>Minghao Fu</em>, Fan Feng, Nicklas Hansen, Biwei Huang',
     venue: "arXiv 2026",
     year: 2026,
     thumb: "images/papers/tcwm.png",
@@ -78,7 +108,7 @@ export const papers = [
   {
     id: "scar",
     title: "SCAR: Self-Supervised Continuous Action Representation Learning",
-    authors: 'Hongjia Liu, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, <em>Minghao Fu</em>, Xinyue Wang, Haofei Lu, Biwei Huang',
+    authors: 'Hongjia Liu, Fan Feng, <em>Minghao Fu</em>, Xinyue Wang, Haofei Lu, Biwei Huang',
     venue: "arXiv 2026",
     year: 2026,
     thumb: "images/papers/scar.png",
@@ -105,7 +135,7 @@ export const papers = [
   {
     id: "task-sufficient-wams",
     title: "Learning Task-Sufficient World Models by Synergizing Agentic Exploration and Structured Modeling",
-    authors: '<a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Yujia Zheng, <em>Minghao Fu</em>, Yongqiang Chen, Guangyi Chen, Kevin Murphy, Biwei Huang, Kun Zhang',
+    authors: 'Fan Feng, Yujia Zheng, <em>Minghao Fu</em>, Yongqiang Chen, Guangyi Chen, Kevin Murphy, Biwei Huang, Kun Zhang',
     venue: "ICML 2026",
     year: 2026,
     thumb: "images/papers/task-sufficient.png",
@@ -117,7 +147,7 @@ export const papers = [
   {
     id: "dreamsac",
     title: "DreamSAC: Learning Hamiltonian World Models via Symmetry Exploration",
-    authors: 'Jinzhou Tang, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, <em>Minghao Fu</em>, Wenjun Lin, Biwei Huang, Keze Wang',
+    authors: 'Jinzhou Tang, Fan Feng, <em>Minghao Fu</em>, Wenjun Lin, Biwei Huang, Keze Wang',
     venue: "CVPR 2026",
     year: 2026,
     thumb: "images/papers/dreamsac.png",
@@ -132,7 +162,7 @@ export const papers = [
   {
     id: "adadiff",
     title: "Ada-Diffuser: Latent-Aware Adaptive Diffusion for Decision-Making",
-    authors: '<a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Selena Ge, <em>Minghao Fu</em>, Zijian Li, Yujia Zheng, Zeyu Tang, Yingyao Hu, Biwei Huang, Kun Zhang',
+    authors: 'Fan Feng, Selena Ge, <em>Minghao Fu</em>, Zijian Li, Yujia Zheng, Zeyu Tang, Yingyao Hu, Biwei Huang, Kun Zhang',
     venue: "ICLR 2026",
     year: 2026,
     thumb: "images/papers/adadiff.png",
@@ -174,7 +204,7 @@ export const papers = [
   {
     id: "online-ts",
     title: "Online Time Series Forecasting with Theoretical Guarantees",
-    authors: 'Zijian Li, Changze Zhou, <em>Minghao Fu</em>, Sanjay Manjunath, <a href="https://fan-feng.com/" data-link target="_blank" rel="noopener">Fan Feng</a>, Guangyi Chen, Yingyao Hu*, Ruichu Cai, Kun Zhang*',
+    authors: 'Zijian Li, Changze Zhou, <em>Minghao Fu</em>, Sanjay Manjunath, Fan Feng, Guangyi Chen, Yingyao Hu*, Ruichu Cai, Kun Zhang*',
     venue: "NeurIPS 2025",
     year: 2025,
     thumb: "images/papers/online.png",
