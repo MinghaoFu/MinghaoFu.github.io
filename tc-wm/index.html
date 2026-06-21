@@ -47,11 +47,13 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260614a">
+  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260620c">
   <script>
     /* Enable scroll-reveal before first paint (no flash). Dropped automatically
        under reduced-motion, or if enhance.js fails to load — so content always shows. */
@@ -71,7 +73,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <script defer src="./static/js/enhance.js"></script>
+  <script defer src="./static/js/enhance.js?v=20260620c"></script>
 </head>
 <body>
 
@@ -90,12 +92,14 @@
     <div class="navbar-start nav-center">
       <a class="navbar-item" href="#overview">Overview</a>
       <a class="navbar-item" href="#abstract">Abstract</a>
-      <a class="navbar-item" href="#task-centric">Task-Centric</a>
-      <a class="navbar-item" href="#datasets">Environments</a>
+      <a class="navbar-item" href="#task-centric">Interactive</a>
+      <a class="navbar-item" href="#motivation">Motivation</a>
       <a class="navbar-item" href="#method">Method</a>
+      <a class="navbar-item" href="#highlights">Findings</a>
       <a class="navbar-item" href="#results">Results</a>
-      <a class="navbar-item" href="#rollouts">Open-Loop Rollout</a>
+      <a class="navbar-item" href="#rollouts">Rollouts</a>
       <a class="navbar-item" href="#analysis">Analysis</a>
+      <a class="navbar-item" href="#datasets">Environments</a>
     </div>
   </div>
 </nav>
@@ -108,7 +112,6 @@
           <p class="kicker">Project Page</p>
           <h1 class="title is-1 publication-title">Back to <span class="accent">Parsimonious Latents</span>:</h1>
           <p class="publication-subtitle">Learning Task-Centric World Models from Visual Foundations</p>
-          <p class="tagline">What latent space should a world model learn for planning and control beyond visual?</p>
           <p class="publication-authors">
             <a href="https://minghaofu.com/" target="_blank" rel="noopener">Minghao Fu</a><sup>1</sup>
             &nbsp; <a href="https://fan-feng.com/" target="_blank" rel="noopener">Fan Feng</a><sup>1</sup>
@@ -134,13 +137,9 @@
 </section>
 
 
-
-
-
-
 <section class="section" id="overview">
   <div class="container is-max-desktop">
-    <h2 class="title is-3">Overview</h2>
+    <h2 class="title is-3 overview-q">What latent space should a world model learn for planning and control beyond visual?</h2>
     <div class="teaser-wrap">
       <video class="teaser-video" controls playsinline preload="metadata" poster="./static/videos/tcwm_teaser_poster.jpg">
         <source src="./static/videos/tcwm_teaser.mp4" type="video/mp4">
@@ -166,6 +165,7 @@
 <section class="section" id="task-centric">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Where the Task-Centric Latent Acts</h2>
+    <p class="section-lede">Pick a task and a latent block. The glow marks where each model's latent drives the predicted change.</p>
     <div class="tc-card">
       <div class="tc-bar">
         <div class="tc-bar-left">
@@ -237,45 +237,194 @@
     </p>
   </div>
 </section>
-<style>
-.tc-card{background:var(--bg-card);border:1px solid var(--rule);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow-card);margin-bottom:14px}
-.tc-bar{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.tc-bar-left{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap}
-.tc-group{display:flex;flex-direction:column;gap:8px}
-.tc-label{font-family:var(--font-tag);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
-.tc-label .tc-val{color:var(--accent);font-family:var(--font-mono);font-weight:700;letter-spacing:0}
-.tc-seg{display:inline-flex;gap:2px;padding:3px;background:var(--bg-soft);border:1px solid var(--rule);border-radius:11px}
-.tc-seg-btn{font-family:var(--font-tag);font-size:12.5px;font-weight:600;letter-spacing:.01em;color:var(--ink-muted);background:transparent;border:none;border-radius:8px;padding:7px 15px;cursor:pointer;transition:background .15s,color .15s,box-shadow .15s}
-.tc-seg-btn:hover{color:var(--ink)}
-.tc-seg-btn.is-on{background:var(--bg-card);color:var(--accent-deep);box-shadow:0 1px 2px rgba(29,39,51,.10)}
-.tc-seg.tc-seg-sm .tc-seg-btn{padding:6px 13px;font-size:12px}
-.tc-pills{display:inline-flex;gap:7px}
-.tc-pill{font-family:var(--font-tag);font-size:12.5px;font-weight:600;color:var(--ink-2);background:var(--bg-card);border:1px solid var(--rule-strong);border-radius:999px;padding:7px 17px;cursor:pointer;transition:.15s}
-.tc-pill:hover{border-color:var(--accent);color:var(--accent-deep)}
-.tc-pill.is-on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(40,103,158,.25)}
-.tc-static-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 24px;margin-top:18px;padding-top:18px;border-top:1px dashed var(--rule-strong)}
-.tc-slider{display:flex;flex-direction:column;gap:8px}
-.tc-slider input[type=range]{width:128px;accent-color:var(--accent);cursor:pointer}
-.tc-reset{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);background:var(--bg-card);border:1px solid var(--rule-strong);border-radius:8px;padding:7px 14px;cursor:pointer;transition:.15s}
-.tc-reset:hover{color:var(--ink);border-color:var(--accent)}
-.tc-panels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-.tc-panel{margin:0;display:flex;flex-direction:column;border:1px solid var(--rule);border-top-width:3px;border-radius:12px;overflow:hidden;background:var(--bg-card);box-shadow:var(--shadow-card)}
-.tc-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px;border-bottom:1px solid var(--rule)}
-.tc-name{display:flex;align-items:center;gap:8px;font-family:var(--font-tag);font-size:11.5px;font-weight:700;color:var(--ink);letter-spacing:.01em}
-.tc-dot{width:7px;height:7px;border-radius:50%;flex:none}
-.tc-chip{font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted);background:var(--bg-soft);border-radius:5px;padding:3px 7px}
-.tc-panel canvas{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#15171b}
-.tc-panel.is-a{border-top-color:var(--accent)} .tc-panel.is-a .tc-dot{background:var(--accent)}
-.tc-panel.is-n{border-top-color:#b5532b} .tc-panel.is-n .tc-dot{background:#b5532b}
-.tc-panel.is-d{border-top-color:#5b6b7a} .tc-panel.is-d .tc-dot{background:#5b6b7a}
-.tc-panel.is-a .tc-chip{color:var(--accent-deep);background:var(--accent-soft)}
-.tc-vsrc{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;left:-9999px}
-@media(max-width:640px){
-  .tc-card{padding:18px 16px}
-  .tc-bar{align-items:flex-start}
-  .tc-panels{grid-template-columns:1fr}
-}
-</style>
+
+<section class="section" id="motivation">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Why Visual Embeddings Aren't a Control State</h2>
+    <p class="section-lede">Frozen foundation embeddings describe how a scene <em>looks</em>. Planning and control need a <em>state</em>: a compact handle on the factors an action can change. TC-WM recovers one with a single linear projection inside the embedding.</p>
+        <img class="figure-img" src="./static/figures/png/world_model_variants.png" alt="Comparison of world-model paradigms (a)-(c) and TC-WM (d)-(e)">
+        <p class="figure-caption"><strong>Figure 1: Comparison of world-model paradigms.</strong> <em>(a)</em> Generative WM (MDN-RNN, IRIS) — predict pixels directly. <em>(b)</em> Latent WM (TD-MPC, MuZero) — predict in a learned latent. <em>(c)</em> Embedding WM (DINO-WM, V-JEPA) — predict in a frozen foundation embedding. <em>(d)</em> <strong>TC-WM dynamics</strong> — predict in a compact latent <em>inside</em> the embedding. <em>(e)</em> <strong>Task-centric structure</strong> — align <span style="font-style:italic">z<sup>s</sup></span> with proprioception, anchor <span style="font-style:italic">z<sup>c</sup></span> via embedding reconstruction.</p>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Method</h2>
+    <img class="figure-img figure-main" src="./static/figures/png/network.png" alt="TC-WM architecture: linear projection of joint visual and proprioception embeddings into a compact latent, with task-centric alignment, dynamics, and embedding reconstruction">
+    <p class="figure-caption"><strong>Architecture.</strong> A frozen visual backbone is linearly projected into a compact latent; a designated subspace is aligned with proprioception via InfoNCE; a ViT predicts latent dynamics; a linear decoder reconstructs the embedding to prevent collapse. Under partial alignment, the task-centric block is identifiable up to an affine map.</p>
+  </div>
+</section>
+
+<section class="section" id="highlights">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Key Findings</h2>
+    <div class="highlights">
+      <div class="hl-card"><span class="hl-index">01</span><h3 class="hl-title">Compact beats verbatim</h3><p class="hl-text">A single linear projection of frozen DINOv2 embeddings gives the lowest latent-rollout error across nine tasks. Predicting in a parsimonious latent is more accurate than predicting in the raw embedding.</p></div>
+      <div class="hl-card"><span class="hl-index">02</span><h3 class="hl-title">Task-centric planning wins</h3><p class="hl-text">Aligning a latent subspace with proprioception is the only method that surpasses DINO-WM on every Robomimic task, giving more precise control.</p></div>
+      <div class="hl-card"><span class="hl-index">03</span><h3 class="hl-title">The latent stays interpretable</h3><p class="hl-text">Alignment concentrates the dynamic latent on the gripper and manipulated object. Without it, the influence spreads across the whole scene.</p></div>
+    </div>
+        <img class="figure-img" src="./static/figures/png/teaser_five_panel.png" alt="Robomimic highlight: success rate, latent-rollout MSE, linear probing on Lift and Can, and anti-collapse">
+        <p class="figure-caption"><strong>Figure 2: Robomimic highlight.</strong> (1) Success rate. (2) Latent-rollout MSE. (3&ndash;4) Linear probes on <code>Lift</code> and <code>Can</code>. (5) TC-WM avoids the latent collapse seen when rolling out directly on foundation embeddings.</p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Results</h2>
+
+    <img class="figure-img" src="./static/figures/png/pred_loss.png" alt="World model prediction accuracy across nine environments">
+    <p class="figure-caption"><strong>World-model prediction.</strong> Lowest latent-prediction error on nearly all tasks; competitive image reconstruction. Lower is better.</p>
+
+    <img class="figure-img" src="./static/figures/png/plan_compare_cem_ldp.png" alt="Planning performance under CEM and LDP">
+    <p class="figure-caption"><strong>Planning.</strong> CEM on <code>Maze</code> / <code>Wall</code> / <code>Push-T</code> / <code>Cheetah</code> / <code>Hopper</code>; LDP on <code>Lift</code> / <code>Can</code> / <code>Square</code>. Only method that surpasses DINO-WM on every LDP task.</p>
+
+    <div class="rollout-card" style="margin-top:1.6rem;">
+      <div class="rollout-row is-4">
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_clean_orig_4fps.gif"   alt="Clean observation"          loading="lazy"><span class="rollout-label">clean input</span></div>
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_clean_pred_4fps.gif"   alt="TC-WM rollout from clean"   loading="lazy"><span class="rollout-label">TC-WM pred (clean)</span></div>
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_noisy_input_4fps.gif"  alt="Perturbed observation"      loading="lazy"><span class="rollout-label">noisy input</span></div>
+        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_noisy_pred_4fps.gif"   alt="TC-WM rollout from perturbed" loading="lazy"><span class="rollout-label">TC-WM pred (noisy)</span></div>
+      </div>
+      <p class="rollout-task"><code>Lift</code> &nbsp;&middot;&nbsp; Gaussian noise + color jitter</p>
+    </div>
+    <p class="figure-caption"><strong>Unseen perturbations.</strong> Under additive Gaussian noise and per-channel color jitter never seen during training, TC-WM's open-loop rollout preserves cube position and manipulator silhouette at near-clean fidelity.</p>
+  </div>
+</section>
+
+<section class="section" id="rollouts">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Open-Loop Rollout</h2>
+
+    <div class="rollout-grid">
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_orig_4fps.gif" alt="Lift original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_recon_4fps.gif" alt="Lift reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_pred_4fps.gif" alt="Lift TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Lift</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_orig_4fps.gif" alt="Can original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_recon_4fps.gif" alt="Can reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_pred_4fps.gif" alt="Can TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Can</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_orig_4fps.gif" alt="Square original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_recon_4fps.gif" alt="Square reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_pred_4fps.gif" alt="Square TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Square</code></p>
+      </div>
+
+            <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_orig_4fps.gif" alt="Wall original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_recon_4fps.gif" alt="Wall reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_pred_4fps.gif" alt="Wall TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Wall</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_orig_4fps.gif" alt="Maze original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_recon_4fps.gif" alt="Maze reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_pred_4fps.gif" alt="Maze TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Maze</code></p>
+      </div>
+
+      <div class="rollout-card">
+        <div class="rollout-row">
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_orig_4fps.gif" alt="Cheetah original" loading="lazy"><span class="rollout-label">original</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_recon_4fps.gif" alt="Cheetah reconstruction"><span class="rollout-label">reconstruction</span></div>
+          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_pred_4fps.gif" alt="Cheetah TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
+        </div>
+        <p class="rollout-task"><code>Cheetah</code></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="analysis">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Analysis</h2>
+
+    <img class="figure-img" src="./static/figures/png/architecture_ablation.png" alt="Architecture and projection-head ablations on Robomimic">
+    <p class="figure-caption"><strong>Architecture / projection ablations</strong> on <code>Robomimic</code>. Visual encoder / latent-source choice (a) and projection-head ablation (b), each showing success rate on the left and mirrored SSIM on the right. RP denotes randomly projected DINOv2 embeddings. Linear projection is the best; DINOv2 and DINOv3 dominate as foundation encoders.</p>
+
+
+    <img class="figure-img" src="./static/figures/png/loss_ablation.png" alt="Loss component ablation on Lift">
+    <p class="figure-caption"><strong>Loss components</strong> on <code>Lift</code>. Removing embedding reconstruction collapses both planning and visual fidelity; removing proprioceptive supervision lowers success rate while preserving SSIM; the latent split dimension matters little.</p>
+  </div>
+</section>
+
+<section class="section" id="datasets">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Environments</h2>
+    <p class="section-lede">Nine offline visual-control tasks: navigation, locomotion, and manipulation &mdash; trained on images + actions + proprioception, no reward.</p>
+    <div class="env-grid">
+      <div class="env-card">
+        <img src="./static/datasets/gifs/point_maze_episode_009.gif" alt="Maze trajectory" loading="lazy">
+        <span class="env-tag">Maze</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/wall_single_episode_003.gif" alt="Wall trajectory" loading="lazy">
+        <span class="env-tag">Wall</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/episode_006.gif" alt="Push-T trajectory" loading="lazy">
+        <span class="env-tag">Push-T</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/episode_00006.gif" alt="Robomimic Lift trajectory" loading="lazy">
+        <span class="env-tag">Lift</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/episode_00009.gif" alt="Robomimic Can trajectory" loading="lazy">
+        <span class="env-tag">Can</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/square_episode.gif" alt="Robomimic Square trajectory" loading="lazy">
+        <span class="env-tag">Square</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/dmc_reacher_mmbench.gif" alt="DMC Reacher trajectory" loading="lazy">
+        <span class="env-tag">Reacher</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/dmc_cheetah_mmbench.gif" alt="DMC Cheetah trajectory" loading="lazy">
+        <span class="env-tag">Cheetah</span>
+      </div>
+      <div class="env-card">
+        <img src="./static/datasets/gifs/dmc_hopper_mmbench.gif" alt="DMC Hopper trajectory" loading="lazy">
+        <span class="env-tag">Hopper</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre class="bibtex-block"><code>@article{fu2026tcwm,
+  title  = {Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations},
+  author = {Fu, Minghao and Feng, Fan and Hansen, Nicklas and Huang, Biwei},
+  journal= {arXiv preprint arXiv:2605.25620},
+  year   = {2026}
+}</code></pre>
+  </div>
+</section>
+
 <script>
 (function(){
 const FP={"square": {"base": "./static/analysis/footprint/square__base.png", "dwbase": "./static/analysis/footprint/square__dwbase.png", "dw": "./static/analysis/footprint/square__dw.png", "z": {"a": "./static/analysis/footprint/square__z_a.png", "n": "./static/analysis/footprint/square__z_n.png"}, "s": {"a": "./static/analysis/footprint/square__s_a.png", "n": "./static/analysis/footprint/square__s_n.png"}, "c": {"a": "./static/analysis/footprint/square__c_a.png", "n": "./static/analysis/footprint/square__c_n.png"}}, "lift": {"base": "./static/analysis/footprint/lift__base.png", "dwbase": "./static/analysis/footprint/lift__dwbase.png", "dw": "./static/analysis/footprint/lift__dw.png", "z": {"a": "./static/analysis/footprint/lift__z_a.png", "n": "./static/analysis/footprint/lift__z_n.png"}, "s": {"a": "./static/analysis/footprint/lift__s_a.png", "n": "./static/analysis/footprint/lift__s_n.png"}, "c": {"a": "./static/analysis/footprint/lift__c_a.png", "n": "./static/analysis/footprint/lift__c_n.png"}}, "can": {"base": "./static/analysis/footprint/can__base.png", "dwbase": "./static/analysis/footprint/can__dwbase.png", "dw": "./static/analysis/footprint/can__dw.png", "z": {"a": "./static/analysis/footprint/can__z_a.png", "n": "./static/analysis/footprint/can__z_n.png"}, "s": {"a": "./static/analysis/footprint/can__s_a.png", "n": "./static/analysis/footprint/can__s_n.png"}, "c": {"a": "./static/analysis/footprint/can__c_a.png", "n": "./static/analysis/footprint/can__c_n.png"}}}; const LUT=[[0, 0, 3], [0, 0, 4], [0, 0, 6], [1, 0, 7], [1, 1, 9], [1, 1, 11], [2, 1, 14], [2, 2, 16], [3, 2, 18], [4, 3, 20], [4, 3, 22], [5, 4, 24], [6, 4, 27], [7, 5, 29], [8, 6, 31], [9, 6, 33], [10, 7, 35], [11, 7, 38], [13, 8, 40], [14, 8, 42], [15, 9, 45], [16, 9, 47], [18, 10, 50], [19, 10, 52], [20, 11, 54], [22, 11, 57], [23, 11, 59], [25, 11, 62], [26, 11, 64], [28, 12, 67], [29, 12, 69], [31, 12, 71], [32, 12, 74], [34, 11, 76], [36, 11, 78], [38, 11, 80], [39, 11, 82], [41, 11, 84], [43, 10, 86], [45, 10, 88], [46, 10, 90], [48, 10, 92], [50, 9, 93], [52, 9, 95], [53, 9, 96], [55, 9, 97], [57, 9, 98], [59, 9, 100], [60, 9, 101], [62, 9, 102], [64, 9, 102], [65, 9, 103], [67, 10, 104], [69, 10, 105], [70, 10, 105], [72, 11, 106], [74, 11, 106], [75, 12, 107], [77, 12, 107], [79, 13, 108], [80, 13, 108], [82, 14, 108], [83, 14, 109], [85, 15, 109], [87, 15, 109], [88, 16, 109], [90, 17, 109], [91, 17, 110], [93, 18, 110], [95, 18, 110], [96, 19, 110], [98, 20, 110], [99, 20, 110], [101, 21, 110], [102, 21, 110], [104, 22, 110], [106, 23, 110], [107, 23, 110], [109, 24, 110], [110, 24, 110], [112, 25, 110], [114, 25, 109], [115, 26, 109], [117, 27, 109], [118, 27, 109], [120, 28, 109], [122, 28, 109], [123, 29, 108], [125, 29, 108], [126, 30, 108], [128, 31, 107], [129, 31, 107], [131, 32, 107], [133, 32, 106], [134, 33, 106], [136, 33, 106], [137, 34, 105], [139, 34, 105], [141, 35, 105], [142, 36, 104], [144, 36, 104], [145, 37, 103], [147, 37, 103], [149, 38, 102], [150, 38, 102], [152, 39, 101], [153, 40, 100], [155, 40, 100], [156, 41, 99], [158, 41, 99], [160, 42, 98], [161, 43, 97], [163, 43, 97], [164, 44, 96], [166, 44, 95], [167, 45, 95], [169, 46, 94], [171, 46, 93], [172, 47, 92], [174, 48, 91], [175, 49, 91], [177, 49, 90], [178, 50, 89], [180, 51, 88], [181, 51, 87], [183, 52, 86], [184, 53, 86], [186, 54, 85], [187, 55, 84], [189, 55, 83], [190, 56, 82], [191, 57, 81], [193, 58, 80], [194, 59, 79], [196, 60, 78], [197, 61, 77], [199, 62, 76], [200, 62, 75], [201, 63, 74], [203, 64, 73], [204, 65, 72], [205, 66, 71], [207, 68, 70], [208, 69, 68], [209, 70, 67], [210, 71, 66], [212, 72, 65], [213, 73, 64], [214, 74, 63], [215, 75, 62], [217, 77, 61], [218, 78, 59], [219, 79, 58], [220, 80, 57], [221, 82, 56], [222, 83, 55], [223, 84, 54], [224, 86, 52], [226, 87, 51], [227, 88, 50], [228, 90, 49], [229, 91, 48], [230, 92, 46], [230, 94, 45], [231, 95, 44], [232, 97, 43], [233, 98, 42], [234, 100, 40], [235, 101, 39], [236, 103, 38], [237, 104, 37], [237, 106, 35], [238, 108, 34], [239, 109, 33], [240, 111, 31], [240, 112, 30], [241, 114, 29], [242, 116, 28], [242, 117, 26], [243, 119, 25], [243, 121, 24], [244, 122, 22], [245, 124, 21], [245, 126, 20], [246, 128, 18], [246, 129, 17], [247, 131, 16], [247, 133, 14], [248, 135, 13], [248, 136, 12], [248, 138, 11], [249, 140, 9], [249, 142, 8], [249, 144, 8], [250, 145, 7], [250, 147, 6], [250, 149, 6], [250, 151, 6], [251, 153, 6], [251, 155, 6], [251, 157, 6], [251, 158, 7], [251, 160, 7], [251, 162, 8], [251, 164, 10], [251, 166, 11], [251, 168, 13], [251, 170, 14], [251, 172, 16], [251, 174, 18], [251, 176, 20], [251, 177, 22], [251, 179, 24], [251, 181, 26], [251, 183, 28], [251, 185, 30], [250, 187, 33], [250, 189, 35], [250, 191, 37], [250, 193, 40], [249, 195, 42], [249, 197, 44], [249, 199, 47], [248, 201, 49], [248, 203, 52], [248, 205, 55], [247, 207, 58], [247, 209, 60], [246, 211, 63], [246, 213, 66], [245, 215, 69], [245, 217, 72], [244, 219, 75], [244, 220, 79], [243, 222, 82], [243, 224, 86], [243, 226, 89], [242, 228, 93], [242, 230, 96], [241, 232, 100], [241, 233, 104], [241, 235, 108], [241, 237, 112], [241, 238, 116], [241, 240, 121], [241, 242, 125], [242, 243, 129], [242, 244, 133], [243, 246, 137], [244, 247, 141], [245, 248, 145], [246, 250, 149], [247, 251, 153], [249, 252, 157], [250, 253, 160], [252, 254, 164]]; const TRAJ={"square": "./static/datasets/rollouts/square_mmbench_idx8_orig_4fps.gif", "lift": "./static/datasets/rollouts/lift_orig_4fps.gif", "can": "./static/datasets/rollouts/can_orig_4fps.gif"}; const cache={};
@@ -347,186 +496,6 @@ loadVideos(curTask);
 setMode(curMode);
 })();
 </script>
-
-<section class="section figure-teaser">
-  <div class="container is-max-desktop">
-    <img class="figure-img" src="./static/figures/png/world_model_variants.png" alt="Comparison of world-model paradigms (a)-(c) and TC-WM (d)-(e)">
-    <p class="figure-caption"><strong>Figure 1: Comparison of world-model paradigms.</strong> <em>(a)</em> Generative WM (MDN-RNN, IRIS) — predict pixels directly. <em>(b)</em> Latent WM (TD-MPC, MuZero) — predict in a learned latent. <em>(c)</em> Embedding WM (DINO-WM, V-JEPA) — predict in a frozen foundation embedding. <em>(d)</em> <strong>TC-WM dynamics</strong> — predict in a compact latent <em>inside</em> the embedding. <em>(e)</em> <strong>Task-centric structure</strong> — align <span style="font-style:italic">z<sup>s</sup></span> with proprioception, anchor <span style="font-style:italic">z<sup>c</sup></span> via embedding reconstruction.</p>
-  </div>
-</section>
-
-<section class="section figure-teaser">
-  <div class="container is-max-desktop">
-    <img class="figure-img" src="./static/figures/png/teaser_five_panel.png" alt="Robomimic highlight: success rate, latent-rollout MSE, linear probing on Lift and Can, and anti-collapse">
-    <p class="figure-caption"><strong>Figure 2: Robomimic highlight.</strong> (1) Success rate. (2) Latent-rollout MSE. (3&ndash;4) Linear probes on <code>Lift</code> and <code>Can</code>. (5) TC-WM avoids the latent collapse seen when rolling out directly on foundation embeddings.</p>
-  </div>
-</section>
-
-<section class="section" id="datasets">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Environments</h2>
-    <p class="section-lede">Nine offline visual-control tasks: navigation, locomotion, and manipulation &mdash; trained on images + actions + proprioception, no reward.</p>
-    <div class="env-grid">
-      <div class="env-card">
-        <img src="./static/datasets/gifs/point_maze_episode_009.gif" alt="Maze trajectory" loading="lazy">
-        <span class="env-tag">Maze</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/wall_single_episode_003.gif" alt="Wall trajectory" loading="lazy">
-        <span class="env-tag">Wall</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/episode_006.gif" alt="Push-T trajectory" loading="lazy">
-        <span class="env-tag">Push-T</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/episode_00006.gif" alt="Robomimic Lift trajectory" loading="lazy">
-        <span class="env-tag">Lift</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/episode_00009.gif" alt="Robomimic Can trajectory" loading="lazy">
-        <span class="env-tag">Can</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/square_episode.gif" alt="Robomimic Square trajectory" loading="lazy">
-        <span class="env-tag">Square</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/dmc_reacher_mmbench.gif" alt="DMC Reacher trajectory" loading="lazy">
-        <span class="env-tag">Reacher</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/dmc_cheetah_mmbench.gif" alt="DMC Cheetah trajectory" loading="lazy">
-        <span class="env-tag">Cheetah</span>
-      </div>
-      <div class="env-card">
-        <img src="./static/datasets/gifs/dmc_hopper_mmbench.gif" alt="DMC Hopper trajectory" loading="lazy">
-        <span class="env-tag">Hopper</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="method">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Method</h2>
-    <img class="figure-img figure-main" src="./static/figures/png/network.png" alt="TC-WM architecture: linear projection of joint visual and proprioception embeddings into a compact latent, with task-centric alignment, dynamics, and embedding reconstruction">
-    <p class="figure-caption"><strong>Architecture.</strong> A frozen visual backbone is linearly projected into a compact latent; a designated subspace is aligned with proprioception via InfoNCE; a ViT predicts latent dynamics; a linear decoder reconstructs the embedding to prevent collapse. Under partial alignment, the task-centric block is identifiable up to an affine map.</p>
-  </div>
-</section>
-
-<section class="section" id="results">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Results</h2>
-
-    <img class="figure-img" src="./static/figures/png/pred_loss.png" alt="World model prediction accuracy across nine environments">
-    <p class="figure-caption"><strong>World-model prediction.</strong> Lowest latent-prediction error on nearly all tasks; competitive image reconstruction. Lower is better.</p>
-
-    <img class="figure-img" src="./static/figures/png/plan_compare_cem_ldp.png" alt="Planning performance under CEM and LDP">
-    <p class="figure-caption"><strong>Planning.</strong> CEM on <code>Maze</code> / <code>Wall</code> / <code>Push-T</code> / <code>Cheetah</code> / <code>Hopper</code>; LDP on <code>Lift</code> / <code>Can</code> / <code>Square</code>. Only method that surpasses DINO-WM on every LDP task.</p>
-
-    <div class="rollout-card" style="margin-top:1.6rem;">
-      <div class="rollout-row is-4">
-        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_clean_orig_4fps.gif"   alt="Clean observation"          loading="lazy"><span class="rollout-label">clean input</span></div>
-        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_clean_pred_4fps.gif"   alt="TC-WM rollout from clean"   loading="lazy"><span class="rollout-label">TC-WM pred (clean)</span></div>
-        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_noisy_input_4fps.gif"  alt="Perturbed observation"      loading="lazy"><span class="rollout-label">noisy input</span></div>
-        <div class="rollout-cell"><img src="./static/datasets/rollouts/perturb_lift_noisy_pred_4fps.gif"   alt="TC-WM rollout from perturbed" loading="lazy"><span class="rollout-label">TC-WM pred (noisy)</span></div>
-      </div>
-      <p class="rollout-task"><code>Lift</code> &nbsp;&middot;&nbsp; Gaussian noise + color jitter</p>
-    </div>
-    <p class="figure-caption"><strong>Unseen perturbations.</strong> Under additive Gaussian noise and per-channel color jitter never seen during training, TC-WM's open-loop rollout preserves cube position and manipulator silhouette at near-clean fidelity.</p>
-  </div>
-</section>
-
-
-<section class="section" id="rollouts">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Open-Loop Rollout</h2>
-
-    <div class="rollout-grid">
-      <div class="rollout-card">
-        <div class="rollout-row">
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_orig_4fps.gif" alt="Lift original" loading="lazy"><span class="rollout-label">original</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_recon_4fps.gif" alt="Lift reconstruction"><span class="rollout-label">reconstruction</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/lift_pred_4fps.gif" alt="Lift TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
-        </div>
-        <p class="rollout-task"><code>Lift</code></p>
-      </div>
-
-      <div class="rollout-card">
-        <div class="rollout-row">
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_orig_4fps.gif" alt="Can original" loading="lazy"><span class="rollout-label">original</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_recon_4fps.gif" alt="Can reconstruction"><span class="rollout-label">reconstruction</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/can_pred_4fps.gif" alt="Can TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
-        </div>
-        <p class="rollout-task"><code>Can</code></p>
-      </div>
-
-      <div class="rollout-card">
-        <div class="rollout-row">
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_orig_4fps.gif" alt="Square original" loading="lazy"><span class="rollout-label">original</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_recon_4fps.gif" alt="Square reconstruction"><span class="rollout-label">reconstruction</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/square_mmbench_idx8_pred_4fps.gif" alt="Square TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
-        </div>
-        <p class="rollout-task"><code>Square</code></p>
-      </div>
-
-            <div class="rollout-card">
-        <div class="rollout-row">
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_orig_4fps.gif" alt="Wall original" loading="lazy"><span class="rollout-label">original</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_recon_4fps.gif" alt="Wall reconstruction"><span class="rollout-label">reconstruction</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/wall_idx6_pred_4fps.gif" alt="Wall TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
-        </div>
-        <p class="rollout-task"><code>Wall</code></p>
-      </div>
-
-      <div class="rollout-card">
-        <div class="rollout-row">
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_orig_4fps.gif" alt="Maze original" loading="lazy"><span class="rollout-label">original</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_recon_4fps.gif" alt="Maze reconstruction"><span class="rollout-label">reconstruction</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/maze_idx2_pred_4fps.gif" alt="Maze TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
-        </div>
-        <p class="rollout-task"><code>Maze</code></p>
-      </div>
-
-      <div class="rollout-card">
-        <div class="rollout-row">
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_orig_4fps.gif" alt="Cheetah original" loading="lazy"><span class="rollout-label">original</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_recon_4fps.gif" alt="Cheetah reconstruction"><span class="rollout-label">reconstruction</span></div>
-          <div class="rollout-cell"><img src="./static/datasets/rollouts/cheetah_idx8_pred_4fps.gif" alt="Cheetah TC-WM rollout" loading="lazy"><span class="rollout-label">rollout</span></div>
-        </div>
-        <p class="rollout-task"><code>Cheetah</code></p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="section" id="analysis">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Analysis</h2>
-
-    <img class="figure-img" src="./static/figures/png/architecture_ablation.png" alt="Architecture and projection-head ablations on Robomimic">
-    <p class="figure-caption"><strong>Architecture / projection ablations</strong> on <code>Robomimic</code>. Visual encoder / latent-source choice (a) and projection-head ablation (b), each showing success rate on the left and mirrored SSIM on the right. RP denotes randomly projected DINOv2 embeddings. Linear projection is the best; DINOv2 and DINOv3 dominate as foundation encoders.</p>
-
-
-    <img class="figure-img" src="./static/figures/png/loss_ablation.png" alt="Loss component ablation on Lift">
-    <p class="figure-caption"><strong>Loss components</strong> on <code>Lift</code>. Removing embedding reconstruction collapses both planning and visual fidelity; removing proprioceptive supervision lowers success rate while preserving SSIM; the latent split dimension matters little.</p>
-  </div>
-</section>
-
-
-<section class="section" id="bibtex">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">BibTeX</h2>
-    <pre class="bibtex-block"><code>@article{fu2026tcwm,
-  title  = {Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations},
-  author = {Fu, Minghao and Feng, Fan and Hansen, Nicklas and Huang, Biwei},
-  journal= {arXiv preprint arXiv:2605.25620},
-  year   = {2026}
-}</code></pre>
-  </div>
-</section>
 
 </body>
 </html>

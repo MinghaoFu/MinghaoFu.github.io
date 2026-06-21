@@ -6,7 +6,7 @@
   window.__revInit = true;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var REVEAL = '.section > .container > h2.title, .section-lede, .figure-img, .figure-caption,' +
-               '.env-card, .rollout-card, .teaser-wrap, .abstract-block, .bibtex-block';
+               '.env-card, .rollout-card, .hl-card, .teaser-wrap, .abstract-block, .bibtex-block';
 
   // ---- scroll reveal ----
   if (!reduce && 'IntersectionObserver' in window) {
@@ -14,7 +14,7 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px 12% 0px' });
     document.querySelectorAll(REVEAL).forEach(function (el) {
       var p = el.parentElement;            // stagger cards within their grid
       if (p && (p.classList.contains('env-grid') || p.classList.contains('rollout-grid'))) {
