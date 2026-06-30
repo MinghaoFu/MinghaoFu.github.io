@@ -210,7 +210,7 @@ export const papers = [
     thumb: "images/papers/online.png",
     albumId: "latent-space",
     popular: true,
-    links: { arxiv: "https://arxiv.org/pdf/2510.18281" },
+    links: { arxiv: "https://arxiv.org/pdf/2510.18281", code: "files/online-time-series-forecasting-supplementary.zip" },
   },
 ];
 

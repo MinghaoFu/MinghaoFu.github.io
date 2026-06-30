@@ -663,7 +663,14 @@ function linkButtonsHTML(p){
   const btns = [];
   if (L.project) btns.push(`<a class="link-btn-icon" data-link href="${L.project}" target="_blank" rel="noopener" title="Project page" aria-label="Project page">${ICON.project}</a>`);
   if (L.arxiv)   btns.push(`<a class="link-btn-icon" data-link href="${L.arxiv}"   target="_blank" rel="noopener" title="arXiv / PDF"  aria-label="arXiv / PDF">${ICON.arxiv}</a>`);
-  if (L.code)    btns.push(`<a class="link-btn-icon" data-link href="${L.code}"    target="_blank" rel="noopener" title="Code"         aria-label="Code">${ICON.github}</a>`);
+  if (L.code) {
+    // A local file (e.g. a supplementary .zip) downloads on click; an external
+    // repo URL opens in a new tab. Same GitHub icon either way.
+    const codeIsFile = /\.(zip|tgz|gz|tar)$/i.test(L.code) || !/^https?:\/\//i.test(L.code);
+    btns.push(codeIsFile
+      ? `<a class="link-btn-icon" data-link href="${L.code}" download title="Download code" aria-label="Download code">${ICON.github}</a>`
+      : `<a class="link-btn-icon" data-link href="${L.code}" target="_blank" rel="noopener" title="Code" aria-label="Code">${ICON.github}</a>`);
+  }
   if (L.dataset) btns.push(`<a class="link-btn-icon" data-link href="${L.dataset}" target="_blank" rel="noopener" title="Dataset"      aria-label="Dataset">${ICON.dataset}</a>`);
   return `<div class="col-actions">${btns.join("")}</div>`;
 }
