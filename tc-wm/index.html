@@ -6,7 +6,7 @@
   <meta name="keywords" content="TC-WM, Task-Centric World Models, world models, world model, visual foundation models, DINOv2, representation learning, offline reinforcement learning, planning, control, proprioception, parsimonious latents, Minghao Fu">
   <meta name="author" content="Minghao Fu, Fan Feng, Nicklas Hansen, Biwei Huang">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TC-WM: Back to Parsimonious Latents &mdash; Task-Centric World Models from Visual Foundations</title>
+  <title>Back to Parsimonious Latents &mdash; Task-Centric World Models from Visual Foundations</title>
   <link rel="canonical" href="https://minghaofu.com/tc-wm/">
 
   <!-- Open Graph -->
@@ -113,12 +113,12 @@
           <h1 class="title is-1 publication-title">Back to <span class="accent">Parsimonious Latents</span>:</h1>
           <p class="publication-subtitle">Learning Task-Centric World Models from Visual Foundations</p>
           <p class="publication-authors">
-            <a href="https://minghaofu.com/" target="_blank" rel="noopener">Minghao Fu</a><sup>1</sup>
-            &nbsp; <a href="https://fan-feng.com/" target="_blank" rel="noopener">Fan Feng</a><sup>1</sup>
-            &nbsp; <a href="https://www.nicklashansen.com/" target="_blank" rel="noopener">Nicklas Hansen</a><sup>1</sup>
-            &nbsp; <a href="https://biweihuang.com/" target="_blank" rel="noopener">Biwei Huang</a><sup>1</sup>
+            <a href="https://minghaofu.com/" target="_blank" rel="noopener">Minghao Fu</a>
+            &nbsp; <a href="https://fan-feng.com/" target="_blank" rel="noopener">Fan Feng</a>
+            &nbsp; <a href="https://www.nicklashansen.com/" target="_blank" rel="noopener">Nicklas Hansen</a>
+            &nbsp; <a href="https://biweihuang.com/" target="_blank" rel="noopener">Biwei Huang</a>
           </p>
-          <p class="publication-affiliation"><sup>1</sup>University of California, San Diego</p>
+          <p class="publication-affiliation">University of California, San Diego</p>
           <div class="publication-links">
             <a href="https://arxiv.org/abs/2605.25620" class="btn is-accent" target="_blank" rel="noopener" aria-label="arXiv preprint">
               <span class="icon"><i class="fas fa-book"></i></span><span>arXiv</span>
@@ -128,6 +128,9 @@
             </a>
             <a href="https://github.com/MinghaoFu/TC-WM" class="btn" target="_blank" rel="noopener" aria-label="Code repository">
               <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+            </a>
+            <a href="#task-centric" class="btn" aria-label="Interactive demo">
+              <span class="icon"><i class="fas fa-hand-pointer"></i></span><span>Interactive Demo</span>
             </a>
           </div>
         </div>
@@ -142,7 +145,7 @@
     <h2 class="title is-3 overview-q">What latent space should a world model learn for planning and control beyond visual?</h2>
     <div class="teaser-wrap">
       <video class="teaser-video" controls playsinline preload="metadata" poster="./static/videos/tcwm_teaser_poster.jpg">
-        <source src="./static/videos/tcwm_teaser.mp4" type="video/mp4">
+        <source src="./static/videos/tcwm_teaser.mp4?v=6" type="video/mp4">
       </video>
     </div>
   </div>
@@ -165,7 +168,7 @@
 <section class="section" id="task-centric">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Where the Task-Centric Latent Acts</h2>
-    <p class="section-lede">Pick a task and a latent block. The glow marks where each model's latent drives the predicted change.</p>
+    <p class="section-lede">Pick a task, then switch the latent block. TC-WM splits the compact latent into a task-centric part <em>z<sup>s</sup></em> and a contextual part <em>z<sup>c</sup></em>, and the dynamics roll out both. The glow marks where each block drives the predicted change.</p>
     <div class="tc-card">
       <div class="tc-bar">
         <div class="tc-bar-left">
@@ -232,8 +235,8 @@
       </div>
     </div>
     <p class="figure-caption"><strong>Where the task-centric latent acts.</strong>
-      <span id="fp_cap_anim">As the demonstration replays, the glow marks where each model's latent drives the change. With alignment it stays on the gripper and manipulated object; without it, or directly applying visual embeddings, it spreads across the scene.</span>
-      <span id="fp_cap_static" hidden>Accumulated over the whole demonstration, the glow marks where each model's latent drives the change. With alignment it stays on the gripper and manipulated object; without it, or directly applying visual embeddings, it spreads wider.</span>
+      <span id="fp_cap_anim">As the demonstration replays, the glow marks where each latent block drives the change. The dynamics roll out the full latent <em>z = [z<sup>s</sup>, z<sup>c</sup>]</em>. Aligning <em>z<sup>s</sup></em> with proprioception makes it task-centric, so its glow stays on the gripper and manipulated object, the factors an action controls. That frees the complement <em>z<sup>c</sup></em> to capture the contextual visual information, so it spreads over the scene and background. Without alignment, or applying the visual embedding directly, the footprint spreads across texture and background, the task-irrelevant content. Such a representation is <em>visual-centric</em>, not <em>task-centric</em>.</span>
+      <span id="fp_cap_static" hidden>Accumulated over the whole demonstration, the glow marks where each latent block drives the change. The dynamics roll out the full latent <em>z = [z<sup>s</sup>, z<sup>c</sup>]</em>. Aligned with proprioception, the task-centric <em>z<sup>s</sup></em> concentrates on the gripper and manipulated object, which frees the complement <em>z<sup>c</sup></em> to capture the contextual visual information and spread over the scene. Without alignment, or applying the visual embedding directly, the footprint spreads across texture and background, the task-irrelevant content. Such a representation is <em>visual-centric</em>, not <em>task-centric</em>.</span>
     </p>
   </div>
 </section>
