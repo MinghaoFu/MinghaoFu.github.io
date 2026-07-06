@@ -53,7 +53,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260620c">
+  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260705a">
   <script>
     /* Enable scroll-reveal before first paint (no flash). Dropped automatically
        under reduced-motion, or if enhance.js fails to load — so content always shows. */
@@ -168,7 +168,7 @@
 <section class="section" id="task-centric">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Where the Task-Centric Latent Acts</h2>
-    <p class="section-lede">Pick a task, then switch the latent block. TC-WM splits the compact latent into a task-centric part <em>z<sup>s</sup></em> and a contextual part <em>z<sup>c</sup></em>, and the dynamics roll out both. The glow marks where each block drives the predicted change.</p>
+    <p class="section-lede">TC-WM splits its compact latent into a task-centric part <em>z<sup>s</sup></em> and a contextual part <em>z<sup>c</sup></em>. The glow marks where a block drives the predicted change &mdash; pick a task and block to compare.</p>
     <div class="tc-card">
       <div class="tc-bar">
         <div class="tc-bar-left">
@@ -228,16 +228,17 @@
           <canvas id="fp_cd" width="224" height="224"></canvas>
         </figure>
       </div>
+      <div class="tc-scrub" id="fp_scrubrow" hidden>
+        <span class="tc-label">Trajectory <b class="tc-val" id="fp_frv">&sum; all</b><span class="tc-scrub-hint"> &middot; drag to step through frames</span></span>
+        <input type="range" id="fp_scrub" min="0" max="100" step="1" value="100" aria-label="Scrub trajectory frames">
+      </div>
       <div class="tc-vsrc" aria-hidden="true">
         <video id="vid_a" muted loop playsinline preload="auto" crossorigin="anonymous"><source src="./static/analysis/clips_pack/square_align.mp4" type="video/mp4"></video>
         <video id="vid_n" muted loop playsinline preload="auto" crossorigin="anonymous"><source src="./static/analysis/clips_pack/square_noalign.mp4" type="video/mp4"></video>
         <video id="vid_d" muted loop playsinline preload="auto" crossorigin="anonymous"><source src="./static/analysis/clips_pack/square_dino.mp4" type="video/mp4"></video>
       </div>
     </div>
-    <p class="figure-caption"><strong>Where the task-centric latent acts.</strong>
-      <span id="fp_cap_anim">As the demonstration replays, the glow marks where each latent block drives the change. The dynamics roll out the full latent <em>z = [z<sup>s</sup>, z<sup>c</sup>]</em>. Aligning <em>z<sup>s</sup></em> with proprioception makes it task-centric, so its glow stays on the gripper and manipulated object, the factors an action controls. That frees the complement <em>z<sup>c</sup></em> to capture the contextual visual information, so it spreads over the scene and background. Without alignment, or applying the visual embedding directly, the footprint spreads across texture and background, the task-irrelevant content. Such a representation is <em>visual-centric</em>, not <em>task-centric</em>.</span>
-      <span id="fp_cap_static" hidden>Accumulated over the whole demonstration, the glow marks where each latent block drives the change. The dynamics roll out the full latent <em>z = [z<sup>s</sup>, z<sup>c</sup>]</em>. Aligned with proprioception, the task-centric <em>z<sup>s</sup></em> concentrates on the gripper and manipulated object, which frees the complement <em>z<sup>c</sup></em> to capture the contextual visual information and spread over the scene. Without alignment, or applying the visual embedding directly, the footprint spreads across texture and background, the task-irrelevant content. Such a representation is <em>visual-centric</em>, not <em>task-centric</em>.</span>
-    </p>
+    <p class="figure-caption"><strong>Reading the glow.</strong> A saliency map: where advancing only that latent block one step changes the decode.</p>
   </div>
 </section>
 
@@ -466,6 +467,16 @@ async function renderStatic(){
   draw('fp_cn',d[curBlock].n,d.base,v.thr,v.gam,v.gain);
   draw('fp_cd',d.dw,d.dwbase,v.thr,v.gam,v.gain);
 }
+function renderScrub(){
+  var s=$('fp_scrub'),pos=+s.value,mx=+s.max;
+  if(pos>=mx){$('fp_frv').innerHTML='&sum; all';renderStatic();return;}
+  var frac=pos/mx;$('fp_frv').textContent=Math.round(frac*100)+'%';
+  var v=syncVals();
+  PANELS.forEach(function(p){var vd=$(p[1]);if(!vd.duration||isNaN(vd.duration))return;
+    vd.onseeked=function(){if(vd.readyState<2||!vd.videoWidth)return;var b=tile(vd,0),g=tile(vd,GX[curBlock]);draw(p[0],g,b,v.thr,v.gam,v.gain);};
+    try{vd.currentTime=Math.min(vd.duration-0.001,frac*vd.duration);}catch(e){}});
+}
+function renderStaticView(){var s=$('fp_scrub');if(s&&+s.value<+s.max){renderScrub();}else{if($('fp_frv'))$('fp_frv').innerHTML='&sum; all';renderStatic();}}
 function loadVideos(t){
   PANELS.forEach(function(p){var vd=$(p[1]);vd.querySelector('source').src=PACKDIR+PACK[t][{vid_a:'a',vid_n:'n',vid_d:'d'}[p[1]]]+'.mp4';vd.load();});
 }
@@ -476,24 +487,25 @@ function stopLoop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
 function setMode(m){
   curMode=m;
   Array.prototype.forEach.call($('tc_modeseg').children,function(b){b.classList.toggle('is-on',b.dataset.mode===m);});
-  $('fp_cap_anim').hidden=(m!=='anim');$('fp_cap_static').hidden=(m==='anim');
+  $('fp_scrubrow').hidden=(m==='anim');
   if(m==='anim'){playVideos();startLoop();}
-  else{stopLoop();pauseVideos();renderStatic();}
+  else{stopLoop();pauseVideos();renderStaticView();}
 }
 $('tc_modeseg').addEventListener('click',function(e){var b=e.target.closest('[data-mode]');if(b)setMode(b.dataset.mode);});
 $('tc_taskpills').addEventListener('click',function(e){
   var b=e.target.closest('[data-task]');if(!b)return;curTask=b.dataset.task;
   Array.prototype.forEach.call(this.children,function(x){x.classList.toggle('is-on',x===b);});
   loadVideos(curTask);
-  if(curMode==='anim')playVideos();else renderStatic();
+  if(curMode==='anim')playVideos();else renderStaticView();
 });
 $('tc_blockseg').addEventListener('click',function(e){
   var b=e.target.closest('[data-block]');if(!b)return;curBlock=b.dataset.block;
   Array.prototype.forEach.call(this.children,function(x){x.classList.toggle('is-on',x===b);});
-  if(curMode!=='anim')renderStatic();
+  if(curMode!=='anim')renderStaticView();
 });
-['fp_thr','fp_gam','fp_gain'].forEach(function(id){$(id).addEventListener('input',function(){if(curMode!=='anim')renderStatic();else syncVals();});});
-$('fp_reset').addEventListener('click',function(){$('fp_thr').value=0.12;$('fp_gam').value=0.80;$('fp_gain').value=1.00;if(curMode!=='anim')renderStatic();else syncVals();});
+['fp_thr','fp_gam','fp_gain'].forEach(function(id){$(id).addEventListener('input',function(){if(curMode!=='anim')renderStaticView();else syncVals();});});
+$('fp_scrub').addEventListener('input',renderScrub);
+$('fp_reset').addEventListener('click',function(){$('fp_thr').value=0.12;$('fp_gam').value=0.80;$('fp_gain').value=1.00;$('fp_scrub').value=100;if(curMode!=='anim')renderStaticView();else syncVals();});
 if(new URLSearchParams(location.search).get('fpmode')==='static')curMode='static';
 loadVideos(curTask);
 setMode(curMode);
