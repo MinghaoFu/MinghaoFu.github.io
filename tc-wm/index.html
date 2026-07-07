@@ -53,7 +53,7 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260705a">
+  <link rel="stylesheet" href="./static/css/tcwm.css?v=20260705b">
   <script>
     /* Enable scroll-reveal before first paint (no flash). Dropped automatically
        under reduced-motion, or if enhance.js fails to load — so content always shows. */
@@ -504,9 +504,10 @@ $('tc_blockseg').addEventListener('click',function(e){
   if(curMode!=='anim')renderStaticView();
 });
 ['fp_thr','fp_gam','fp_gain'].forEach(function(id){$(id).addEventListener('input',function(){if(curMode!=='anim')renderStaticView();else syncVals();});});
-$('fp_scrub').addEventListener('input',renderScrub);
-$('fp_reset').addEventListener('click',function(){$('fp_thr').value=0.12;$('fp_gam').value=0.80;$('fp_gain').value=1.00;$('fp_scrub').value=100;if(curMode!=='anim')renderStaticView();else syncVals();});
+$('fp_scrub').addEventListener('input',function(){$('fp_scrub').style.setProperty('--pct',$('fp_scrub').value+'%');renderScrub();});
+$('fp_reset').addEventListener('click',function(){$('fp_thr').value=0.12;$('fp_gam').value=0.80;$('fp_gain').value=1.00;$('fp_scrub').value=100;$('fp_scrub').style.setProperty('--pct','100%');if(curMode!=='anim')renderStaticView();else syncVals();});
 if(new URLSearchParams(location.search).get('fpmode')==='static')curMode='static';
+$('fp_scrub').style.setProperty('--pct',$('fp_scrub').value+'%');
 loadVideos(curTask);
 setMode(curMode);
 })();
