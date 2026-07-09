@@ -695,3 +695,25 @@ footer.footer .content p {
   .tc-bar{align-items:flex-start}
   .tc-panels{grid-template-columns:1fr}
 }
+
+/* scaling section */
+.cosmos-lead{color:var(--ink);margin:0 0 0.4rem;}
+.cosmos-key{white-space:nowrap;}
+.cosmos-key .k{font-family:var(--font-mono);font-size:0.82em;}
+.cosmos-key .truth{color:var(--ink);}
+.cosmos-key .tc{color:var(--accent);font-weight:600;}
+.cosmos-key .base{color:var(--ink-muted);}
+.cosmos-grid{display:flex;flex-direction:column;gap:1.4rem;margin-top:1.5rem;}
+.cosmos-card{border:1px solid var(--rule);border-radius:12px;padding:0.9rem 1rem 1rem;background:var(--bg-card);box-shadow:var(--shadow-card);}
+.cosmos-card .rollout-task{margin:0 0 0.6rem;}
+.cosmos-labels{display:flex;gap:0.4rem;margin-bottom:0.5rem;}
+.cosmos-labels .cl{flex:1;font-family:var(--font-mono);font-size:0.66rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:0.45rem;color:var(--ink-muted);}
+.cosmos-labels .cl::before{content:"";width:9px;height:9px;border-radius:2px;background:currentColor;flex:none;}
+.cosmos-labels .truth{color:var(--ink);}
+.cosmos-labels .tc{color:var(--accent);}
+.cosmos-labels .base{color:var(--ink-muted);}
+.cosmos-vid{position:relative;line-height:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#0b0d10;}
+.cosmos-vid video{width:100%;display:block;}
+.cosmos-vid .dv{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.30);pointer-events:none;z-index:2;}
+.cosmos-vid .dv.a{left:33.333%}
+.cosmos-vid .dv.b{left:66.666%}
