@@ -100,6 +100,7 @@
       <a class="navbar-item" href="#rollouts">Rollouts</a>
       <a class="navbar-item" href="#analysis">Analysis</a>
       <a class="navbar-item" href="#datasets">Environments</a>
+      <a class="navbar-item" href="#scaling-video">Scaling</a>
     </div>
   </div>
 </nav>
@@ -132,6 +133,9 @@
             <a href="#task-centric" class="btn" aria-label="Interactive demo">
               <span class="icon"><i class="fas fa-hand-pointer"></i></span><span>Interactive Demo</span>
             </a>
+            <a href="#scaling-video" class="btn" aria-label="16B backbone video-model scaling demo">
+              <span class="icon" style="font-size:1.2em;line-height:1" aria-hidden="true">🦖</span><span>16B Backbone</span>
+            </a>
           </div>
         </div>
       </div>
@@ -145,7 +149,7 @@
     <h2 class="title is-3 overview-q">What latent space should a world model learn for planning and control beyond visual?</h2>
     <div class="teaser-wrap">
       <video class="teaser-video" controls playsinline preload="metadata" poster="./static/videos/tcwm_teaser_poster.jpg">
-        <source src="./static/videos/tcwm_teaser.mp4?v=7" type="video/mp4">
+        <source src="./static/videos/tcwm_teaser_v3.mp4?v=2" type="video/mp4">
       </video>
     </div>
   </div>
@@ -375,7 +379,7 @@
 <section class="section" id="datasets">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Environments</h2>
-    <p class="section-lede">Nine offline visual-control tasks: navigation, locomotion, and manipulation &mdash; trained on images + actions + proprioception, no reward.</p>
+    <p class="section-lede">Nine offline visual-control tasks: navigation, locomotion, and manipulation. We use images, actions, and proprioception during training, without reward.</p>
     <div class="env-grid">
       <div class="env-card">
         <img src="./static/datasets/gifs/point_maze_episode_009.gif" alt="Maze trajectory" loading="lazy">
@@ -414,6 +418,42 @@
         <span class="env-tag">Hopper</span>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section" id="scaling-video">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Scaling to a Video World Model</h2>
+    <p class="cosmos-lead">The method is not specific to DINOv2 or to simulation. We finetune <strong>Cosmos3-Nano</strong>, a 16B video foundation model, with the task-centric objective &mdash; denoted <strong>TC-Cosmos3</strong> &mdash; and evaluate it on real <a href="https://droid-dataset.github.io/">DROID</a> robot episodes. Each clip is conditioned on identical ground-truth actions from a common start frame, so any divergence reflects the world model rather than the policy: <span class="cosmos-key"><span class="k truth">Ground truth</span> &middot; <span class="k tc">TC-Cosmos3</span> &middot; <span class="k base">Cosmos3-Nano</span></span>.</p>
+
+    <div class="cosmos-grid">
+      <div class="cosmos-card">
+        <p class="rollout-task"><code>DROID ep 5</code> &nbsp;&middot;&nbsp; Put the blocks into the bowl, then wipe the table</p>
+        <div class="cosmos-labels"><span class="cl truth">Ground truth</span><span class="cl tc">TC-Cosmos3</span><span class="cl base">Cosmos3-Nano</span></div>
+        <div class="cosmos-vid"><span class="dv a"></span><span class="dv b"></span><video autoplay muted loop playsinline preload="metadata"><source src="./static/videos/cosmos/cosmos_ep5_w0.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="cosmos-card">
+        <p class="rollout-task"><code>DROID ep 10</code> &nbsp;&middot;&nbsp; Remove the cables from the plastic bag and put them on the table</p>
+        <div class="cosmos-labels"><span class="cl truth">Ground truth</span><span class="cl tc">TC-Cosmos3</span><span class="cl base">Cosmos3-Nano</span></div>
+        <div class="cosmos-vid"><span class="dv a"></span><span class="dv b"></span><video autoplay muted loop playsinline preload="metadata"><source src="./static/videos/cosmos/cosmos_ep10_w1.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="cosmos-card">
+        <p class="rollout-task"><code>DROID ep 23</code> &nbsp;&middot;&nbsp; Plug the charger head into the adapter</p>
+        <div class="cosmos-labels"><span class="cl truth">Ground truth</span><span class="cl tc">TC-Cosmos3</span><span class="cl base">Cosmos3-Nano</span></div>
+        <div class="cosmos-vid"><span class="dv a"></span><span class="dv b"></span><video autoplay muted loop playsinline preload="metadata"><source src="./static/videos/cosmos/cosmos_ep23_w1.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="cosmos-card">
+        <p class="rollout-task"><code>DROID ep 40</code> &nbsp;&middot;&nbsp; Put the black bottle and the sponge on the top shelf</p>
+        <div class="cosmos-labels"><span class="cl truth">Ground truth</span><span class="cl tc">TC-Cosmos3</span><span class="cl base">Cosmos3-Nano</span></div>
+        <div class="cosmos-vid"><span class="dv a"></span><span class="dv b"></span><video autoplay muted loop playsinline preload="metadata"><source src="./static/videos/cosmos/cosmos_ep40_w0.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="cosmos-card">
+        <p class="rollout-task"><code>DROID ep 52</code> &nbsp;&middot;&nbsp; Remove the screwdriver from the rack and put it in the cup</p>
+        <div class="cosmos-labels"><span class="cl truth">Ground truth</span><span class="cl tc">TC-Cosmos3</span><span class="cl base">Cosmos3-Nano</span></div>
+        <div class="cosmos-vid"><span class="dv a"></span><span class="dv b"></span><video autoplay muted loop playsinline preload="metadata"><source src="./static/videos/cosmos/cosmos_ep52_w0.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <p class="figure-caption"><strong>Real-robot video rollouts.</strong> Each panel stitches three camera views (wrist on top, two exterior below). TC-Cosmos3 stays anchored to the gripper and the manipulated object while letting non-interacting background vary &mdash; the same disentanglement measured in simulation, now carried by a 16B video model on real hardware.</p>
   </div>
 </section>
 
