@@ -364,6 +364,21 @@ input{font:inherit;color:inherit}
   white-space:nowrap;
   padding-bottom:.08em;
 }
+/* Chinese name shown beside the English one (also a search keyword) */
+.hero-title .name-zh{
+  font-size:.42em;
+  font-weight:700;
+  letter-spacing:0;
+  opacity:.72;
+  margin-left:.28em;
+  vertical-align:.12em;
+}
+.about-card .name .name-zh{
+  font-size:.62em;
+  font-weight:700;
+  opacity:.7;
+  margin-left:.32em;
+}
 /* Album titles can be long — allow them to wrap normally */
 .hero-title.album{
   font-size:clamp(36px, 6vw, 88px);
