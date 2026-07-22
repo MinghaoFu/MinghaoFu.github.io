@@ -312,7 +312,7 @@ function renderHome(view){
           <span class="verified" title="Verified researcher">${ICON.verified}</span>
           <span>Verified Researcher</span>
         </div>
-        <h1 class="hero-title">${escapeHtml(me.name)}</h1>
+        <h1 class="hero-title">${escapeHtml(me.name)}${me.nameZh ? `<span class="name-zh" lang="zh-Hans">${escapeHtml(me.nameZh)}</span>` : ""}</h1>
         <p class="hero-tagline">${escapeHtml(me.tagline)}</p>
         <div class="hero-meta">
           <span><span data-readers>${readersText()}</span> monthly readers</span>
@@ -374,7 +374,7 @@ function renderHome(view){
           <img src="${me.photo}" alt="${escapeHtml(me.name)}">
           <div>
             <h3>About</h3>
-            <div class="name">${escapeHtml(me.name)}</div>
+            <div class="name">${escapeHtml(me.name)}${me.nameZh ? `<span class="name-zh" lang="zh-Hans">${escapeHtml(me.nameZh)}</span>` : ""}</div>
             <div class="bio">${me.bio.map(p => `<p>${p}</p>`).join("")}</div>
             ${me.contact ? `<div class="contact">Email: <span>${escapeHtml(me.contact)}</span></div>` : ""}
           </div>
