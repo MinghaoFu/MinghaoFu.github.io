@@ -116,6 +116,6 @@ Drop a self-contained folder at the repo root (see `tc-wm/` for an example) and 
 
 ## License
 
-The **code** in this repository is free to reuse and adapt for your own personal site.
+The **code** — HTML, CSS, JavaScript and the layout/theme system — is released under the [MIT License](LICENSE). Fork it, adapt it, and build your own site on it.
 
-The **content** — text, biography, photographs, CV, publications, paper figures and blog posts — belongs to the original author. Replace it with your own before publishing.
+The **content** is not covered by that license. Text, biography, photographs, CV, publications, paper figures and blog posts remain © Minghao Fu, all rights reserved. Replace them with your own before publishing a fork.
