@@ -4,9 +4,6 @@
 
 export const me = {
   name: "Minghao Fu",
-  // Chinese name, rendered next to the English one (hero + About) so the page
-  // is findable by searching 付铭昊, and mirrored in <title>/JSON-LD alternateName.
-  nameZh: "付铭昊",
   handle: "MinghaoFu",
   role: "Ph.D. · UC San Diego · HDSI",
   verified: true,
