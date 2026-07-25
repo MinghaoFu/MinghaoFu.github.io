@@ -54,10 +54,8 @@ export const albums = [
   },
 ];
 
-// Author homepages — single source of truth. linkifyAuthors() in app.js wraps
-// any author name found here in a link to their site; names not listed render
-// as plain text. Only personal homepages that were identity-verified are kept
-// here (no Google Scholar / LinkedIn / directory-only entries, by design).
+// Author homepages. Any name listed here is auto-linked wherever it appears;
+// others stay plain text. Personal sites only (no Scholar / LinkedIn).
 export const authorLinks = {
   "Biwei Huang": "https://biweihuang.com",
   "Kun Zhang": "https://www.andrew.cmu.edu/user/kunz1/index.html",

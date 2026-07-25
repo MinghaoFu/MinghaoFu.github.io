@@ -3,9 +3,8 @@ import {
   papersByAlbum, albumById, paperById, popularPapers,
 } from "./data.js";
 
-// Wrap each author name that has a verified homepage (authorLinks in data.js)
-// in a link. Splits on commas; keeps Minghao's <em> and the */† markers
-// outside the link; names not in the map pass through as plain text.
+// Auto-link author names that have a homepage in authorLinks. Splits on commas;
+// keeps the <em> and any */† markers outside the link.
 function linkifyAuthors(authorsHtml){
   return String(authorsHtml).split(/,\s*/).map(seg => {
     if (seg.includes("<em>")) return seg;            // own name — never linked
@@ -664,8 +663,7 @@ function linkButtonsHTML(p){
   if (L.project) btns.push(`<a class="link-btn-icon" data-link href="${L.project}" target="_blank" rel="noopener" title="Project page" aria-label="Project page">${ICON.project}</a>`);
   if (L.arxiv)   btns.push(`<a class="link-btn-icon" data-link href="${L.arxiv}"   target="_blank" rel="noopener" title="arXiv / PDF"  aria-label="arXiv / PDF">${ICON.arxiv}</a>`);
   if (L.code) {
-    // A local file (e.g. a supplementary .zip) downloads on click; an external
-    // repo URL opens in a new tab. Same GitHub icon either way.
+    // Local file (e.g. a .zip) downloads on click; an external repo opens in a new tab.
     const codeIsFile = /\.(zip|tgz|gz|tar)$/i.test(L.code) || !/^https?:\/\//i.test(L.code);
     btns.push(codeIsFile
       ? `<a class="link-btn-icon" data-link href="${L.code}" download title="Download code" aria-label="Download code">${ICON.github}</a>`
