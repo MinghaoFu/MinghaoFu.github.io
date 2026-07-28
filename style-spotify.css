@@ -769,6 +769,43 @@ input{font:inherit;color:inherit}
 .track:hover .col-actions,
 .track:focus-within .col-actions{opacity:1}
 .col-actions:empty{display:none}
+/* Player link buttons are always visible (not gated on row hover). */
+.player-right .col-actions{opacity:1}
+
+/* Paper-name hover-to-jump link (list rows + player). Reveals a → and opens the
+   project page (or arXiv) in a new tab; the rest of a row still plays/selects. */
+a.t.jump, a.pl-title.jump{
+  display:flex;
+  align-items:center;
+  min-width:0;
+  color:var(--text);
+  text-decoration:none;
+  cursor:pointer;
+}
+a.t.jump .jt-text, a.pl-title.jump .jt-text{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  min-width:0;
+}
+a.t.jump:hover .jt-text, a.pl-title.jump:hover .jt-text{color:var(--link)}
+.jump-arrow{
+  flex:0 0 auto;
+  max-width:0;
+  overflow:hidden;
+  opacity:0;
+  color:var(--link);
+  font-weight:700;
+  transform:translateX(-3px);
+  transition:max-width .16s ease, opacity .16s ease, margin-left .16s ease, transform .16s ease;
+}
+a.t.jump:hover .jump-arrow, a.pl-title.jump:hover .jump-arrow,
+a.t.jump:focus-visible .jump-arrow, a.pl-title.jump:focus-visible .jump-arrow{
+  max-width:1.4em;
+  opacity:1;
+  margin-left:6px;
+  transform:none;
+}
 .link-btn-icon{
   width:32px;
   height:32px;
@@ -1295,6 +1332,13 @@ input{font:inherit;color:inherit}
   .about-card{grid-template-columns:1fr}
   .about-card img{width:140px;height:140px}
   .timeline-section{grid-template-columns:1fr}
+  /* Shrink the player bar on smaller screens */
+  :root{--player-h:74px}
+  #player{padding:6px 12px;gap:10px}
+  .player-left{gap:10px}
+  .player-left .thumb,
+  .player-left .thumb-fallback{width:44px;height:44px}
+  .player-left .pl-title{font-size:13px}
 }
 @media (max-width: 600px){
   #app{
@@ -1310,8 +1354,21 @@ input{font:inherit;color:inherit}
   .view-hero{padding:16px;margin:0 -16px 16px;min-height:280px}
   .hero-photo{width:140px;height:140px}
   .hero-title{font-size:42px}
-  .player-left{flex-basis:50%}
-  .player-right{display:none}
+  /* Compact player: small thumb, hide authors, keep the link buttons */
+  :root{--player-h:58px}
+  .player-left{flex:1 1 auto;gap:8px}
+  .player-left .thumb,
+  .player-left .thumb-fallback{width:38px;height:38px}
+  .player-left .pl-sub{display:none}
+  .player-left .pl-title{font-size:12.5px}
+  .player-center{flex:0 0 auto}
+  .player-controls{gap:10px}
+  .player-controls .icon-btn{width:26px;height:26px}
+  .player-controls .icon-btn svg{width:16px;height:16px}
+  .play-pause{width:28px;height:28px}
+  .play-pause svg{width:14px;height:14px}
+  .player-right{display:flex;flex:0 0 auto}
+  .player-right .link-btn-icon{width:30px;height:30px}
   .tracklist-header,
   .track{grid-template-columns:32px minmax(0,1fr)}
   .tracklist.popular .tracklist-header,

@@ -673,6 +673,21 @@ function linkButtonsHTML(p){
   return `<div class="col-actions">${btns.join("")}</div>`;
 }
 
+// Where "open this paper" should jump: project webpage first, then arXiv/PDF.
+function primaryLink(p){
+  const L = (p && p.links) || {};
+  return L.project || L.arxiv || null;
+}
+// Paper title as a hover-to-reveal-arrow jump link (opens primaryLink in a new
+// tab). Falls back to a plain title element when there's nothing to open.
+// `cls` is the title class ("t" for rows, "pl-title" for the player).
+function titleJump(p, cls){
+  const t = escapeHtml(p.title);
+  const url = primaryLink(p);
+  if (!url) return `<div class="${cls}">${t}</div>`;
+  return `<a class="${cls} jump" data-link href="${url}" target="_blank" rel="noopener" title="Open paper"><span class="jt-text">${t}</span><span class="jump-arrow" aria-hidden="true">→</span></a>`;
+}
+
 // Popular row: # | thumb | title+venue badge | actions
 function popularRowHTML(p, num){
   const isPlaying = player.paperId === p.id && player.isPlaying;
@@ -684,7 +699,7 @@ function popularRowHTML(p, num){
       <div class="col-thumb">${thumbHTML(p)}</div>
       <div class="col-title">
         <div class="meta">
-          <div class="t">${escapeHtml(p.title)}</div>
+          ${titleJump(p, "t")}
           <div class="a">${linkifyAuthors(p.authors)}</div>
           <div class="meta-row"><span class="${venueClass}">${escapeHtml(p.venue)}</span></div>
         </div>
@@ -704,7 +719,7 @@ function trackRowHTML(p, num, opts = {}){
     <div class="col-title">
       ${thumbHTML(p)}
       <div class="meta">
-        <div class="t">${escapeHtml(p.title)}</div>
+        ${titleJump(p, "t")}
         <div class="a">${linkifyAuthors(p.authors)}</div>
       </div>
     </div>
@@ -773,7 +788,7 @@ function renderPlayer(){
     <div class="player-left">
       ${p ? thumbHTML(p) : `<div class="thumb-fallback" style="background:#222">♪</div>`}
       <div class="pl-meta">
-        <div class="pl-title">${p ? escapeHtml(p.title) : "Select a paper to read"}</div>
+        ${p ? titleJump(p, "pl-title") : `<div class="pl-title">Select a paper to read</div>`}
         <div class="pl-sub">${p ? linkifyAuthors(p.authors) : escapeHtml(me.name)}</div>
       </div>
     </div>
@@ -786,7 +801,7 @@ function renderPlayer(){
       </div>
     </div>
 
-    <div class="player-right"></div>
+    <div class="player-right">${p ? linkButtonsHTML(p) : ""}</div>
   `;
   node.querySelector('[data-act="toggle"]')?.addEventListener("click", togglePlay);
   node.querySelector('[data-act="prev"]')?.addEventListener("click", () => nextTrack(-1));
