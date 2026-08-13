@@ -61,6 +61,8 @@
           t = (h >= 7 && h < 19) ? 'light' : 'dark';
         }
         document.documentElement.setAttribute('data-theme', t);
+        // Paint the themed background immediately, before the stylesheet loads.
+        document.documentElement.style.backgroundColor = (t === 'light') ? '#ffffff' : '#121212';
         var m = document.querySelector('meta[name="theme-color"]');
         if (m) m.content = (t === 'light') ? '#ffffff' : '#121212';
       }catch(e){}
@@ -71,12 +73,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style-spotify.css?v=20260728a">
+  <link rel="modulepreload" href="js/app.js?v=20260728a">
+  <link rel="modulepreload" href="js/data.js">
 </head>
 <body>
   <div id="app">
     <aside id="sidebar"></aside>
     <header id="topbar"></header>
-    <main id="view"><noscript-fallback>
+    <main id="view"><noscript>
       <h1>Minghao Fu (付铭昊)</h1>
       <p>Ph.D. student at UC San Diego (Halıcıoğlu Data Science Institute), researching causal representation learning, world models, and reinforcement learning.</p>
       <h2>Selected research</h2>
@@ -90,7 +94,7 @@
         <li><a href="https://www.linkedin.com/in/minghao-fu-80254a270/">LinkedIn</a></li>
         <li><a href="https://minghaofu.com/cv.pdf">Curriculum Vitae (PDF)</a></li>
       </ul>
-    </noscript-fallback></main>
+    </noscript></main>
     <footer id="player"></footer>
   </div>
   <script type="module" src="js/app.js?v=20260728a"></script>
