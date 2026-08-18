@@ -16,7 +16,7 @@ export const me = {
   // Shown obfuscated ([at]/[dot]) in the About card to deter scrapers.
   contact: "isminghaofu [at] gmail [dot] com",
   bio: [
-    'Ph.D. student at the Halıcıoğlu Data Science Institute, <a href="https://www.ucsd.edu/">UC San Diego</a>, advised by <a href="https://biweihuang.com/">Biwei Huang</a>.',
+    'Ph.D. student at the Halıcıoğlu Data Science Institute, <a href="https://www.ucsd.edu/">UC San Diego</a>.',
     'Earlier, I earned my M.S. in the Machine Learning Department at <a href="https://mbzuai.ac.ae/">MBZUAI</a>, advised by <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>, and was a visiting student at the CLeaR Lab at <a href="https://www.cmu.edu/">CMU</a>, where I worked with <a href="https://www.cmu.edu/dietrich/philosophy/people/faculty/spirtes.html">Peter Spirtes</a>, <a href="https://www.cmu.edu/dietrich/philosophy/people/emeritus/glymour.html">Clark Glymour</a>, and <a href="https://www.andrew.cmu.edu/user/kunz1/index.html">Kun Zhang</a>. I received my B.S. in Software Engineering from <a href="https://en.uestc.edu.cn/">UESTC</a> and interned with the Ark NLP Group at Shanghai AI Lab.',
     'My research pursues (1) the theoretical foundations of representation learning, which highlight the importance of (2) collecting diverse data in a principled way — <em>no data diversity, no model intelligence</em>; and (3) how to marry the data diversity to model intelligence, scaling physical world models from first principles.'
   ],
@@ -251,7 +251,6 @@ export const education = [
     what: "Ph.D., Halıcıoğlu Data Science Institute",
     when: "Aug 2025 – Present",
     logo: "images/schools/ucsd.png",
-    advisor: '<a href="https://biweihuang.com/">Biwei Huang</a>',
   },
   {
     where: "Carnegie Mellon University",
@@ -276,7 +275,6 @@ export const education = [
 ];
 
 export const experience = [
-  { where: "ByteDance",       what: "Research Scientist Intern, Foundation Team", when: "Jun 2026 – Sep 2026", location: "San Jose, CA", logo: "images/schools/bytedance.png" },
   { where: "Cradle AI",       what: "Cofounder & CTO",                            when: "Jun 2024 – Jun 2025", location: "Abu Dhabi, UAE", logo: "images/schools/cradle.png" },
   { where: "Shanghai AI Lab", what: "Research Intern, Ark NLP Group",             when: "Nov 2022 – Mar 2023", location: "Shanghai, China", logo: "images/schools/shanghai-ai-lab.png" },
 ];
