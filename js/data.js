@@ -251,6 +251,7 @@ export const education = [
     what: "Ph.D., Halıcıoğlu Data Science Institute",
     when: "Aug 2025 – Present",
     logo: "images/schools/ucsd.png",
+    advisor: '<a href="https://biweihuang.com/">Biwei Huang</a>',
   },
   {
     where: "Carnegie Mellon University",
