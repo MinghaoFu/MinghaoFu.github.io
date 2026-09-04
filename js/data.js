@@ -111,7 +111,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/scar.png",
     albumId: "world-models",
-    popular: true,
     links: { arxiv: "https://arxiv.org/pdf/2605.16412" },
   },
   // ===== ICML 2026 (July 2026) =====
@@ -150,7 +149,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/dreamsac.png",
     albumId: "world-models",
-    popular: true,
     links: {
       arxiv: "https://arxiv.org/pdf/2603.07545",
       code:  "https://github.com/tangjzh/DreamSAC",
@@ -166,7 +164,10 @@ export const papers = [
     thumb: "images/papers/adadiff.png",
     albumId: "latent-space",
     popular: true,
-    links: { arxiv: "https://openreview.net/pdf?id=lZ2iSl8ihf" },
+    links: {
+      arxiv:   "https://arxiv.org/abs/2605.16054",
+      project: "https://sites.google.com/view/ada-diffuser/home",
+    },
   },
   {
     id: "personax",
@@ -176,7 +177,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/personaX.png",
     albumId: "latent-space",
-    popular: true,
     links: {
       arxiv:   "https://arxiv.org/pdf/2509.11362",
       project: "webpages/PersonaX/index.html",
@@ -207,7 +207,6 @@ export const papers = [
     year: 2025,
     thumb: "images/papers/online.png",
     albumId: "latent-space",
-    popular: true,
     links: { arxiv: "https://arxiv.org/pdf/2510.18281", code: "files/online-time-series-forecasting-supplementary.zip" },
   },
 ];

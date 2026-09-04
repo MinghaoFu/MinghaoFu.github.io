@@ -359,8 +359,7 @@ function renderHome(view){
           <a class="section-link" href="#/search?q=">Show all</a>
         </div>
         <div class="filter-chips" id="disco-chips">
-          <button class="chip active" data-filter="all">Popular releases</button>
-          <button class="chip" data-filter="album">Albums</button>
+          <button class="chip active" data-filter="album">Albums</button>
         </div>
         <div class="card-grid" id="disco-grid">
           ${albums.map(a => albumCardHTML(a)).join("")}
