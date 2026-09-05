@@ -115,6 +115,17 @@ export const papers = [
   },
   // ===== ICML 2026 (July 2026) =====
   {
+    id: "task-sufficient-wams",
+    title: "Learning Task-Sufficient World Models by Synergizing Agentic Exploration and Structured Modeling",
+    authors: 'Fan Feng, Yujia Zheng, <em>Minghao Fu</em>, Yongqiang Chen, Guangyi Chen, Kevin Murphy, Biwei Huang, Kun Zhang',
+    venue: "ICML 2026",
+    year: 2026,
+    thumb: "images/papers/task-sufficient.png",
+    albumId: "world-models",
+    popular: true,
+    links: {},
+  },
+  {
     id: "climate",
     // Displayed title is intentionally shortened (drops "for Climate Analysis")
     // to position me as a representation-learning researcher, not a climate
@@ -126,17 +137,8 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/climate.png",
     albumId: "latent-space",
+    popular: true,
     links: { arxiv: "https://arxiv.org/pdf/2501.12500" },
-  },
-  {
-    id: "task-sufficient-wams",
-    title: "Learning Task-Sufficient World Models by Synergizing Agentic Exploration and Structured Modeling",
-    authors: 'Fan Feng, Yujia Zheng, <em>Minghao Fu</em>, Yongqiang Chen, Guangyi Chen, Kevin Murphy, Biwei Huang, Kun Zhang',
-    venue: "ICML 2026",
-    year: 2026,
-    thumb: "images/papers/task-sufficient.png",
-    albumId: "world-models",
-    links: {},
   },
   // ===== CVPR 2026 (June 2026) =====
   {
