@@ -126,7 +126,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/climate.png",
     albumId: "latent-space",
-    popular: true,
     links: { arxiv: "https://arxiv.org/pdf/2501.12500" },
   },
   {
@@ -137,7 +136,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/task-sufficient.png",
     albumId: "world-models",
-    popular: true,
     links: {},
   },
   // ===== CVPR 2026 (June 2026) =====
@@ -163,7 +161,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/adadiff.png",
     albumId: "latent-space",
-    popular: true,
     links: {
       arxiv:   "https://arxiv.org/abs/2605.16054",
       project: "https://sites.google.com/view/ada-diffuser/home",
@@ -193,7 +190,6 @@ export const papers = [
     year: 2025,
     thumb: "images/papers/child.png",
     albumId: "latent-space",
-    popular: true,
     links: {
       arxiv: "https://arxiv.org/pdf/2510.18310",
       code:  "https://github.com/MinghaoFu/CHiLD",
