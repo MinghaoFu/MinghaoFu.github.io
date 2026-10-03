@@ -87,12 +87,12 @@ export const authorLinks = {
 // NeurIPS → ICLR → ICML → NeurIPS …). Popular section shows the first N
 // `popular: true` entries — keep "frontier" papers at the top.
 export const papers = [
-  // ===== Frontier (just submitted) =====
+  // ===== NeurIPS 2026 (Dec 2026) =====
   {
     id: "tcwm",
     title: "Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations",
     authors: '<em>Minghao Fu</em>, Fan Feng, Nicklas Hansen, Biwei Huang',
-    venue: "arXiv 2026",
+    venue: "NeurIPS 2026",
     year: 2026,
     thumb: "images/papers/tcwm.png",
     albumId: "world-models",
@@ -103,6 +103,7 @@ export const papers = [
       code:    "https://github.com/MinghaoFu/TC-WM",
     },
   },
+  // ===== Frontier (just submitted) =====
   {
     id: "scar",
     title: "SCAR: Self-Supervised Continuous Action Representation Learning",
@@ -233,6 +234,7 @@ export const blogs = [
 // self-supervised learning and world models (RL included as it is tightly
 // coupled to world models). Avoid naming scattered sub-areas.
 export const news = [
+  { date: "Sep 2026", html: 'Our paper on <strong>world models</strong> was accepted to <strong>NeurIPS 2026</strong>.' },
   { date: "May 2026", html: 'New preprint on <strong>world models</strong>: <strong>Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations</strong>.' },
   { date: "May 2026", html: 'Two papers on <strong>representation learning</strong> and <strong>world models</strong> were accepted to <strong>ICML 2026</strong>.' },
   { date: "Mar 2026", html: 'Our paper on <strong>world models</strong> was accepted to <strong>CVPR 2026</strong>.' },
