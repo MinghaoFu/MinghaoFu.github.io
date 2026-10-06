@@ -153,7 +153,7 @@ export const papers = [
     thumb: "images/papers/task-sufficient.png",
     albumId: "world-models",
     popular: true,
-    links: {},
+    links: { arxiv: "https://arxiv.org/abs/2607.04409" },
   },
   {
     id: "climate",
