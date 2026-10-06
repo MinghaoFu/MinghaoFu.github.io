@@ -108,7 +108,7 @@ export const papers = [
   {
     id: "rsigame",
     title: "RSIGame: Autonomous Agentic Game Development with Recursive Self-improvement",
-    authors: 'Wenyi Wu, <em>Minghao Fu</em>, Jieyu You, Kun Zhou, Siqi Liu, Aayush Salvi, Yiheng Lin, Ce Zhang, Xiaohan Lan, Jiahui Zhu, Yujie Zhong, Qi She, Biwei Huang',
+    authors: 'Wenyi Wu*, <em>Minghao Fu*</em>, Jieyu You, Kun Zhou, Siqi Liu, Aayush Salvi, Yiheng Lin, Ce Zhang, Xiaohan Lan, Jiahui Zhu, Yujie Zhong, Qi She, Biwei Huang',
     venue: "Under Review",
     year: 2026,
     thumb: "images/papers/rsigame.png",
