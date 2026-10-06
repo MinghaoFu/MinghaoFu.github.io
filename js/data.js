@@ -106,6 +106,21 @@ export const papers = [
   },
   // ===== Frontier (just submitted) =====
   {
+    id: "rsigame",
+    title: "RSIGame: Autonomous Agentic Game Development with Recursive Self-improvement",
+    authors: 'Wenyi Wu, <em>Minghao Fu</em>, Jieyu You, Kun Zhou, Siqi Liu, Aayush Salvi, Yiheng Lin, Ce Zhang, Xiaohan Lan, Jiahui Zhu, Yujie Zhong, Qi She, Biwei Huang',
+    venue: "Under Review",
+    year: 2026,
+    thumb: "images/papers/rsigame.png",
+    albumId: "world-models",
+    links: {
+      arxiv:   "https://arxiv.org/abs/2609.39045",
+      project: "https://huggingface.co/spaces/RSIGame/rsigame-page",
+      code:    "https://github.com/WenyiWU0111/RSIGame",
+      dataset: "https://huggingface.co/RSIGame",
+    },
+  },
+  {
     id: "lewam",
     title: "LeWAM: End-to-End World and Action Modeling with JEPAs",
     authors: '<em>Minghao Fu*</em>, Tavis Siebert*, Eryk Halicki, Randall Balestriero',
