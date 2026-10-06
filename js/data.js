@@ -58,6 +58,7 @@ export const albums = [
 // others stay plain text. Personal sites only (no Scholar / LinkedIn).
 export const authorLinks = {
   "Biwei Huang": "https://biweihuang.com",
+  "Randall Balestriero": "https://randallbalestriero.github.io",
   "Kun Zhang": "https://www.andrew.cmu.edu/user/kunz1/index.html",
   "Nicklas Hansen": "https://www.nicklashansen.com",
   "Kevin Murphy": "https://www.cs.ubc.ca/~murphyk/",
@@ -104,6 +105,19 @@ export const papers = [
     },
   },
   // ===== Frontier (just submitted) =====
+  {
+    id: "lewam",
+    title: "LeWAM: End-to-End World and Action Modeling with JEPAs",
+    authors: '<em>Minghao Fu*</em>, Tavis Siebert*, Eryk Halicki, Randall Balestriero',
+    venue: "Under Review",
+    year: 2026,
+    thumb: "images/papers/lewam.png",
+    albumId: "world-models",
+    links: {
+      project: "https://le-wam.github.io/",
+      code:    "https://github.com/MinghaoFu/lewam",
+    },
+  },
   {
     id: "scar",
     title: "SCAR: Self-Supervised Continuous Action Representation Learning",
