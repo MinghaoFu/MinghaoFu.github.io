@@ -350,7 +350,6 @@ function renderHome(view){
         <div class="tracklist popular" id="popular-list">
           ${top.map((p,i) => popularRowHTML(p, i+1)).join("")}
         </div>
-        ${papers.length > top.length ? `<div style="margin-top:8px"><button class="section-link" id="popular-toggle">See more</button></div>` : ""}
       </section>
 
       <section class="section">
@@ -437,18 +436,6 @@ function renderHome(view){
     const L = target.links || {};
     const url = L.arxiv || L.project || L.code || L.dataset;
     if (url) window.open(url, "_blank", "noopener");
-  });
-  // "See more" toggle on Popular: expand to all papers, then collapse back.
-  const popToggle = view.querySelector("#popular-toggle");
-  const popList = view.querySelector("#popular-list");
-  let expanded = false;
-  popToggle?.addEventListener("click", () => {
-    expanded = !expanded;
-    const rows = expanded ? papers : popularPapers(5);
-    popList.innerHTML = rows.map((p,i) => popularRowHTML(p, i+1)).join("");
-    bindTrackHandlers(popList);
-    highlightPlayingRows();
-    popToggle.textContent = expanded ? "Show less" : "See more";
   });
   // Refresh visit counter (first hit per session = increment, then read-only).
   refreshReaderCount();
