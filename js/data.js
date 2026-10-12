@@ -95,7 +95,7 @@ export const papers = [
     authors: '<em>Minghao Fu*</em>, Tavis Siebert*, Eryk Halicki, Randall Balestriero',
     venue: "Preprint",
     year: 2026,
-    thumb: "images/papers/lewam.png",
+    thumb: "images/papers/lewam.gif",
     albumId: "world-models",
     popular: true,
     links: {
