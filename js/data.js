@@ -88,6 +88,22 @@ export const authorLinks = {
 // NeurIPS → ICLR → ICML → NeurIPS …). Popular section shows the first N
 // `popular: true` entries — keep "frontier" papers at the top.
 export const papers = [
+  // ===== Preprints =====
+  {
+    id: "lewam",
+    title: "LeWAM: End-to-End World and Action Modeling with JEPAs",
+    authors: '<em>Minghao Fu*</em>, Tavis Siebert*, Eryk Halicki, Randall Balestriero',
+    venue: "Preprint",
+    year: 2026,
+    thumb: "images/papers/lewam.png",
+    albumId: "world-models",
+    popular: true,
+    links: {
+      arxiv:   "https://minghaofu.com/files/lewam.pdf",
+      project: "https://le-wam.github.io/",
+      code:    "https://github.com/MinghaoFu/lewam",
+    },
+  },
   // ===== NeurIPS 2026 (Dec 2026) =====
   {
     id: "tcwm",
@@ -118,21 +134,6 @@ export const papers = [
       project: "https://huggingface.co/spaces/RSIGame/rsigame-page",
       code:    "https://github.com/WenyiWU0111/RSIGame",
       dataset: "https://huggingface.co/RSIGame",
-    },
-  },
-  {
-    id: "lewam",
-    title: "LeWAM: End-to-End World and Action Modeling with JEPAs",
-    authors: '<em>Minghao Fu*</em>, Tavis Siebert*, Eryk Halicki, Randall Balestriero',
-    venue: "Preprint",
-    year: 2026,
-    thumb: "images/papers/lewam.png",
-    albumId: "world-models",
-    popular: true,
-    links: {
-      arxiv:   "https://minghaofu.com/files/lewam.pdf",
-      project: "https://le-wam.github.io/",
-      code:    "https://github.com/MinghaoFu/lewam",
     },
   },
   {
@@ -170,7 +171,10 @@ export const papers = [
     thumb: "images/papers/climate.png",
     albumId: "latent-space",
     popular: true,
-    links: { arxiv: "https://arxiv.org/pdf/2501.12500" },
+    links: {
+      arxiv: "https://arxiv.org/pdf/2501.12500",
+      code:  "https://github.com/MinghaoFu/CaDRe",
+    },
   },
   // ===== CVPR 2026 (June 2026) =====
   {
