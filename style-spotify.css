@@ -1,5 +1,6 @@
 :root, :root[data-theme="dark"]{
   --bg-base:#121212;
+  --hero-bg:#1d2b26;   /* flat homepage hero; change this one value to restyle it */
   --bg-elev:#181818;
   --bg-elev-hi:#1a1a1a;
   --bg-press:#000;
@@ -26,6 +27,7 @@
 }
 :root[data-theme="light"]{
   --bg-base:#ffffff;
+  --hero-bg:#e9efec;   /* flat homepage hero, light theme */
   --bg-elev:#f4f4f4;
   --bg-elev-hi:#ececec;
   --bg-press:#e6e6e6;
@@ -294,7 +296,7 @@ input{font:inherit;color:inherit}
   position:relative;
   margin:0;
   min-height:clamp(420px, 60vh, 620px);
-  background:#121212;
+  background:var(--hero-bg);
   overflow:hidden;
   display:block;
 }
@@ -304,7 +306,13 @@ input{font:inherit;color:inherit}
   background-size:cover;
   background-position:center center;
   background-repeat:no-repeat;
-  background-color:#121212;
+  background-color:var(--hero-bg);
+}
+/* Flat hero (no banner image): just the colour, fading into the page at the
+   bottom. The side-darkening below exists to rescue text over a photo and
+   would show up as an uneven wash on a flat colour, so it is dropped here. */
+.view-hero-bg.solid::before{
+  background:linear-gradient(180deg, transparent 0%, transparent 62%, var(--bg-base) 100%);
 }
 /* Strong fade so the bottom-left text overlay stays readable on any image.
    Dark mode: black overlay deepens the image and blends to the dark page bg.
@@ -322,6 +330,10 @@ input{font:inherit;color:inherit}
   background:
     linear-gradient(180deg, transparent 0%, transparent 45%, rgba(255,255,255,.55) 80%, var(--bg-base) 100%),
     linear-gradient(90deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.15) 28%, rgba(255,255,255,0) 55%);
+}
+/* Same specificity as the rule above, so it has to come after it to win. */
+:root[data-theme="light"] .view-hero-bg.solid::before{
+  background:linear-gradient(180deg, transparent 0%, transparent 62%, var(--bg-base) 100%);
 }
 .view-hero-text{
   position:absolute;

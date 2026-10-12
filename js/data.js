@@ -8,7 +8,7 @@ export const me = {
   role: "Ph.D. · UC San Diego · HDSI",
   verified: true,
   photo: "images/profile.png",
-  banner: "images/hero-blueprint.png",
+  banner: "",            // empty = flat hero colour; set --hero-bg in the CSS to change it
   // Base count + a live hit counter add to this on the homepage.
   // Edit base any time; the counter (counterapi.dev) handles the deltas.
   monthlyReadersBase: 12847,

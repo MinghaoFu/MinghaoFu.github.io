@@ -302,10 +302,15 @@ function renderTopbar(){
 // ============ Home view ============
 function renderHome(view){
   const top = popularPapers(5);
-  const banner = me.banner || me.photo;
+  // No banner image configured -> flat themed colour. The .solid class drops the
+  // side-darkening overlay, which only makes sense over a photo.
+  const banner = me.banner || "";
+  const heroBg = banner
+    ? `<div class="view-hero-bg" style="background-image:url('${banner}')"></div>`
+    : `<div class="view-hero-bg solid"></div>`;
   view.innerHTML = `
     <section class="view-hero">
-      <div class="view-hero-bg" style="background-image:url('${banner}')"></div>
+      ${heroBg}
       <div class="view-hero-text">
         <div class="hero-eyebrow">
           <span class="verified" title="Verified researcher">${ICON.verified}</span>
