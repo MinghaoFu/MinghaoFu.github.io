@@ -708,7 +708,7 @@ input{font:inherit;color:inherit}
 .tracklist.popular{padding:8px 0}
 .tracklist.popular .tracklist-header{display:none}
 .tracklist.popular .track{
-  grid-template-columns:24px 56px minmax(120px,1fr) auto;
+  grid-template-columns:24px 112px minmax(120px,1fr) auto;
   gap:16px;
   padding:8px;
 }
@@ -754,7 +754,10 @@ input{font:inherit;color:inherit}
 }
 .tracklist.popular .track .col-thumb img,
 .tracklist.popular .track .col-thumb .thumb-fallback{
-  width:56px;height:56px;border-radius:4px;
+  width:112px;height:56px;border-radius:4px;
+  /* Teasers are wide (roughly 1.4:1 to 2.8:1). Without object-fit the browser
+     stretches them into the box; cover crops instead so nothing is distorted. */
+  object-fit:cover;
   font-size:18px;
 }
 
@@ -1372,7 +1375,9 @@ a.t.jump:focus-visible .jump-arrow, a.pl-title.jump:focus-visible .jump-arrow{
   .tracklist-header,
   .track{grid-template-columns:32px minmax(0,1fr)}
   .tracklist.popular .tracklist-header,
-  .tracklist.popular .track{grid-template-columns:32px 48px minmax(0,1fr)}
+  .tracklist.popular .track{grid-template-columns:32px 96px minmax(0,1fr)}
+  .tracklist.popular .track .col-thumb img,
+  .tracklist.popular .track .col-thumb .thumb-fallback{width:96px;height:48px}
   .tracklist-header .col-album,
   .tracklist-header .col-venue,
   .tracklist-header .col-year,
