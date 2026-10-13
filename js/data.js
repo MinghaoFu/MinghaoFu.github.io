@@ -9,9 +9,6 @@ export const me = {
   verified: true,
   photo: "images/profile.png",
   banner: "",            // empty = flat hero colour; set --hero-bg in the CSS to change it
-  // Base count + a live hit counter add to this on the homepage.
-  // Edit base any time; the counter (counterapi.dev) handles the deltas.
-  monthlyReadersBase: 12847,
   tagline: "I work on representation learning.",
   // Shown obfuscated ([at]/[dot]) in the About card to deter scrapers.
   contact: "isminghaofu [at] gmail [dot] com",

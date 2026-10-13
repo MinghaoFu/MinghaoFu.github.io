@@ -61,49 +61,6 @@ const SOCIAL_ICON = {
   cv:       "cvdoc",
 };
 
-// ============ Reader counter (counterapi.dev) ============
-// One free public counter. /up increments + returns; bare URL just reads.
-// We only increment once per browser session, then re-read on later visits.
-const READER_NAMESPACE = "minghaofu-site";
-const READER_KEY = "homepage";
-const READER_CACHE_KEY = "mf-reader-count-v1";
-const READER_SESSION_KEY = "mf-reader-hit-v1";
-
-function getCachedReaderCount(){
-  try{
-    const v = parseInt(localStorage.getItem(READER_CACHE_KEY) || "0", 10);
-    return isNaN(v) ? 0 : v;
-  }catch(e){ return 0; }
-}
-function setCachedReaderCount(n){
-  try{ localStorage.setItem(READER_CACHE_KEY, String(n)); }catch(e){}
-}
-function formatReaders(n){
-  return Number(n).toLocaleString("en-US");
-}
-function readersText(){
-  return formatReaders(me.monthlyReadersBase + getCachedReaderCount());
-}
-async function refreshReaderCount(){
-  let alreadyHit = false;
-  try{ alreadyHit = !!sessionStorage.getItem(READER_SESSION_KEY); }catch(e){}
-  const path = alreadyHit
-    ? `https://api.counterapi.dev/v1/${READER_NAMESPACE}/${READER_KEY}`
-    : `https://api.counterapi.dev/v1/${READER_NAMESPACE}/${READER_KEY}/up`;
-  try{
-    const r = await fetch(path, { mode: "cors" });
-    if (!r.ok) return;
-    const d = await r.json();
-    if (typeof d.count === "number"){
-      setCachedReaderCount(d.count);
-      try{ sessionStorage.setItem(READER_SESSION_KEY, "1"); }catch(e){}
-      document.querySelectorAll("[data-readers]").forEach(el => {
-        el.textContent = readersText();
-      });
-    }
-  }catch(e){ /* offline, blocked, or API down — keep cached/base value */ }
-}
-
 // ============ Theme (light / dark) ============
 const THEME_KEY = "mf-theme-v1";
 function defaultThemeByClock(){
@@ -318,9 +275,6 @@ function renderHome(view){
         </div>
         <h1 class="hero-title">${escapeHtml(me.name)}</h1>
         <p class="hero-tagline">${escapeHtml(me.tagline)}</p>
-        <div class="hero-meta">
-          <span><span data-readers>${readersText()}</span> monthly readers</span>
-        </div>
       </div>
     </section>
 
@@ -429,8 +383,6 @@ function renderHome(view){
     const url = L.arxiv || L.project || L.code || L.dataset;
     if (url) window.open(url, "_blank", "noopener");
   });
-  // Refresh visit counter (first hit per session = increment, then read-only).
-  refreshReaderCount();
   const followBtn = view.querySelector("#follow-btn");
   const followPop = view.querySelector("#follow-popover");
   followBtn?.addEventListener("click", e => {
