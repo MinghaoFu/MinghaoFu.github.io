@@ -155,7 +155,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/task-sufficient.png",
     albumId: "world-models",
-    popular: true,
     links: { arxiv: "https://arxiv.org/abs/2607.04409" },
   },
   {
@@ -170,7 +169,6 @@ export const papers = [
     year: 2026,
     thumb: "images/papers/climate.png",
     albumId: "latent-space",
-    popular: true,
     links: {
       arxiv: "https://arxiv.org/pdf/2501.12500",
       code:  "https://github.com/MinghaoFu/CaDRe",
