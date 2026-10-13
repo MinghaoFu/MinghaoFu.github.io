@@ -1,5 +1,5 @@
 import {
-  me, papers, albums, news, education, experience, service, blogs, authorLinks,
+  me, papers, albums, news, education, service, blogs, authorLinks,
   papersByAlbum, albumById, paperById, popularPapers,
 } from "./data.js";
 
@@ -404,19 +404,6 @@ function renderHome(view){
                 <div class="where">${escapeHtml(e.where)}</div>
                 <div class="what">${escapeHtml(e.what)}</div>
                 ${e.advisor ? `<div class="advisor">Advised by ${e.advisor}</div>` : ""}
-              </div>
-              <div class="when">${escapeHtml(e.when)}</div>
-            </div>`).join("")}
-        </div>
-        <div class="timeline-col">
-          <h3 class="section-title">Experience</h3>
-          ${experience.map(e => `
-            <div class="timeline-row ${e.logo ? "" : "no-logo"}">
-              ${e.logo ? `<img src="${e.logo}" alt="">` : ""}
-              <div>
-                <div class="where">${escapeHtml(e.where)}</div>
-                <div class="what">${escapeHtml(e.what)}</div>
-                ${e.location ? `<div class="loc">${escapeHtml(e.location)}</div>` : ""}
               </div>
               <div class="when">${escapeHtml(e.when)}</div>
             </div>`).join("")}
