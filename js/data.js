@@ -131,6 +131,7 @@ export const papers = [
       project: "https://huggingface.co/spaces/RSIGame/rsigame-page",
       code:    "https://github.com/WenyiWU0111/RSIGame",
       dataset: "https://huggingface.co/RSIGame",
+      media:   "https://mp.weixin.qq.com/s/kPASsLuAtoiAR_iBDV05PA",
     },
   },
   {
