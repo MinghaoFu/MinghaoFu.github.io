@@ -306,7 +306,6 @@ export const education = [
 ];
 
 export const experience = [
-  { where: "Cradle AI",       what: "Cofounder & CTO",                            when: "Jun 2024 – Jun 2025", location: "Abu Dhabi, UAE", logo: "images/schools/cradle.png" },
   { where: "Shanghai AI Lab", what: "Research Intern, Ark NLP Group",             when: "Nov 2022 – Mar 2023", location: "Shanghai, China", logo: "images/schools/shanghai-ai-lab.png" },
 ];
 
