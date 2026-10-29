@@ -96,7 +96,7 @@ export const papers = [
     albumId: "world-models",
     popular: true,
     links: {
-      arxiv:   "https://minghaofu.com/files/lewam.pdf",
+      arxiv:   "https://arxiv.org/abs/2610.12818",
       project: "https://le-wam.github.io/",
       code:    "https://github.com/MinghaoFu/lewam",
     },
