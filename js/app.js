@@ -341,7 +341,7 @@ function renderHome(view){
       <section class="section">
         <div class="section-head"><h2 class="section-title">News</h2></div>
         <div class="news-list">
-          ${news.map(n => `
+          ${news.slice(0, 3).map(n => `
             <div class="news-row">
               <div class="when">${escapeHtml(n.date)}</div>
               <div class="what">${n.html}</div>
