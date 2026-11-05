@@ -266,9 +266,6 @@ export const blogs = [
 // coupled to world models). Avoid naming scattered sub-areas.
 // Newest first. The homepage shows the top 3; the rest stay here as a record.
 export const news = [
-  { date: "Nov 2026", html: 'Gave an oral presentation at the <strong>TAG workshop</strong> (<em>The Action Gap</em>) at <strong>CoRL 2026</strong>.' },
-  { date: "Nov 2026", html: 'Gave a talk at the <strong>Measurement Errors and Latent Variables Workshop</strong> at <strong>JHU</strong>.' },
-  { date: "Nov 2026", html: '<strong>SCAR</strong> was selected for an <strong>oral presentation</strong> at the <strong>TAG workshop</strong>, CoRL 2026.' },
   { date: "Oct 2026", html: 'Released <strong>LeWAM</strong>: End-to-End World and Action Modeling with JEPAs.' },
   { date: "Sep 2026", html: 'Our paper on <strong>world models</strong> was accepted to <strong>NeurIPS 2026</strong>.' },
   { date: "May 2026", html: 'New preprint on <strong>world models</strong>: <strong>Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations</strong>.' },
