@@ -1,7 +1,7 @@
 import {
   me, papers, albums, news, education, service, blogs, authorLinks,
   papersByAlbum, albumById, paperById, popularPapers,
-} from "./data.js";
+} from "./data.js?v=20261107a";
 
 // Auto-link author names that have a homepage in authorLinks. Splits on commas;
 // keeps the <em> and any */† markers outside the link.

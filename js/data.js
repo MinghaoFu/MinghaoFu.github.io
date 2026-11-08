@@ -266,9 +266,9 @@ export const blogs = [
 // coupled to world models). Avoid naming scattered sub-areas.
 // Newest first. The homepage shows the top 3; the rest stay here as a record.
 export const news = [
-  { date: "Oct 2026", html: 'Released <strong>LeWAM</strong>: End-to-End World and Action Modeling with JEPAs.' },
-  { date: "Sep 2026", html: 'Our paper on <strong>world models</strong> was accepted to <strong>NeurIPS 2026</strong>.' },
-  { date: "May 2026", html: 'New preprint on <strong>world models</strong>: <strong>Back to Parsimonious Latents: Learning Task-Centric World Models from Visual Foundations</strong>.' },
+  { date: "Oct 2026", html: 'Released <a href="https://le-wam.github.io/"><strong>LeWAM</strong></a>: end-to-end world and action modeling with JEPAs.' },
+  { date: "Sep 2026", html: '<a href="tc-wm/index.html"><strong>TC-WM</strong></a> was accepted to <strong>NeurIPS 2026</strong>.' },
+  { date: "May 2026", html: 'New preprint <a href="tc-wm/index.html"><strong>TC-WM</strong></a>: task-centric world models from visual foundations.' },
   { date: "May 2026", html: 'Two papers on <strong>representation learning</strong> and <strong>world models</strong> were accepted to <strong>ICML 2026</strong>.' },
   { date: "Mar 2026", html: 'Our paper on <strong>world models</strong> was accepted to <strong>CVPR 2026</strong>.' },
   { date: "Jan 2026", html: 'Two papers on <strong>representation learning</strong> and <strong>reinforcement learning</strong> were accepted to <strong>ICLR 2026</strong>.' },
