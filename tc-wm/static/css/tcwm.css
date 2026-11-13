@@ -717,3 +717,15 @@ footer.footer .content p {
 .cosmos-vid .dv{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.30);pointer-events:none;z-index:2;}
 .cosmos-vid .dv.a{left:33.333%}
 .cosmos-vid .dv.b{left:66.666%}
+
+.publication-venue {
+  margin: 0.35rem 0 1.1rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+.hero .publication-venue {
+  animation: fadeUp 0.72s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  animation-delay: 0.46s;
+}
